@@ -137,8 +137,7 @@ namespace Synapse {
                         yield dbus_interface.about_to_sleep ();
 
                     } catch (Error not_there_error) {}
-                    // yea kinda nasty
-                    ScreenSaverPlugin.lock_screen ();
+
                     // wait 2 seconds
                     Timeout.add (2000, do_suspend.callback);
                     yield;
@@ -220,8 +219,7 @@ namespace Synapse {
                         yield dbus_interface.about_to_sleep ();
 
                     } catch (Error not_there_error) {}
-                    // yea kinda nasty
-                    ScreenSaverPlugin.lock_screen ();
+
                     // wait 2 seconds
                     Timeout.add (2000, do_hibernate.callback);
                     yield;

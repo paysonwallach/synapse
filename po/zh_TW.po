@@ -1,11 +1,11 @@
-# Chinese (Traditional) translation for synapse-project
+# Chinese (Traditional) translation for Synapse
 # Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
-# This file is distributed under the same license as the synapse-project package.
+# This file is distributed under the same license as the Synapse package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: synapse-project\n"
+"Project-Id-Version: com.paysonwallach.synapse\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2015-11-30 14:48+0000\n"
 "PO-Revision-Date: 2013-09-21 08:31+0000\n"
@@ -31,7 +31,6 @@ msgstr "搜尋所有做過的事。"
 msgid "Activate"
 msgstr "啟用"
 
-#. Whooot?! This cannot be true!
 #: ../src/ui/category.vala:31 ../src/ui/category.vala:71
 #: ../src/ui/category.vala:135
 msgid "All"
@@ -221,7 +220,6 @@ msgid "Paste current selection"
 msgstr "貼上當前選擇範圍"
 
 #: ../src/ui/settings.vala:256
-#: ../src/plugins/xnoise-media-player-plugin.vala:94
 msgid "Quit"
 msgstr "結束"
 
@@ -330,128 +328,6 @@ msgstr "複製至剪貼簿"
 msgid "Copy selection to clipboard"
 msgstr "將選擇範圍複製至剪貼簿"
 
-#: ../src/plugins/banshee-plugin.vala:70
-msgid "Control Banshee and add items to playlists."
-msgstr "控制 Banshee 並為播放清單添加項目。"
-
-#. DBusService.get_default ().name_is_activatable (BansheePlaybackController.UNIQUE_NAME), // doesn't work for banshee
-#: ../src/plugins/banshee-plugin.vala:76
-msgid "Banshee is not installed"
-msgstr "未安裝 Banshee"
-
-#: ../src/plugins/banshee-plugin.vala:113
-#: ../src/plugins/rhythmbox-plugin.vala:119
-#: ../src/plugins/xnoise-media-player-plugin.vala:140
-msgid "Play"
-msgstr "播放"
-
-#: ../src/plugins/banshee-plugin.vala:114
-msgid "Start playback in Banshee"
-msgstr "在 Banshee 播放"
-
-#: ../src/plugins/banshee-plugin.vala:140
-#: ../src/plugins/rhythmbox-plugin.vala:145
-#: ../src/plugins/xnoise-media-player-plugin.vala:191
-msgid "Pause"
-msgstr "暫停"
-
-#: ../src/plugins/banshee-plugin.vala:141
-msgid "Pause playback in Banshee"
-msgstr "在 Banshee 暫停播放"
-
-#: ../src/plugins/banshee-plugin.vala:160
-#: ../src/plugins/rhythmbox-plugin.vala:171
-#: ../src/plugins/xnoise-media-player-plugin.vala:214
-msgid "Next"
-msgstr "下一個"
-
-#: ../src/plugins/banshee-plugin.vala:161
-msgid "Plays the next song in Banshee's playlist"
-msgstr "播放 Banshee 播放清單的下一首歌"
-
-#: ../src/plugins/banshee-plugin.vala:182
-#: ../src/plugins/rhythmbox-plugin.vala:196
-#: ../src/plugins/xnoise-media-player-plugin.vala:238
-msgid "Previous"
-msgstr "上一個"
-
-#: ../src/plugins/banshee-plugin.vala:183
-msgid "Plays the previous song in Banshee's playlist"
-msgstr "播放 Banshee 播放清單的上一首歌"
-
-#: ../src/plugins/banshee-plugin.vala:204
-msgid "Enqueue in Banshee"
-msgstr "在 Banshee 佇列"
-
-#: ../src/plugins/banshee-plugin.vala:205
-msgid "Add the song to Banshee playlist"
-msgstr "將歌曲添加至 Banshee 播放清單"
-
-#: ../src/plugins/banshee-plugin.vala:241
-msgid "Play in Banshee"
-msgstr "在 Banshee 播放"
-
-#: ../src/plugins/banshee-plugin.vala:242
-#: ../src/plugins/rhythmbox-plugin.vala:265
-msgid "Clears the current playlist and plays the song"
-msgstr "清除當前播放清單並播放歌曲"
-
-#: ../src/plugins/calculator-plugin.vala:59
-msgid "Calculator"
-msgstr "計算機"
-
-#: ../src/plugins/calculator-plugin.vala:60
-msgid "Calculate basic expressions."
-msgstr ""
-
-#: ../src/plugins/calculator-plugin.vala:64
-msgid "bc is not installed"
-msgstr "未安裝 bc"
-
-#: ../src/plugins/chat-actions-plugin.vala:42
-msgid "Open chat"
-msgstr "開啟聊天"
-
-#: ../src/plugins/chat-actions-plugin.vala:43
-msgid "Open a chat with selected contact"
-msgstr "以所選聯絡人開啟聊天"
-
-#: ../src/plugins/chat-actions-plugin.vala:65
-msgid "Send a message"
-msgstr "傳送訊息"
-
-#: ../src/plugins/chat-actions-plugin.vala:66
-msgid "Send a message to the contact"
-msgstr "傳送訊息給聯絡人"
-
-#: ../src/plugins/chat-actions-plugin.vala:99
-msgid "Send message to.."
-msgstr "傳送訊息給.."
-
-#: ../src/plugins/chat-actions-plugin.vala:100
-msgid "Send a message to a contact"
-msgstr "傳送訊息給聯絡人"
-
-#: ../src/plugins/chat-actions-plugin.vala:134
-msgid "Chat actions"
-msgstr "聊天動作"
-
-#: ../src/plugins/chat-actions-plugin.vala:135
-msgid "Open chat, or send a message with your favorite IM"
-msgstr "以最愛的即時通訊程式開啟聊天或傳送訊息"
-
-#: ../src/plugins/chromium-plugin.vala:66
-msgid "Chromium Plugin"
-msgstr ""
-
-#: ../src/plugins/chromium-plugin.vala:67
-msgid "Browse and open Chromium bookmarks."
-msgstr ""
-
-#: ../src/plugins/chromium-plugin.vala:71
-msgid "Chromium is not installed"
-msgstr ""
-
 #: ../src/plugins/command-plugin.vala:44
 msgid "Run command"
 msgstr "執行指令"
@@ -479,22 +355,6 @@ msgstr ""
 msgid "Launch action '%s'"
 msgstr ""
 
-#: ../src/plugins/devhelp-search.vala:59
-msgid "Search in Devhelp"
-msgstr ""
-
-#: ../src/plugins/devhelp-search.vala:60
-msgid "Search documentation for this symbol"
-msgstr ""
-
-#: ../src/plugins/devhelp-search.vala:70
-msgid "Search documentation using Devhelp."
-msgstr ""
-
-#: ../src/plugins/devhelp-search.vala:74
-msgid "Devhelp is not installed"
-msgstr "未安裝 Devhelp"
-
 #: ../src/plugins/dictionary.vala:61
 msgid "Define"
 msgstr "定義"
@@ -510,171 +370,6 @@ msgstr "查閱文字的定義。"
 #: ../src/plugins/dictionary.vala:78
 msgid "No compatible Dictionary installed"
 msgstr ""
-
-#: ../src/plugins/directory-plugin.vala:111
-msgid "Open commonly used directories."
-msgstr ""
-
-#: ../src/plugins/file-op-plugin.vala:40
-msgid "Remove"
-msgstr ""
-
-#: ../src/plugins/file-op-plugin.vala:41
-msgid "Move to Trash"
-msgstr ""
-
-#: ../src/plugins/file-op-plugin.vala:72
-msgid "Rename to"
-msgstr "更名為"
-
-#: ../src/plugins/file-op-plugin.vala:73
-msgid "Rename the file to..."
-msgstr "將檔案更名為..."
-
-#: ../src/plugins/file-op-plugin.vala:89 ../src/plugins/pidgin-plugin.vala:171
-#, c-format
-msgid "File \"%s\"does not exist."
-msgstr "沒有「%s」檔案。"
-
-#: ../src/plugins/file-op-plugin.vala:101
-#, c-format
-msgid "Cannot move \"%s\" to \"%s\""
-msgstr "無法將「%s」移動至「%s」"
-
-#: ../src/plugins/file-op-plugin.vala:125
-msgid "File Operations"
-msgstr "檔案作業"
-
-#: ../src/plugins/file-op-plugin.vala:126
-msgid "Copy, Cut, Paste and Delete files"
-msgstr "複製、剪下、貼上和刪除檔案"
-
-#: ../src/plugins/gnome-bookmarks-plugin.vala:61
-msgid "GNOME Bookmarks Plugin"
-msgstr ""
-
-#: ../src/plugins/gnome-bookmarks-plugin.vala:62
-msgid "Browse and open GNOME bookmarks."
-msgstr ""
-
-#: ../src/plugins/gnome-screensaver-plugin.vala:51
-msgid "Lock Screen"
-msgstr "鎖定螢幕"
-
-#: ../src/plugins/gnome-screensaver-plugin.vala:52
-msgid "Locks screen and starts screensaver."
-msgstr "鎖定螢幕並啟動螢幕保護程式。"
-
-#: ../src/plugins/gnome-screensaver-plugin.vala:80
-msgid "Lock screen of your computer."
-msgstr "鎖定電腦螢幕。"
-
-#: ../src/plugins/gnome-screensaver-plugin.vala:84
-msgid "Gnome Screen Saver wasn't found"
-msgstr "找不到 Gnome 螢幕保護程式"
-
-#: ../src/plugins/hybrid-search-plugin.vala:62
-msgid ""
-"Improve results returned by the Zeitgeist plugin by looking for similar "
-"files on the filesystem."
-msgstr ""
-
-#: ../src/plugins/imgur-plugin.vala:51
-msgid "Upload to imgur"
-msgstr "上傳至 imgur"
-
-#: ../src/plugins/imgur-plugin.vala:52
-msgid "Upload selection to imgur image sharer"
-msgstr ""
-
-#: ../src/plugins/imgur-plugin.vala:162
-#: ../src/plugins/pastebin-plugin.vala:151
-msgid ""
-"The selection was successfully uploaded and its URL was copied to clipboard."
-msgstr ""
-
-#: ../src/plugins/imgur-plugin.vala:166
-#: ../src/plugins/pastebin-plugin.vala:155
-msgid ""
-"An error occurred during upload, please check the log for more information."
-msgstr ""
-
-#: ../src/plugins/imgur-plugin.vala:174
-msgid "Synapse - Imgur"
-msgstr ""
-
-#: ../src/plugins/imgur-plugin.vala:229
-msgid "Upload to imgur to contact.."
-msgstr ""
-
-#: ../src/plugins/imgur-plugin.vala:230
-msgid "Upload selection to imgur image sharer, and send the link to contact"
-msgstr ""
-
-#: ../src/plugins/imgur-plugin.vala:263
-msgid "Imgur"
-msgstr ""
-
-#: ../src/plugins/imgur-plugin.vala:264
-msgid "Share images using imgur."
-msgstr "以 imgur 分享檔案。"
-
-#: ../src/plugins/launchpad-plugin.vala:45
-msgid "Authorize with Launchpad"
-msgstr "以 Launchpad 授權"
-
-#: ../src/plugins/launchpad-plugin.vala:52
-msgid ""
-"Please press the Finish button once you login to Launchpad with your web "
-"browser"
-msgstr "以網頁瀏覽器登入 Launchpad 後按「完成」"
-
-#: ../src/plugins/launchpad-plugin.vala:55
-msgid "Finish authorization"
-msgstr "完成授權"
-
-#: ../src/plugins/launchpad-plugin.vala:240
-msgid "Find bugs and branches on Launchpad."
-msgstr ""
-
-#. project link (lp:synapse)
-#: ../src/plugins/launchpad-plugin.vala:291
-#, c-format
-msgid "Launchpad: Bazaar branches for %s"
-msgstr ""
-
-#. series link (lp:synapse/0.3)
-#: ../src/plugins/launchpad-plugin.vala:298
-#, c-format
-msgid "Launchpad: Series %s for Project %s"
-msgstr ""
-
-#. branch link (lp:~mhr3/synapse/lp-plugin)
-#: ../src/plugins/launchpad-plugin.vala:305
-#, c-format
-msgid "Launchpad: Bazaar branch %s"
-msgstr ""
-
-#: ../src/plugins/launchpad-plugin.vala:320
-#, c-format
-msgid "Launchpad: Bug #%s"
-msgstr ""
-
-#: ../src/plugins/locate-plugin.vala:62 ../src/plugins/locate-plugin.vala:72
-msgid "Locate"
-msgstr "搜索"
-
-#: ../src/plugins/locate-plugin.vala:63
-msgid "Locate files with this name on the filesystem"
-msgstr "以此名稱在檔案系統搜索檔案"
-
-#: ../src/plugins/locate-plugin.vala:73
-msgid "Runs locate command to find files on the filesystem."
-msgstr "執行 locate 指令以在檔案系統找尋檔案。"
-
-#: ../src/plugins/locate-plugin.vala:77
-msgid "Unable to find \"locate\" binary"
-msgstr "找不到 locate 執行檔"
 
 #: ../src/plugins/opensearch.vala:254
 msgid "Search the web."
@@ -704,84 +399,6 @@ msgstr "Google 地圖"
 #: ../src/plugins/opensearch.vala:271
 msgid "Search using Google Maps"
 msgstr "以 Google Maps 搜尋"
-
-#: ../src/plugins/pastebin-plugin.vala:42
-#: ../src/plugins/pastebin-plugin.vala:261
-msgid "Pastebin"
-msgstr ""
-
-#: ../src/plugins/pastebin-plugin.vala:43
-#: ../src/plugins/pastebin-plugin.vala:228
-msgid "Pastebin selection"
-msgstr ""
-
-#: ../src/plugins/pastebin-plugin.vala:163
-msgid "Synapse - Pastebin"
-msgstr ""
-
-#: ../src/plugins/pastebin-plugin.vala:227
-msgid "Pastebin to contact.."
-msgstr ""
-
-#: ../src/plugins/pastebin-plugin.vala:262
-msgid "Upload files to pastebin."
-msgstr "上傳檔案至 pastebin。"
-
-#: ../src/plugins/pastebin-plugin.vala:266
-msgid "Unable to find \"pastebinit\" program"
-msgstr "找不到 pastebinit 程式"
-
-#: ../src/plugins/pidgin-plugin.vala:77
-msgid "Get access to your Pidgin contacts"
-msgstr ""
-
-#: ../src/plugins/pidgin-plugin.vala:81
-msgid "Pidgin is not installed."
-msgstr "未安裝 Pidgin。"
-
-#: ../src/plugins/pidgin-plugin.vala:94
-msgid "Send in chat to.."
-msgstr ""
-
-#: ../src/plugins/pidgin-plugin.vala:95
-msgid "Send selected file within Pidgin"
-msgstr "在 Pidgin 傳送所選檔案"
-
-#: ../src/plugins/rhythmbox-plugin.vala:79
-msgid "Control Rhythmbox and add items to playlists."
-msgstr "控制 Rhythmbox 並為播放清單添加項目。"
-
-#: ../src/plugins/rhythmbox-plugin.vala:83
-msgid "Rhythmbox is not installed"
-msgstr "未安裝 Rhythmbox"
-
-#: ../src/plugins/rhythmbox-plugin.vala:120
-msgid "Start playback in Rhythmbox"
-msgstr "在 Rhythmbox 播放"
-
-#: ../src/plugins/rhythmbox-plugin.vala:146
-msgid "Pause playback in Rhythmbox"
-msgstr "在 Rhythmbox 暫停播放"
-
-#: ../src/plugins/rhythmbox-plugin.vala:172
-msgid "Plays the next song in Rhythmbox's playlist"
-msgstr "播放 Rhythmbox 播放清單下一首歌"
-
-#: ../src/plugins/rhythmbox-plugin.vala:197
-msgid "Plays the previous song in Rhythmbox's playlist"
-msgstr "播放 Rhythmbox 播放清單上一首歌"
-
-#: ../src/plugins/rhythmbox-plugin.vala:222
-msgid "Enqueue in Rhythmbox"
-msgstr "在 Rhythmbox 佇列"
-
-#: ../src/plugins/rhythmbox-plugin.vala:223
-msgid "Add the song to Rhythmbox playlist"
-msgstr "將歌曲添加至 Rhythmbox 播放清單"
-
-#: ../src/plugins/rhythmbox-plugin.vala:264
-msgid "Play in Rhythmbox"
-msgstr "在 Rhythmbox 播放"
 
 #: ../src/plugins/selection-plugin.vala:55
 msgid "Selection"
@@ -853,66 +470,6 @@ msgstr "暫停、休眠、重新啟動或關掉電腦。"
 msgid "ConsoleKit wasn't found"
 msgstr "找不到 ConsoleKit"
 
-#: ../src/plugins/xnoise-media-player-plugin.vala:59
-msgid "Control Xnoise media player."
-msgstr "控制 Xnoise 媒體播放器。"
-
-#: ../src/plugins/xnoise-media-player-plugin.vala:63
-msgid "Xnoise is not installed!"
-msgstr "未安裝 Xnoise！"
-
-#: ../src/plugins/xnoise-media-player-plugin.vala:95
-msgid "Quit Xnoise"
-msgstr "結束 Xnoise"
-
-#: ../src/plugins/xnoise-media-player-plugin.vala:117
-msgid "Raise"
-msgstr "提高"
-
-#: ../src/plugins/xnoise-media-player-plugin.vala:118
-msgid "Show Xnoise"
-msgstr "顯示 Xnoise"
-
-#: ../src/plugins/xnoise-media-player-plugin.vala:141
-msgid "Start playback in Xnoise"
-msgstr "在 Xnoise 播放"
-
-#: ../src/plugins/xnoise-media-player-plugin.vala:163
-msgid "TogglePlaying"
-msgstr ""
-
-#: ../src/plugins/xnoise-media-player-plugin.vala:164
-msgid "Start/Pause playback in Xnoise"
-msgstr "在 Xnoise 開始/暫停播放"
-
-#: ../src/plugins/xnoise-media-player-plugin.vala:192
-msgid "Pause playback in Xnoise"
-msgstr "在 Xnoise 暫停播放"
-
-#: ../src/plugins/xnoise-media-player-plugin.vala:215
-msgid "Plays the next song in Xnoise's playlist"
-msgstr "播放 Xnoise 播放清單的下一首歌"
-
-#: ../src/plugins/xnoise-media-player-plugin.vala:239
-msgid "Plays the previous song in Xnoise's playlist"
-msgstr "播放 Xnoise 播放清單的上一首歌"
-
-#: ../src/plugins/xnoise-media-player-plugin.vala:261
-msgid "Stop"
-msgstr "停止"
-
-#: ../src/plugins/xnoise-media-player-plugin.vala:262
-msgid "Stops the playback of Xnoise"
-msgstr "在 Xnoise 停止播放"
-
-#: ../src/plugins/xnoise-media-player-plugin.vala:285
-msgid "Play in Xnoise"
-msgstr "在 Xnoise 播放"
-
-#: ../src/plugins/xnoise-media-player-plugin.vala:286
-msgid "Queues and plays the song"
-msgstr "佇列並播放歌曲"
-
 #: ../src/plugins/zeitgeist-plugin.vala:162
 msgid "few moments ago"
 msgstr "一會之前"
@@ -968,20 +525,4 @@ msgstr "相關的檔案"
 
 #: ../src/plugins/zeitgeist-related.vala:75
 msgid "Finds files related to other search results using Zeitgeist."
-msgstr ""
-
-#: ../src/plugins/zeal-plugin.vala:102
-msgid "Zeal"
-msgstr ""
-
-#: ../src/plugins/zeal-plugin.vala:103
-msgid "Zeal offline documentation (zealdocs.org)"
-msgstr ""
-
-#: ../src/plugins/zeal-plugin.vala:107
-msgid "zeal is not installed, please see zealdocs.org"
-msgstr ""
-
-#: ../src/plugins/zeal-plugin.vala:167
-msgid "Zeal documentation research"
 msgstr ""

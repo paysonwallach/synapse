@@ -147,42 +147,18 @@ namespace Synapse {
 #endif
                 // item providing plugins
                 typeof (DesktopFilePlugin),
-                typeof (HybridSearchPlugin),
-                typeof (GnomeBookmarksPlugin),
-                typeof (GnomeSessionPlugin),
-                typeof (ScreenSaverPlugin),
                 typeof (SystemManagementPlugin),
                 typeof (CommandPlugin),
-                typeof (RhythmboxActions),
-                typeof (BansheeActions),
-                typeof (DirectoryPlugin),
-                typeof (LaunchpadPlugin),
                 typeof (CalculatorPlugin),
                 typeof (SelectionPlugin),
                 typeof (SshPlugin),
-                typeof (XnoiseActions),
-                typeof (ChromiumPlugin),
-                typeof (FileOpPlugin),
-                typeof (PidginPlugin),
                 typeof (PassPlugin),
-                typeof (ZimPlugin),
-                typeof (TomboyNotesPlugin),
-                typeof (GNotePlugin),
-                typeof (ChatActions),
-                typeof (ZealPlugin),
-                typeof (RolldicePlugin),
 #if HAVE_ZEITGEIST
                 typeof (ZeitgeistPlugin),
                 typeof (ZeitgeistRelated),
 #endif
-#if HAVE_LIBREST
-                typeof (ImgUrPlugin),
-#endif
                 // action-only plugins
-                typeof (DevhelpPlugin),
                 typeof (OpenSearchPlugin),
-                typeof (LocatePlugin),
-                typeof (PastebinPlugin),
                 typeof (DictionaryPlugin)
             };
             foreach (Type t in plugin_types) {

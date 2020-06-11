@@ -1,11 +1,11 @@
-# Korean translation for synapse-project
+# Korean translation for Synapse
 # Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
-# This file is distributed under the same license as the synapse-project package.
+# This file is distributed under the same license as the Synapse package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: synapse-project\n"
+"Project-Id-Version: com.paysonwallach.synapse\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2015-11-30 14:48+0000\n"
 "PO-Revision-Date: 2014-05-01 11:36+0000\n"
@@ -31,7 +31,6 @@ msgstr "원하는 모든 것을 검색합니다."
 msgid "Activate"
 msgstr "활성화"
 
-#. Whooot?! This cannot be true!
 #: ../src/ui/category.vala:31 ../src/ui/category.vala:71
 #: ../src/ui/category.vala:135
 msgid "All"
@@ -221,7 +220,6 @@ msgid "Paste current selection"
 msgstr "현재 선택한 것 붙여넣기"
 
 #: ../src/ui/settings.vala:256
-#: ../src/plugins/xnoise-media-player-plugin.vala:94
 msgid "Quit"
 msgstr "끝내기"
 
@@ -330,128 +328,6 @@ msgstr "클립보드로 복사"
 msgid "Copy selection to clipboard"
 msgstr "선택한것을 클립보드로 복사"
 
-#: ../src/plugins/banshee-plugin.vala:70
-msgid "Control Banshee and add items to playlists."
-msgstr "밴시를 조작하고 재생 목록에 항목을 추가합니다."
-
-#. DBusService.get_default ().name_is_activatable (BansheePlaybackController.UNIQUE_NAME), // doesn't work for banshee
-#: ../src/plugins/banshee-plugin.vala:76
-msgid "Banshee is not installed"
-msgstr "밴시를 설치하지 않았습니다"
-
-#: ../src/plugins/banshee-plugin.vala:113
-#: ../src/plugins/rhythmbox-plugin.vala:119
-#: ../src/plugins/xnoise-media-player-plugin.vala:140
-msgid "Play"
-msgstr "재생"
-
-#: ../src/plugins/banshee-plugin.vala:114
-msgid "Start playback in Banshee"
-msgstr "밴시를 재생합니다"
-
-#: ../src/plugins/banshee-plugin.vala:140
-#: ../src/plugins/rhythmbox-plugin.vala:145
-#: ../src/plugins/xnoise-media-player-plugin.vala:191
-msgid "Pause"
-msgstr "일시 정지"
-
-#: ../src/plugins/banshee-plugin.vala:141
-msgid "Pause playback in Banshee"
-msgstr "밴시를 일시 정지합니다"
-
-#: ../src/plugins/banshee-plugin.vala:160
-#: ../src/plugins/rhythmbox-plugin.vala:171
-#: ../src/plugins/xnoise-media-player-plugin.vala:214
-msgid "Next"
-msgstr "다음"
-
-#: ../src/plugins/banshee-plugin.vala:161
-msgid "Plays the next song in Banshee's playlist"
-msgstr "밴시 재생 목록의 다음 노래를 재생합니다."
-
-#: ../src/plugins/banshee-plugin.vala:182
-#: ../src/plugins/rhythmbox-plugin.vala:196
-#: ../src/plugins/xnoise-media-player-plugin.vala:238
-msgid "Previous"
-msgstr "이전"
-
-#: ../src/plugins/banshee-plugin.vala:183
-msgid "Plays the previous song in Banshee's playlist"
-msgstr "밴시 재생 목록의 이전 노래를 재생합니다."
-
-#: ../src/plugins/banshee-plugin.vala:204
-msgid "Enqueue in Banshee"
-msgstr "밴시 재생 목록에 추가"
-
-#: ../src/plugins/banshee-plugin.vala:205
-msgid "Add the song to Banshee playlist"
-msgstr "밴시 재생 목록에 노래를 추가합니다"
-
-#: ../src/plugins/banshee-plugin.vala:241
-msgid "Play in Banshee"
-msgstr "밴시로 재생"
-
-#: ../src/plugins/banshee-plugin.vala:242
-#: ../src/plugins/rhythmbox-plugin.vala:265
-msgid "Clears the current playlist and plays the song"
-msgstr "현재 재생 목록을 비우고 노래를 재생합니다"
-
-#: ../src/plugins/calculator-plugin.vala:59
-msgid "Calculator"
-msgstr "계산기"
-
-#: ../src/plugins/calculator-plugin.vala:60
-msgid "Calculate basic expressions."
-msgstr "기본 식을 계산합니다."
-
-#: ../src/plugins/calculator-plugin.vala:64
-msgid "bc is not installed"
-msgstr "bc를 설치하지 않았습니다"
-
-#: ../src/plugins/chat-actions-plugin.vala:42
-msgid "Open chat"
-msgstr "대화 열기"
-
-#: ../src/plugins/chat-actions-plugin.vala:43
-msgid "Open a chat with selected contact"
-msgstr "선택한 사람과 대화 열기"
-
-#: ../src/plugins/chat-actions-plugin.vala:65
-msgid "Send a message"
-msgstr "메시지 보내기"
-
-#: ../src/plugins/chat-actions-plugin.vala:66
-msgid "Send a message to the contact"
-msgstr "연락처에 메시지 보내기"
-
-#: ../src/plugins/chat-actions-plugin.vala:99
-msgid "Send message to.."
-msgstr "메시지 보내기..."
-
-#: ../src/plugins/chat-actions-plugin.vala:100
-msgid "Send a message to a contact"
-msgstr "연락처로 메시지 보내기"
-
-#: ../src/plugins/chat-actions-plugin.vala:134
-msgid "Chat actions"
-msgstr "대화 동작"
-
-#: ../src/plugins/chat-actions-plugin.vala:135
-msgid "Open chat, or send a message with your favorite IM"
-msgstr "메신저로 대화를 열거나 메시지를 보냅니다."
-
-#: ../src/plugins/chromium-plugin.vala:66
-msgid "Chromium Plugin"
-msgstr "크로미엄 플러그인"
-
-#: ../src/plugins/chromium-plugin.vala:67
-msgid "Browse and open Chromium bookmarks."
-msgstr "크로미엄 책갈피를 찾아보고 엽니다."
-
-#: ../src/plugins/chromium-plugin.vala:71
-msgid "Chromium is not installed"
-msgstr "크로미엄을 설치하지 않음"
-
 #: ../src/plugins/command-plugin.vala:44
 msgid "Run command"
 msgstr "명령 실행"
@@ -479,22 +355,6 @@ msgstr "현재 선택한 것을 %s(으)로 엽니다"
 msgid "Launch action '%s'"
 msgstr ""
 
-#: ../src/plugins/devhelp-search.vala:59
-msgid "Search in Devhelp"
-msgstr "Devhelp로 검색"
-
-#: ../src/plugins/devhelp-search.vala:60
-msgid "Search documentation for this symbol"
-msgstr "이 상징에 대한 문서를 검색합니다"
-
-#: ../src/plugins/devhelp-search.vala:70
-msgid "Search documentation using Devhelp."
-msgstr "Devhelp를 이용해 문서를 검색합니다."
-
-#: ../src/plugins/devhelp-search.vala:74
-msgid "Devhelp is not installed"
-msgstr "Devhelp를 설치하지 않았습니다"
-
 #: ../src/plugins/dictionary.vala:61
 msgid "Define"
 msgstr "정의"
@@ -510,171 +370,6 @@ msgstr "단어의 정의를 찾아봅니다."
 #: ../src/plugins/dictionary.vala:78
 msgid "No compatible Dictionary installed"
 msgstr ""
-
-#: ../src/plugins/directory-plugin.vala:111
-msgid "Open commonly used directories."
-msgstr "일반적으로 사용하는 디렉터리를 엽니다."
-
-#: ../src/plugins/file-op-plugin.vala:40
-msgid "Remove"
-msgstr ""
-
-#: ../src/plugins/file-op-plugin.vala:41
-msgid "Move to Trash"
-msgstr ""
-
-#: ../src/plugins/file-op-plugin.vala:72
-msgid "Rename to"
-msgstr "이름 바꾸기"
-
-#: ../src/plugins/file-op-plugin.vala:73
-msgid "Rename the file to..."
-msgstr "파일 이름 바꾸기..."
-
-#: ../src/plugins/file-op-plugin.vala:89 ../src/plugins/pidgin-plugin.vala:171
-#, c-format
-msgid "File \"%s\"does not exist."
-msgstr "파일 \"%s\"이(가) 없습니다."
-
-#: ../src/plugins/file-op-plugin.vala:101
-#, c-format
-msgid "Cannot move \"%s\" to \"%s\""
-msgstr "\"%s\"을(를) \"%s\"(으)로 옮길 수 없습니다"
-
-#: ../src/plugins/file-op-plugin.vala:125
-msgid "File Operations"
-msgstr "파일 동작"
-
-#: ../src/plugins/file-op-plugin.vala:126
-msgid "Copy, Cut, Paste and Delete files"
-msgstr "파일을 복사하고 잘라내고, 붙여 넣습니다."
-
-#: ../src/plugins/gnome-bookmarks-plugin.vala:61
-msgid "GNOME Bookmarks Plugin"
-msgstr ""
-
-#: ../src/plugins/gnome-bookmarks-plugin.vala:62
-msgid "Browse and open GNOME bookmarks."
-msgstr ""
-
-#: ../src/plugins/gnome-screensaver-plugin.vala:51
-msgid "Lock Screen"
-msgstr "화면 잠금"
-
-#: ../src/plugins/gnome-screensaver-plugin.vala:52
-msgid "Locks screen and starts screensaver."
-msgstr "화면을 잠그고 화면 보호기를 시작합니다."
-
-#: ../src/plugins/gnome-screensaver-plugin.vala:80
-msgid "Lock screen of your computer."
-msgstr "컴퓨터 화면을 잠급니다."
-
-#: ../src/plugins/gnome-screensaver-plugin.vala:84
-msgid "Gnome Screen Saver wasn't found"
-msgstr "그놈 화면 보호기를 찾을 수 없습니다."
-
-#: ../src/plugins/hybrid-search-plugin.vala:62
-msgid ""
-"Improve results returned by the Zeitgeist plugin by looking for similar "
-"files on the filesystem."
-msgstr "자이트가이스트 플러그인은 파일 시스템에서 비슷한 파일을 찾아 더 나은 결과를 제공합니다."
-
-#: ../src/plugins/imgur-plugin.vala:51
-msgid "Upload to imgur"
-msgstr "imgur로 업로드"
-
-#: ../src/plugins/imgur-plugin.vala:52
-msgid "Upload selection to imgur image sharer"
-msgstr "선택한 사진을 imgur 그림 공유 사이트로 업로드합니다."
-
-#: ../src/plugins/imgur-plugin.vala:162
-#: ../src/plugins/pastebin-plugin.vala:151
-msgid ""
-"The selection was successfully uploaded and its URL was copied to clipboard."
-msgstr "선택한 사진을 성공적으로 업로드했으며 주소를 클립보드로 복사했습니다."
-
-#: ../src/plugins/imgur-plugin.vala:166
-#: ../src/plugins/pastebin-plugin.vala:155
-msgid ""
-"An error occurred during upload, please check the log for more information."
-msgstr "업로드하는 중 오류가 발생했습니다. 자세한 내용은 기록 파일을 확인해주십시오."
-
-#: ../src/plugins/imgur-plugin.vala:174
-msgid "Synapse - Imgur"
-msgstr "시냅스 - Imgur"
-
-#: ../src/plugins/imgur-plugin.vala:229
-msgid "Upload to imgur to contact.."
-msgstr "imgur에 업로드한 후 연결 주소 보내기"
-
-#: ../src/plugins/imgur-plugin.vala:230
-msgid "Upload selection to imgur image sharer, and send the link to contact"
-msgstr "선택한 그림을 Imgur 그림 공유 사이트에 업로드하고 연결 주소를 대화 상대에 보냅니다"
-
-#: ../src/plugins/imgur-plugin.vala:263
-msgid "Imgur"
-msgstr "Imgur"
-
-#: ../src/plugins/imgur-plugin.vala:264
-msgid "Share images using imgur."
-msgstr "imgur 사이트를 이용해 사진을 공유합니다."
-
-#: ../src/plugins/launchpad-plugin.vala:45
-msgid "Authorize with Launchpad"
-msgstr "런치패드에 인증"
-
-#: ../src/plugins/launchpad-plugin.vala:52
-msgid ""
-"Please press the Finish button once you login to Launchpad with your web "
-"browser"
-msgstr "웹 브라우저로 런치패드에 로그인하시려면 끝내기 단추를 한번 눌러 주십시오."
-
-#: ../src/plugins/launchpad-plugin.vala:55
-msgid "Finish authorization"
-msgstr "인증 끝내기"
-
-#: ../src/plugins/launchpad-plugin.vala:240
-msgid "Find bugs and branches on Launchpad."
-msgstr "런치패드에서 버그와 파생 코드를 찾아봅니다."
-
-#. project link (lp:synapse)
-#: ../src/plugins/launchpad-plugin.vala:291
-#, c-format
-msgid "Launchpad: Bazaar branches for %s"
-msgstr "런치패드: %s의 바자 파생 코트"
-
-#. series link (lp:synapse/0.3)
-#: ../src/plugins/launchpad-plugin.vala:298
-#, c-format
-msgid "Launchpad: Series %s for Project %s"
-msgstr "런치패드: 프로젝트 %2$s의 시리즈 %1$s"
-
-#. branch link (lp:~mhr3/synapse/lp-plugin)
-#: ../src/plugins/launchpad-plugin.vala:305
-#, c-format
-msgid "Launchpad: Bazaar branch %s"
-msgstr "런치패드: 바자 파생 코드 %s"
-
-#: ../src/plugins/launchpad-plugin.vala:320
-#, c-format
-msgid "Launchpad: Bug #%s"
-msgstr "런치패드: 버그 #%s"
-
-#: ../src/plugins/locate-plugin.vala:62 ../src/plugins/locate-plugin.vala:72
-msgid "Locate"
-msgstr "파일 찾기"
-
-#: ../src/plugins/locate-plugin.vala:63
-msgid "Locate files with this name on the filesystem"
-msgstr "이 이름을 가진 파일을 파일 시스템에서 찾습니다."
-
-#: ../src/plugins/locate-plugin.vala:73
-msgid "Runs locate command to find files on the filesystem."
-msgstr "시스템 상의 파일을 찾기 위해 로케이트 명령을 실행합니다."
-
-#: ../src/plugins/locate-plugin.vala:77
-msgid "Unable to find \"locate\" binary"
-msgstr "로케이트 바이너리를 찾을 수 없습니다."
 
 #: ../src/plugins/opensearch.vala:254
 msgid "Search the web."
@@ -704,84 +399,6 @@ msgstr "구글 지도"
 #: ../src/plugins/opensearch.vala:271
 msgid "Search using Google Maps"
 msgstr "구글 지도를 이용해 검색합니다."
-
-#: ../src/plugins/pastebin-plugin.vala:42
-#: ../src/plugins/pastebin-plugin.vala:261
-msgid "Pastebin"
-msgstr "페이스트빈"
-
-#: ../src/plugins/pastebin-plugin.vala:43
-#: ../src/plugins/pastebin-plugin.vala:228
-msgid "Pastebin selection"
-msgstr "페이스트빈 선택"
-
-#: ../src/plugins/pastebin-plugin.vala:163
-msgid "Synapse - Pastebin"
-msgstr "시탭스 - 페이스트빈"
-
-#: ../src/plugins/pastebin-plugin.vala:227
-msgid "Pastebin to contact.."
-msgstr "페이스트빈 연결 주소 보내기..."
-
-#: ../src/plugins/pastebin-plugin.vala:262
-msgid "Upload files to pastebin."
-msgstr "파일을 페이스트빈에 업로드합니다."
-
-#: ../src/plugins/pastebin-plugin.vala:266
-msgid "Unable to find \"pastebinit\" program"
-msgstr "\"pastebinit\" 프로그램을 찾을 수 없습니다."
-
-#: ../src/plugins/pidgin-plugin.vala:77
-msgid "Get access to your Pidgin contacts"
-msgstr "피진 대화 상대에 접근합니다"
-
-#: ../src/plugins/pidgin-plugin.vala:81
-msgid "Pidgin is not installed."
-msgstr "피진을 설치하지 않았습니다."
-
-#: ../src/plugins/pidgin-plugin.vala:94
-msgid "Send in chat to.."
-msgstr "대화 안에서 보내기.."
-
-#: ../src/plugins/pidgin-plugin.vala:95
-msgid "Send selected file within Pidgin"
-msgstr "선택한 파일을 피진 안에서 보내기"
-
-#: ../src/plugins/rhythmbox-plugin.vala:79
-msgid "Control Rhythmbox and add items to playlists."
-msgstr "리듬박스를 조작하고 재생 목록에 항목을 추가합니다."
-
-#: ../src/plugins/rhythmbox-plugin.vala:83
-msgid "Rhythmbox is not installed"
-msgstr "리듬박스를 설치하지 않았습니다"
-
-#: ../src/plugins/rhythmbox-plugin.vala:120
-msgid "Start playback in Rhythmbox"
-msgstr "리듬박스를 재생합니다"
-
-#: ../src/plugins/rhythmbox-plugin.vala:146
-msgid "Pause playback in Rhythmbox"
-msgstr "리듬박스를 일시 정지합니다"
-
-#: ../src/plugins/rhythmbox-plugin.vala:172
-msgid "Plays the next song in Rhythmbox's playlist"
-msgstr "리듬박스 재생 목록의 다음 노래를 재생합니다."
-
-#: ../src/plugins/rhythmbox-plugin.vala:197
-msgid "Plays the previous song in Rhythmbox's playlist"
-msgstr "리듬박스 재생 목록의 이전 노래를 재생합니다."
-
-#: ../src/plugins/rhythmbox-plugin.vala:222
-msgid "Enqueue in Rhythmbox"
-msgstr "리듬박스 재생 목록에 추가"
-
-#: ../src/plugins/rhythmbox-plugin.vala:223
-msgid "Add the song to Rhythmbox playlist"
-msgstr "노래를 리듬박스 재생 목록에 추가합니다"
-
-#: ../src/plugins/rhythmbox-plugin.vala:264
-msgid "Play in Rhythmbox"
-msgstr "리듬박스로 재생"
 
 #: ../src/plugins/selection-plugin.vala:55
 msgid "Selection"
@@ -853,66 +470,6 @@ msgstr "컴퓨터를 끄거나 디시 시작하거나 최대 절전 혹은 절�
 msgid "ConsoleKit wasn't found"
 msgstr "콘솔 키트(ConsoleKit)를 찾을 수 없습니다"
 
-#: ../src/plugins/xnoise-media-player-plugin.vala:59
-msgid "Control Xnoise media player."
-msgstr "Xnoise 미디어 플레이어 조정"
-
-#: ../src/plugins/xnoise-media-player-plugin.vala:63
-msgid "Xnoise is not installed!"
-msgstr "Xnoise를 설치하지 않았습니다!"
-
-#: ../src/plugins/xnoise-media-player-plugin.vala:95
-msgid "Quit Xnoise"
-msgstr "Xnoise 끝내기"
-
-#: ../src/plugins/xnoise-media-player-plugin.vala:117
-msgid "Raise"
-msgstr "올리기"
-
-#: ../src/plugins/xnoise-media-player-plugin.vala:118
-msgid "Show Xnoise"
-msgstr "Xnoise 보이기"
-
-#: ../src/plugins/xnoise-media-player-plugin.vala:141
-msgid "Start playback in Xnoise"
-msgstr "Xnoise 재생 시작"
-
-#: ../src/plugins/xnoise-media-player-plugin.vala:163
-msgid "TogglePlaying"
-msgstr "재생 시작 / 중지"
-
-#: ../src/plugins/xnoise-media-player-plugin.vala:164
-msgid "Start/Pause playback in Xnoise"
-msgstr "Xnoise 재생을 시작하고 중지합니다."
-
-#: ../src/plugins/xnoise-media-player-plugin.vala:192
-msgid "Pause playback in Xnoise"
-msgstr "Xnoise 재생을 중지합니다."
-
-#: ../src/plugins/xnoise-media-player-plugin.vala:215
-msgid "Plays the next song in Xnoise's playlist"
-msgstr "Xnoise 연주 목록의 다음 곡을 재생합니다."
-
-#: ../src/plugins/xnoise-media-player-plugin.vala:239
-msgid "Plays the previous song in Xnoise's playlist"
-msgstr "Xnoise 연주 모록의 이전 곡을 재생합니다."
-
-#: ../src/plugins/xnoise-media-player-plugin.vala:261
-msgid "Stop"
-msgstr "정지"
-
-#: ../src/plugins/xnoise-media-player-plugin.vala:262
-msgid "Stops the playback of Xnoise"
-msgstr "Xnoise를 멈춥니다."
-
-#: ../src/plugins/xnoise-media-player-plugin.vala:285
-msgid "Play in Xnoise"
-msgstr "Xnoise 재생"
-
-#: ../src/plugins/xnoise-media-player-plugin.vala:286
-msgid "Queues and plays the song"
-msgstr "노래를 대기열에 추가한 후 재생합니다."
-
 #: ../src/plugins/zeitgeist-plugin.vala:162
 msgid "few moments ago"
 msgstr "조금 전"
@@ -969,19 +526,3 @@ msgstr "관련된 파일"
 #: ../src/plugins/zeitgeist-related.vala:75
 msgid "Finds files related to other search results using Zeitgeist."
 msgstr "자이트가이스트로 다른 검색 결과와 관련이 있는 파일을 찾습니다."
-
-#: ../src/plugins/zeal-plugin.vala:102
-msgid "Zeal"
-msgstr ""
-
-#: ../src/plugins/zeal-plugin.vala:103
-msgid "Zeal offline documentation (zealdocs.org)"
-msgstr ""
-
-#: ../src/plugins/zeal-plugin.vala:107
-msgid "zeal is not installed, please see zealdocs.org"
-msgstr ""
-
-#: ../src/plugins/zeal-plugin.vala:167
-msgid "Zeal documentation research"
-msgstr ""

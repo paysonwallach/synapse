@@ -1,11 +1,11 @@
-# Ukrainian translation for synapse-project
+# Ukrainian translation for Synapse
 # Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
-# This file is distributed under the same license as the synapse-project package.
+# This file is distributed under the same license as the Synapse package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: synapse-project\n"
+"Project-Id-Version: com.paysonwallach.synapse\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2015-11-30 14:48+0000\n"
 "PO-Revision-Date: 2012-08-02 22:16+0000\n"
@@ -32,7 +32,6 @@ msgstr "Пошук всього, що Вам потрібно."
 msgid "Activate"
 msgstr "Увімкнути"
 
-#. Whooot?! This cannot be true!
 #: ../src/ui/category.vala:31 ../src/ui/category.vala:71
 #: ../src/ui/category.vala:135
 msgid "All"
@@ -222,7 +221,6 @@ msgid "Paste current selection"
 msgstr ""
 
 #: ../src/ui/settings.vala:256
-#: ../src/plugins/xnoise-media-player-plugin.vala:94
 msgid "Quit"
 msgstr "Вийти"
 
@@ -332,130 +330,6 @@ msgstr "Копіювати у буфер обміну"
 msgid "Copy selection to clipboard"
 msgstr "Копіювати виділене у буфер обміну"
 
-#: ../src/plugins/banshee-plugin.vala:70
-msgid "Control Banshee and add items to playlists."
-msgstr "Керування плеєром Banshee та додавання пісень до списку відтворення."
-
-#. DBusService.get_default ().name_is_activatable (BansheePlaybackController.UNIQUE_NAME), // doesn't work for banshee
-#: ../src/plugins/banshee-plugin.vala:76
-msgid "Banshee is not installed"
-msgstr "Banshee не встановлено"
-
-#: ../src/plugins/banshee-plugin.vala:113
-#: ../src/plugins/rhythmbox-plugin.vala:119
-#: ../src/plugins/xnoise-media-player-plugin.vala:140
-msgid "Play"
-msgstr "Грати"
-
-#: ../src/plugins/banshee-plugin.vala:114
-msgid "Start playback in Banshee"
-msgstr "Почати відтворення в Banshee"
-
-#: ../src/plugins/banshee-plugin.vala:140
-#: ../src/plugins/rhythmbox-plugin.vala:145
-#: ../src/plugins/xnoise-media-player-plugin.vala:191
-msgid "Pause"
-msgstr "Пауза"
-
-#: ../src/plugins/banshee-plugin.vala:141
-msgid "Pause playback in Banshee"
-msgstr "Призупинити відтворення в Banshee"
-
-#: ../src/plugins/banshee-plugin.vala:160
-#: ../src/plugins/rhythmbox-plugin.vala:171
-#: ../src/plugins/xnoise-media-player-plugin.vala:214
-msgid "Next"
-msgstr "Наступна"
-
-#: ../src/plugins/banshee-plugin.vala:161
-msgid "Plays the next song in Banshee's playlist"
-msgstr "Грати наступну пісню в списку відтворення Banshee"
-
-#: ../src/plugins/banshee-plugin.vala:182
-#: ../src/plugins/rhythmbox-plugin.vala:196
-#: ../src/plugins/xnoise-media-player-plugin.vala:238
-msgid "Previous"
-msgstr "Попередня"
-
-#: ../src/plugins/banshee-plugin.vala:183
-msgid "Plays the previous song in Banshee's playlist"
-msgstr "Грати попередню пісню в списку відтворення Banshee"
-
-#: ../src/plugins/banshee-plugin.vala:204
-msgid "Enqueue in Banshee"
-msgstr "Додати в Banshee"
-
-#: ../src/plugins/banshee-plugin.vala:205
-msgid "Add the song to Banshee playlist"
-msgstr "Додати пісню до списку відтворення Banshee"
-
-#: ../src/plugins/banshee-plugin.vala:241
-msgid "Play in Banshee"
-msgstr "Грати в Banshee"
-
-#: ../src/plugins/banshee-plugin.vala:242
-#: ../src/plugins/rhythmbox-plugin.vala:265
-msgid "Clears the current playlist and plays the song"
-msgstr "Очистити поточний список відтворення, та грати пісню"
-
-#: ../src/plugins/calculator-plugin.vala:59
-msgid "Calculator"
-msgstr "Калькулятор"
-
-#: ../src/plugins/calculator-plugin.vala:60
-msgid "Calculate basic expressions."
-msgstr "Обраховування базових виразів."
-
-#: ../src/plugins/calculator-plugin.vala:64
-msgid "bc is not installed"
-msgstr "Програму bc не встановлено."
-
-#: ../src/plugins/chat-actions-plugin.vala:42
-msgid "Open chat"
-msgstr "Розпочати чат"
-
-#: ../src/plugins/chat-actions-plugin.vala:43
-msgid "Open a chat with selected contact"
-msgstr "Розпочати розмову з вибраними контактами"
-
-#: ../src/plugins/chat-actions-plugin.vala:65
-msgid "Send a message"
-msgstr "Надіслати повідомлення"
-
-#: ../src/plugins/chat-actions-plugin.vala:66
-msgid "Send a message to the contact"
-msgstr "Надіслати повідомлення контакту"
-
-#: ../src/plugins/chat-actions-plugin.vala:99
-msgid "Send message to.."
-msgstr "Надіслати повідомлення..."
-
-#: ../src/plugins/chat-actions-plugin.vala:100
-msgid "Send a message to a contact"
-msgstr "Надіслати повідомлення контакту"
-
-#: ../src/plugins/chat-actions-plugin.vala:134
-msgid "Chat actions"
-msgstr "Дії чату"
-
-#: ../src/plugins/chat-actions-plugin.vala:135
-msgid "Open chat, or send a message with your favorite IM"
-msgstr ""
-"Розпочати розмову або надіслати повідомлення за допомогою вашого улюбленого "
-"IM"
-
-#: ../src/plugins/chromium-plugin.vala:66
-msgid "Chromium Plugin"
-msgstr ""
-
-#: ../src/plugins/chromium-plugin.vala:67
-msgid "Browse and open Chromium bookmarks."
-msgstr ""
-
-#: ../src/plugins/chromium-plugin.vala:71
-msgid "Chromium is not installed"
-msgstr ""
-
 #: ../src/plugins/command-plugin.vala:44
 msgid "Run command"
 msgstr "Виконати команду"
@@ -483,22 +357,6 @@ msgstr "Відкрити обраний файл використовуючи %s
 msgid "Launch action '%s'"
 msgstr ""
 
-#: ../src/plugins/devhelp-search.vala:59
-msgid "Search in Devhelp"
-msgstr "Пошук в Devhelp"
-
-#: ../src/plugins/devhelp-search.vala:60
-msgid "Search documentation for this symbol"
-msgstr "Пошук документації для цього символу"
-
-#: ../src/plugins/devhelp-search.vala:70
-msgid "Search documentation using Devhelp."
-msgstr "Пошук документацій використовуючи Devhelp."
-
-#: ../src/plugins/devhelp-search.vala:74
-msgid "Devhelp is not installed"
-msgstr "Devhelp не встановлено"
-
 #: ../src/plugins/dictionary.vala:61
 msgid "Define"
 msgstr "Визначення"
@@ -514,173 +372,6 @@ msgstr "Перрегляд значення слів."
 #: ../src/plugins/dictionary.vala:78
 msgid "No compatible Dictionary installed"
 msgstr ""
-
-#: ../src/plugins/directory-plugin.vala:111
-msgid "Open commonly used directories."
-msgstr "Відкриття часто використовуваних папок."
-
-#: ../src/plugins/file-op-plugin.vala:40
-msgid "Remove"
-msgstr ""
-
-#: ../src/plugins/file-op-plugin.vala:41
-msgid "Move to Trash"
-msgstr ""
-
-#: ../src/plugins/file-op-plugin.vala:72
-msgid "Rename to"
-msgstr "Перейменувати на"
-
-#: ../src/plugins/file-op-plugin.vala:73
-msgid "Rename the file to..."
-msgstr "Перейменувати файл на..."
-
-#: ../src/plugins/file-op-plugin.vala:89 ../src/plugins/pidgin-plugin.vala:171
-#, c-format
-msgid "File \"%s\"does not exist."
-msgstr "Файл \"%s\"не існує."
-
-#: ../src/plugins/file-op-plugin.vala:101
-#, c-format
-msgid "Cannot move \"%s\" to \"%s\""
-msgstr "Не вдалося перемістити \"%s\" до \"%s\""
-
-#: ../src/plugins/file-op-plugin.vala:125
-msgid "File Operations"
-msgstr "Дії над файлами"
-
-#: ../src/plugins/file-op-plugin.vala:126
-msgid "Copy, Cut, Paste and Delete files"
-msgstr "Копіювати, Вирізати, Вставити і Видалити файли"
-
-#: ../src/plugins/gnome-bookmarks-plugin.vala:61
-msgid "GNOME Bookmarks Plugin"
-msgstr ""
-
-#: ../src/plugins/gnome-bookmarks-plugin.vala:62
-msgid "Browse and open GNOME bookmarks."
-msgstr ""
-
-#: ../src/plugins/gnome-screensaver-plugin.vala:51
-msgid "Lock Screen"
-msgstr "Блокувати екран"
-
-#: ../src/plugins/gnome-screensaver-plugin.vala:52
-msgid "Locks screen and starts screensaver."
-msgstr "Блокувати екран та запустити збереження екрану."
-
-#: ../src/plugins/gnome-screensaver-plugin.vala:80
-msgid "Lock screen of your computer."
-msgstr "Блокувати екран комп’ютера."
-
-#: ../src/plugins/gnome-screensaver-plugin.vala:84
-msgid "Gnome Screen Saver wasn't found"
-msgstr "Gnome Screen Saver не знайдено"
-
-#: ../src/plugins/hybrid-search-plugin.vala:62
-msgid ""
-"Improve results returned by the Zeitgeist plugin by looking for similar "
-"files on the filesystem."
-msgstr ""
-
-#: ../src/plugins/imgur-plugin.vala:51
-msgid "Upload to imgur"
-msgstr "Завантажити до imgur"
-
-#: ../src/plugins/imgur-plugin.vala:52
-msgid "Upload selection to imgur image sharer"
-msgstr ""
-
-#: ../src/plugins/imgur-plugin.vala:162
-#: ../src/plugins/pastebin-plugin.vala:151
-msgid ""
-"The selection was successfully uploaded and its URL was copied to clipboard."
-msgstr ""
-
-#: ../src/plugins/imgur-plugin.vala:166
-#: ../src/plugins/pastebin-plugin.vala:155
-msgid ""
-"An error occurred during upload, please check the log for more information."
-msgstr ""
-"Під-час завантаження сталася помилка, будь ласка, перегляньте журнал для "
-"отримання детальної інформації."
-
-#: ../src/plugins/imgur-plugin.vala:174
-msgid "Synapse - Imgur"
-msgstr ""
-
-#: ../src/plugins/imgur-plugin.vala:229
-msgid "Upload to imgur to contact.."
-msgstr ""
-
-#: ../src/plugins/imgur-plugin.vala:230
-msgid "Upload selection to imgur image sharer, and send the link to contact"
-msgstr ""
-
-#: ../src/plugins/imgur-plugin.vala:263
-msgid "Imgur"
-msgstr "Imgur"
-
-#: ../src/plugins/imgur-plugin.vala:264
-msgid "Share images using imgur."
-msgstr ""
-
-#: ../src/plugins/launchpad-plugin.vala:45
-msgid "Authorize with Launchpad"
-msgstr "Авторизуватись з допомогою Launchpad"
-
-#: ../src/plugins/launchpad-plugin.vala:52
-msgid ""
-"Please press the Finish button once you login to Launchpad with your web "
-"browser"
-msgstr ""
-
-#: ../src/plugins/launchpad-plugin.vala:55
-msgid "Finish authorization"
-msgstr "Авторизацію завершено"
-
-#: ../src/plugins/launchpad-plugin.vala:240
-msgid "Find bugs and branches on Launchpad."
-msgstr ""
-
-#. project link (lp:synapse)
-#: ../src/plugins/launchpad-plugin.vala:291
-#, c-format
-msgid "Launchpad: Bazaar branches for %s"
-msgstr ""
-
-#. series link (lp:synapse/0.3)
-#: ../src/plugins/launchpad-plugin.vala:298
-#, c-format
-msgid "Launchpad: Series %s for Project %s"
-msgstr "Launchpad: Серія %s для проекту %s"
-
-#. branch link (lp:~mhr3/synapse/lp-plugin)
-#: ../src/plugins/launchpad-plugin.vala:305
-#, c-format
-msgid "Launchpad: Bazaar branch %s"
-msgstr "Launchpad: Гілка Bazaar %s"
-
-#: ../src/plugins/launchpad-plugin.vala:320
-#, c-format
-msgid "Launchpad: Bug #%s"
-msgstr "Launchpad: Помилка #%s"
-
-#: ../src/plugins/locate-plugin.vala:62 ../src/plugins/locate-plugin.vala:72
-msgid "Locate"
-msgstr "Визначити місце"
-
-#: ../src/plugins/locate-plugin.vala:63
-msgid "Locate files with this name on the filesystem"
-msgstr "Знайти розташування файлу з цим іменем"
-
-#: ../src/plugins/locate-plugin.vala:73
-msgid "Runs locate command to find files on the filesystem."
-msgstr "Виконати команду пошуку, для пошуку файлів у файловій системі"
-
-#: ../src/plugins/locate-plugin.vala:77
-msgid "Unable to find \"locate\" binary"
-msgstr "Неможливо знайти виконуваний файл \"locate\""
 
 #: ../src/plugins/opensearch.vala:254
 msgid "Search the web."
@@ -710,85 +401,6 @@ msgstr "Карти Google"
 #: ../src/plugins/opensearch.vala:271
 msgid "Search using Google Maps"
 msgstr "Пошук з використанням Google Maps"
-
-#: ../src/plugins/pastebin-plugin.vala:42
-#: ../src/plugins/pastebin-plugin.vala:261
-msgid "Pastebin"
-msgstr ""
-
-#: ../src/plugins/pastebin-plugin.vala:43
-#: ../src/plugins/pastebin-plugin.vala:228
-msgid "Pastebin selection"
-msgstr ""
-
-#: ../src/plugins/pastebin-plugin.vala:163
-msgid "Synapse - Pastebin"
-msgstr ""
-
-#: ../src/plugins/pastebin-plugin.vala:227
-msgid "Pastebin to contact.."
-msgstr ""
-
-#: ../src/plugins/pastebin-plugin.vala:262
-msgid "Upload files to pastebin."
-msgstr ""
-
-#: ../src/plugins/pastebin-plugin.vala:266
-msgid "Unable to find \"pastebinit\" program"
-msgstr ""
-
-#: ../src/plugins/pidgin-plugin.vala:77
-msgid "Get access to your Pidgin contacts"
-msgstr ""
-
-#: ../src/plugins/pidgin-plugin.vala:81
-msgid "Pidgin is not installed."
-msgstr ""
-
-#: ../src/plugins/pidgin-plugin.vala:94
-msgid "Send in chat to.."
-msgstr ""
-
-#: ../src/plugins/pidgin-plugin.vala:95
-msgid "Send selected file within Pidgin"
-msgstr ""
-
-#: ../src/plugins/rhythmbox-plugin.vala:79
-msgid "Control Rhythmbox and add items to playlists."
-msgstr ""
-"Керування плеєром Rhythmbox та додавання композицій до списку відтворення."
-
-#: ../src/plugins/rhythmbox-plugin.vala:83
-msgid "Rhythmbox is not installed"
-msgstr "Rhythmbox не встановлено"
-
-#: ../src/plugins/rhythmbox-plugin.vala:120
-msgid "Start playback in Rhythmbox"
-msgstr "Почати програвання в Rhythmbox"
-
-#: ../src/plugins/rhythmbox-plugin.vala:146
-msgid "Pause playback in Rhythmbox"
-msgstr "Призупинити програвання в Rhythmbox"
-
-#: ../src/plugins/rhythmbox-plugin.vala:172
-msgid "Plays the next song in Rhythmbox's playlist"
-msgstr "Грати наступну пісню в списку відтворення Rhythmbox"
-
-#: ../src/plugins/rhythmbox-plugin.vala:197
-msgid "Plays the previous song in Rhythmbox's playlist"
-msgstr "Грати попередню пісню в списку відтворення Rhythmbox"
-
-#: ../src/plugins/rhythmbox-plugin.vala:222
-msgid "Enqueue in Rhythmbox"
-msgstr "Додати в Rhythmbox"
-
-#: ../src/plugins/rhythmbox-plugin.vala:223
-msgid "Add the song to Rhythmbox playlist"
-msgstr "Додати пісню до списку відтворення Rhythmbox"
-
-#: ../src/plugins/rhythmbox-plugin.vala:264
-msgid "Play in Rhythmbox"
-msgstr "Грати в Rhythmbox"
 
 #: ../src/plugins/selection-plugin.vala:55
 msgid "Selection"
@@ -860,66 +472,6 @@ msgstr ""
 msgid "ConsoleKit wasn't found"
 msgstr ""
 
-#: ../src/plugins/xnoise-media-player-plugin.vala:59
-msgid "Control Xnoise media player."
-msgstr ""
-
-#: ../src/plugins/xnoise-media-player-plugin.vala:63
-msgid "Xnoise is not installed!"
-msgstr ""
-
-#: ../src/plugins/xnoise-media-player-plugin.vala:95
-msgid "Quit Xnoise"
-msgstr ""
-
-#: ../src/plugins/xnoise-media-player-plugin.vala:117
-msgid "Raise"
-msgstr ""
-
-#: ../src/plugins/xnoise-media-player-plugin.vala:118
-msgid "Show Xnoise"
-msgstr ""
-
-#: ../src/plugins/xnoise-media-player-plugin.vala:141
-msgid "Start playback in Xnoise"
-msgstr ""
-
-#: ../src/plugins/xnoise-media-player-plugin.vala:163
-msgid "TogglePlaying"
-msgstr ""
-
-#: ../src/plugins/xnoise-media-player-plugin.vala:164
-msgid "Start/Pause playback in Xnoise"
-msgstr ""
-
-#: ../src/plugins/xnoise-media-player-plugin.vala:192
-msgid "Pause playback in Xnoise"
-msgstr ""
-
-#: ../src/plugins/xnoise-media-player-plugin.vala:215
-msgid "Plays the next song in Xnoise's playlist"
-msgstr ""
-
-#: ../src/plugins/xnoise-media-player-plugin.vala:239
-msgid "Plays the previous song in Xnoise's playlist"
-msgstr ""
-
-#: ../src/plugins/xnoise-media-player-plugin.vala:261
-msgid "Stop"
-msgstr ""
-
-#: ../src/plugins/xnoise-media-player-plugin.vala:262
-msgid "Stops the playback of Xnoise"
-msgstr ""
-
-#: ../src/plugins/xnoise-media-player-plugin.vala:285
-msgid "Play in Xnoise"
-msgstr ""
-
-#: ../src/plugins/xnoise-media-player-plugin.vala:286
-msgid "Queues and plays the song"
-msgstr ""
-
 #: ../src/plugins/zeitgeist-plugin.vala:162
 msgid "few moments ago"
 msgstr "кілька хвилин тому"
@@ -983,20 +535,4 @@ msgstr ""
 
 #: ../src/plugins/zeitgeist-related.vala:75
 msgid "Finds files related to other search results using Zeitgeist."
-msgstr ""
-
-#: ../src/plugins/zeal-plugin.vala:102
-msgid "Zeal"
-msgstr ""
-
-#: ../src/plugins/zeal-plugin.vala:103
-msgid "Zeal offline documentation (zealdocs.org)"
-msgstr ""
-
-#: ../src/plugins/zeal-plugin.vala:107
-msgid "zeal is not installed, please see zealdocs.org"
-msgstr ""
-
-#: ../src/plugins/zeal-plugin.vala:167
-msgid "Zeal documentation research"
 msgstr ""

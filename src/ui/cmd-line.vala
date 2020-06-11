@@ -16,63 +16,47 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA.
  *
  * Authored by Michal Hruby <michal.mhr@gmail.com>
- *
  */
 
 MainLoop loop;
 
-int main (string[] argv)
-{
-  loop = new MainLoop ();
-  var sink = new Synapse.DataSink ();
-  if (argv.length <= 1)
-  {
-    print ("Searching for recent uris...\n");
-    sink.search ("", Synapse.QueryFlags.LOCAL_CONTENT, null, null, (obj, res) =>
-    {
-      try
-      {
-        var rs = sink.search.end (res);
-        foreach (var match in rs)
-        {
-          print (">> %s\n", match.title);
-          var actions = sink.find_actions_for_match (match, null);
-          if (actions.size > 0) print ("  > %s\n", actions[0].title);
-        }
-      }
-      catch (Error err)
-      {
-        warning ("%s", err.message);
-      }
-      loop.quit ();
-    });
-  }
-  else
-  {
-    string query = argv[1];
-    debug (@"Searching for \"$query\"...");
-    sink.search (query, Synapse.QueryFlags.LOCAL_CONTENT, null, null, (obj, res) =>
-    {
-      try
-      {
-        var rs = sink.search.end (res);
-        foreach (var match in rs)
-        {
-          print (">> %s\n", match.title);
-          var actions = sink.find_actions_for_match (match, null);
-          if (actions.size > 0) print ("  > %s\n", actions[0].title);
-        }
-      }
-      catch (Error err)
-      {
-        warning ("%s", err.message);
-      }
-      loop.quit ();
-    });
-  }
+int main (string[] argv) {
+    loop = new MainLoop ();
+    var sink = new Synapse.DataSink ();
+    if (argv.length <= 1) {
+        print ("Searching for recent uris...\n");
+        sink.search ("", Synapse.QueryFlags.LOCAL_CONTENT, null, null, (obj, res) => {
+            try {
+                var rs = sink.search.end (res);
+                foreach (var match in rs) {
+                    print (">> %s\n", match.title);
+                    var actions = sink.find_actions_for_match (match, null);
+                    if (actions.size > 0) print ("  > %s\n", actions[0].title);
+                }
+            } catch (Error err) {
+                warning ("%s", err.message);
+            }
+            loop.quit ();
+        });
+    } else {
+        string query = argv[1];
+        debug (@"Searching for \"$query\"...");
+        sink.search (query, Synapse.QueryFlags.LOCAL_CONTENT, null, null, (obj, res) => {
+            try {
+                var rs = sink.search.end (res);
+                foreach (var match in rs) {
+                    print (">> %s\n", match.title);
+                    var actions = sink.find_actions_for_match (match, null);
+                    if (actions.size > 0) print ("  > %s\n", actions[0].title);
+                }
+            } catch (Error err) {
+                warning ("%s", err.message);
+            }
+            loop.quit ();
+        });
+    }
 
-  loop.run ();
+    loop.run ();
 
-  return 0;
+    return 0;
 }
-

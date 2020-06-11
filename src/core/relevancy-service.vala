@@ -15,83 +15,69 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * Authored by Michal Hruby <michal.mhr@gmail.com>
- *
  */
 
-namespace Synapse
-{
-  public interface RelevancyBackend : Object
-  {
-    public abstract float get_application_popularity (string desktop_id);
-    public abstract float get_uri_popularity (string uri);
+namespace Synapse {
+    public interface RelevancyBackend : Object {
+        public abstract float get_application_popularity (string desktop_id);
+        public abstract float get_uri_popularity (string uri);
 
-    public abstract void application_launched (AppInfo app_info);
-  }
+        public abstract void application_launched (AppInfo app_info);
 
-  public class RelevancyService : GLib.Object
-  {
-    // singleton that can be easily destroyed
-    private static unowned RelevancyService? instance;
-    public static RelevancyService get_default ()
-    {
-      return instance ?? new RelevancyService ();
     }
 
-    private RelevancyService ()
-    {
-    }
+    public class RelevancyService : GLib.Object {
+        // singleton that can be easily destroyed
+        private static unowned RelevancyService? instance;
+        public static RelevancyService get_default () {
+            return instance ?? new RelevancyService ();
+        }
 
-    ~RelevancyService ()
-    {
-    }
+        private RelevancyService () {}
 
-    construct
-    {
-      instance = this;
-      this.add_weak_pointer (&instance);
+        ~RelevancyService () {}
 
-      initialize_relevancy_backend ();
-    }
+        construct {
+            instance = this;
+            this.add_weak_pointer (&instance);
 
-    private RelevancyBackend backend;
+            initialize_relevancy_backend ();
+        }
 
-    private void initialize_relevancy_backend ()
-    {
+        private RelevancyBackend backend;
+
+        private void initialize_relevancy_backend () {
 #if HAVE_ZEITGEIST
-      backend = new ZeitgeistRelevancyBackend ();
+            backend = new ZeitgeistRelevancyBackend ();
 #endif
-    }
+        }
 
-    public float get_application_popularity (string desktop_id)
-    {
-      if (backend == null) return 0.0f;
-      return backend.get_application_popularity (desktop_id);
-    }
+        public float get_application_popularity (string desktop_id) {
+            if (backend == null) return 0.0f;
+            return backend.get_application_popularity (desktop_id);
+        }
 
-    public float get_uri_popularity (string uri)
-    {
-      if (backend == null) return 0.0f;
-      return backend.get_uri_popularity (uri);
-    }
+        public float get_uri_popularity (string uri) {
+            if (backend == null) return 0.0f;
+            return backend.get_uri_popularity (uri);
+        }
 
-    public void application_launched (AppInfo app_info)
-    {
-      debug ("application launched");
-      if (backend == null) return;
-      backend.application_launched (app_info);
-    }
+        public void application_launched (AppInfo app_info) {
+            debug ("application launched");
+            if (backend == null) return;
+            backend.application_launched (app_info);
+        }
 
-    public static int compute_relevancy (int base_relevancy, float modifier)
-    {
-      // FIXME: let's experiment here
-      // the other idea is to use base_relevancy * (1.0f + modifier)
-      int relevancy = (int) (base_relevancy + modifier * MatchScore.INCREMENT_LARGE * 2);
-      //int relevancy = base_relevancy + (int) (modifier * MatchScore.HIGHEST);
-      return relevancy;
-      // FIXME: this clamping should be done, but it screws up the popularity
-      //   for very popular items with high match score
-      //return int.min (relevancy, MatchScore.HIGHEST);
+        public static int compute_relevancy (int base_relevancy, float modifier) {
+            // FIXME: let's experiment here
+            // the other idea is to use base_relevancy * (1.0f + modifier)
+            int relevancy = (int) (base_relevancy + modifier * MatchScore.INCREMENT_LARGE * 2);
+            //int relevancy = base_relevancy + (int) (modifier * MatchScore.HIGHEST);
+            return relevancy;
+            // FIXME: this clamping should be done, but it screws up the popularity
+            //   for very popular items with high match score
+            //return int.min (relevancy, MatchScore.HIGHEST);
+        }
+
     }
-  }
 }
-

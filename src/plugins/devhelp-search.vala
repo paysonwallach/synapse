@@ -16,129 +16,101 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA.
  *
  * Authored by Michal Hruby <michal.mhr@gmail.com>
- *
  */
 
-namespace Synapse
-{
-  public class DevhelpPlugin : Object, Activatable, ActionProvider
-  {
-    public bool enabled { get; set; default = true; }
+namespace Synapse {
+    public class DevhelpPlugin : Object, Activatable, ActionProvider {
+        public bool enabled { get; set; default = true; }
 
-    public void activate ()
-    {
+        public void activate () {}
 
-    }
+        public void deactivate () {}
 
-    public void deactivate ()
-    {
+        private class Search : Match {
+            public int default_relevancy { get; set; default = 0; }
 
-    }
+            public override void execute (Match match) {
+                try {
+                    AppInfo ai = AppInfo.create_from_commandline (
+                        "devhelp -s \"%s\"".printf (match.title),
+                        "devhelp", 0);
+                    ai.launch (null, null);
+                } catch (Error err) {
+                    warning ("%s", err.message);
+                }
+            }
 
-    private class Search : Match
-    {
-      public int default_relevancy { get; set; default = 0; }
+            public Search () {
+                Object (title: _("Search in Devhelp"),
+                        description: _("Search documentation for this symbol"),
+                        has_thumbnail: false, icon_name: "devhelp");
+            }
 
-      public override void execute (Match match)
-      {
-        try
-        {
-          AppInfo ai = AppInfo.create_from_commandline (
-            "devhelp -s \"%s\"".printf (match.title),
-            "devhelp", 0);
-          ai.launch (null, null);
         }
-        catch (Error err)
-        {
-          warning ("%s", err.message);
+
+        static void register_plugin () {
+            PluginRegistry.get_default ().register_plugin (
+                typeof (DevhelpPlugin),
+                "Devhelp",
+                _("Search documentation using Devhelp."),
+                "devhelp",
+                register_plugin,
+                Environment.find_program_in_path ("devhelp") != null,
+                _("Devhelp is not installed")
+                );
         }
-      }
 
-      public Search ()
-      {
-        Object (title: _("Search in Devhelp"),
-                description: _("Search documentation for this symbol"),
-                has_thumbnail: false, icon_name: "devhelp");
-      }
-    }
-
-    static void register_plugin ()
-    {
-      PluginRegistry.get_default ().register_plugin (
-        typeof (DevhelpPlugin),
-        "Devhelp",
-        _("Search documentation using Devhelp."),
-        "devhelp",
-        register_plugin,
-        Environment.find_program_in_path ("devhelp") != null,
-        _("Devhelp is not installed")
-      );
-    }
-
-    static construct
-    {
-      register_plugin ();
-    }
-
-    private Search action;
-    private bool has_devhelp;
-
-    construct
-    {
-      action = new Search ();
-      has_devhelp =
-        Environment.find_program_in_path ("devhelp") != null;
-
-      try
-      {
-        symbol_re = new Regex ("^([a-z]+_)|([A-Z]+[a-z]+[A-Z])",
-                               RegexCompileFlags.OPTIMIZE);
-      }
-      catch (Error err)
-      {
-        warning ("%s", err.message);
-      }
-    }
-
-    public bool handles_unknown ()
-    {
-      return has_devhelp;
-    }
-
-    private Regex symbol_re;
-
-    public ResultSet? find_for_match (ref Query query, Match match)
-    {
-      if (!has_devhelp || !(match is UnknownMatch) ||
-          !(QueryFlags.ACTIONS in query.query_type))
-      {
-        return null;
-      }
-
-      bool query_empty = query.query_string == "";
-      var results = new ResultSet ();
-
-      if (query_empty)
-      {
-        int relevancy = action.default_relevancy;
-        if (symbol_re.match (match.title)) relevancy += MatchScore.INCREMENT_SMALL;
-        results.add (action, relevancy);
-      }
-      else
-      {
-        var matchers = Query.get_matchers_for_query (query.query_string, 0,
-          RegexCompileFlags.CASELESS);
-        foreach (var matcher in matchers)
-        {
-          if (matcher.key.match (action.title))
-          {
-            results.add (action, matcher.value);
-            break;
-          }
+        static construct {
+            register_plugin ();
         }
-      }
 
-      return results;
+        private Search action;
+        private bool has_devhelp;
+
+        construct {
+            action = new Search ();
+            has_devhelp =
+                Environment.find_program_in_path ("devhelp") != null;
+
+            try {
+                symbol_re = new Regex ("^([a-z]+_)|([A-Z]+[a-z]+[A-Z])",
+                                       RegexCompileFlags.OPTIMIZE);
+            } catch (Error err) {
+                warning ("%s", err.message);
+            }
+        }
+
+        public bool handles_unknown () {
+            return has_devhelp;
+        }
+
+        private Regex symbol_re;
+
+        public ResultSet? find_for_match (ref Query query, Match match) {
+            if (!has_devhelp || !(match is UnknownMatch) ||
+                !(QueryFlags.ACTIONS in query.query_type)) {
+                return null;
+            }
+
+            bool query_empty = query.query_string == "";
+            var results = new ResultSet ();
+
+            if (query_empty) {
+                int relevancy = action.default_relevancy;
+                if (symbol_re.match (match.title)) relevancy += MatchScore.INCREMENT_SMALL;
+                results.add (action, relevancy);
+            } else {
+                var matchers = Query.get_matchers_for_query (query.query_string, 0,
+                                                             RegexCompileFlags.CASELESS);
+                foreach (var matcher in matchers) {
+                    if (matcher.key.match (action.title)) {
+                        results.add (action, matcher.value);
+                        break;
+                    }
+                }
+            }
+
+            return results;
+        }
     }
-  }
 }

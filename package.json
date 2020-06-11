@@ -1,0 +1,26 @@
+{
+  "name": "synapse",
+  "version": "0.4.7",
+  "description": "A semantic launcher written in Vala",
+  "scripts": {
+    "format": "find src -name '*.vala' -exec uncrustify -c uncrustify.cfg --replace {} \\;"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.launchpad.net/synapse-project"
+  },
+  "author": "",
+  "license": "LGPL-2.1",
+  "dependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "husky": "^4.2.5",
+    "nunjucks": "^3.2.1",
+    "standard-version": "^8.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run format"
+    }
+  }
+}

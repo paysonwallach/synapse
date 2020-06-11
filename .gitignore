@@ -61,3 +61,5 @@ debian/synapse.substvars
 debian/synapse
 *.swp
 debian/debhelper-build-stamp
+*.uncrustify
+node_modules/

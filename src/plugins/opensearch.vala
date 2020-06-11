@@ -16,13 +16,11 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA.
  *
  * Authored by Michal Hruby <michal.mhr@gmail.com>
- *
  */
 
-namespace Synapse
-{
-  // verbatim string
-  private const string GOOGLE_SEARCH_XML = """
+namespace Synapse {
+    // verbatim string
+    private const string GOOGLE_SEARCH_XML = """
 <?xml version="1.0" encoding="UTF-8"?>
 <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
   <ShortName>Google</ShortName>
@@ -34,7 +32,7 @@ namespace Synapse
   <InputEncoding>UTF-8</InputEncoding>
 </OpenSearchDescription>
 """;
-  private const string GOOGLE_MAPS_XML = """
+    private const string GOOGLE_MAPS_XML = """
 <?xml version="1.0" encoding="UTF-8"?>
 <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
   <ShortName>Google Maps</ShortName>
@@ -46,342 +44,288 @@ namespace Synapse
 </OpenSearchDescription>
 """;
 
-  private const string DUCKDUCKGO_SEARCH_XML = """
+    private const string DUCKDUCKGO_SEARCH_XML = """
 <?xml version="1.0" encoding="utf-8"?>
-<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/"> 
-  <ShortName>DuckDuckGo</ShortName> 
-  <Description>Search DuckDuckGo</Description> 
-  <InputEncoding>UTF-8</InputEncoding> 
-  <LongName>DuckDuckGo Search</LongName> 
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+  <ShortName>DuckDuckGo</ShortName>
+  <Description>Search DuckDuckGo</Description>
+  <InputEncoding>UTF-8</InputEncoding>
+  <LongName>DuckDuckGo Search</LongName>
   <Url type="text/html" method="get" template="https://duckduckgo.com/?q={searchTerms}"/>
   <Url type="application/x-suggestions+json" template="https://ac.duckduckgo.com/ac/?q={searchTerms}&amp;type=list"/>
-</OpenSearchDescription> 
+</OpenSearchDescription>
 """;
 
-  public class OpenSearchPlugin : Object, Activatable, ActionProvider
-  {
-    public bool enabled { get; set; default = true; }
+    public class OpenSearchPlugin : Object, Activatable, ActionProvider {
+        public bool enabled { get; set; default = true; }
 
-    public void activate ()
-    {
-      actions = new Gee.ArrayList<SearchAction> ();
-      load_xmls.begin ();
-    }
-
-    public void deactivate ()
-    {
-    }
-
-    private class OpenSearchParser : Object
-    {
-      const MarkupParser parser =
-      {
-        start, end, text, null, null
-      };
-
-      MarkupParseContext context;
-      bool is_opensearch = false;
-      bool in_name_elem = false;
-      bool in_description_elem = false;
-
-      bool has_name = false;
-      bool has_desc = false;
-      bool has_url = false;
-
-      public string short_name { get; set; }
-      public string description { get; set; }
-      public string query_url { get; set; }
-      public string suggestion_url { get; set; }
-
-      construct
-      {
-        context = new MarkupParseContext (parser, 0, this, null);
-      }
-
-      public bool parse (string content) throws MarkupError
-      {
-        return context.parse (content, -1);
-      }
-
-      public bool has_valid_result ()
-      {
-        return is_opensearch && has_name && has_desc && has_url;
-      }
-
-      private void process_url (string[] attrs, string[] vals)
-      {
-        uint len = strv_length (attrs);
-        bool main_type = false;
-        bool suggestion_type = false;
-
-        for (uint i=0; i<len; i++)
-        {
-          switch (attrs[i])
-          {
-            case "type":
-              if (vals[i] == "text/html") main_type = true;
-              else if (vals[i] == "application/x-suggestions+json") suggestion_type = true;
-              break;
-            case "template":
-              if (main_type)
-              {
-                query_url = vals[i];
-                has_url = true;
-              }
-              else if (suggestion_type) suggestion_url = vals[i];
-              break;
-            default: break;
-          }
-        }
-      }
-
-      private void start (MarkupParseContext ctx, string name,
-                          string[] attr_names, string[] attr_vals) throws MarkupError
-      {
-        switch (name)
-        {
-          case "SearchPlugin": //try to support Mozilla OpenSearch xmls
-            if ("xmlns:os" in attr_names)
-              is_opensearch = true;
-            break;
-          case "OpenSearchDescription": is_opensearch = true; break;
-          case "os:ShortName":
-          case "ShortName": has_name = true; in_name_elem = true; break;
-          case "os:Description":
-          case "Description": has_desc = true; in_description_elem = true; break;
-          case "os:Url":
-          case "Url": process_url (attr_names, attr_vals); break;
-          default: break;
-        }
-      }
-
-      private void end (MarkupParseContext ctx, string name) throws MarkupError
-      {
-        switch (name)
-        {
-          case "os:ShortName":
-          case "ShortName": in_name_elem = false; break;
-          case "os:Description":
-          case "Description": in_description_elem = false; break;
-          default: break;
-        }
-      }
-
-      private void text (MarkupParseContext ctx, string text, size_t text_len) throws MarkupError
-      {
-        if (in_name_elem) short_name = text;
-        else if (in_description_elem) description = text;
-      }
-    }
-
-    private class SearchAction : Match
-    {
-      public int default_relevancy { get; set; default = MatchScore.INCREMENT_MINOR; }
-      public string query_template { get; construct set; }
-
-      public override void execute (Match match)
-      {
-        try
-        {
-          string what = (match is TextMatch) ?
-            ((TextMatch) match).get_text () : match.title;
-          AppInfo.launch_default_for_uri (get_query_url (what), null);
-        }
-        catch (Error err)
-        {
-          warning ("%s", err.message);
-        }
-      }
-
-      protected string get_query_url (string query)
-      {
-        string result;
-        result = query_template.replace ("{searchTerms}",
-                                         Uri.escape_string (query, "", false));
-        result = result.replace ("{language}", get_lang ());
-        // FIXME: remove all other "{codes}"
-
-        return result;
-      }
-
-      protected string get_lang ()
-      {
-        string? result = null;
-        foreach (unowned string lang in Intl.get_language_names ())
-        {
-          if (lang.length == 2)
-          {
-            result = lang;
-            break;
-          }
+        public void activate () {
+            actions = new Gee.ArrayList<SearchAction> ();
+            load_xmls.begin ();
         }
 
-        return result ?? "en";
-      }
+        public void deactivate () {}
 
-      public SearchAction (string name, string description, string url)
-      {
-        Object (title: name,
-                description: description,
-                query_template: url,
-                has_thumbnail: false, icon_name: "applications-internet");
-      }
-    }
+        private class OpenSearchParser : Object {
+            const MarkupParser parser = {
+                start, end, text, null, null
+            };
 
-    private class Config : ConfigObject
-    {
-      public bool use_internal { get; set; default = true; }
+            MarkupParseContext context;
+            bool is_opensearch = false;
+            bool in_name_elem = false;
+            bool in_description_elem = false;
 
-      private string[] _search_engines;
-      public string[] search_engines
-      {
-        get
-        {
-          return _search_engines;
-        }
-        set
-        {
-          _search_engines = value;
-        }
-      }
-    }
+            bool has_name = false;
+            bool has_desc = false;
+            bool has_url = false;
 
-    static void register_plugin ()
-    {
-      PluginRegistry.get_default ().register_plugin (
-        typeof (OpenSearchPlugin),
-        "OpenSearch",
-        _("Search the web."),
-        "applications-internet",
-        register_plugin
-      );
-    }
+            public string short_name { get; set; }
+            public string description { get; set; }
+            public string query_url { get; set; }
+            public string suggestion_url { get; set; }
 
-    static construct
-    {
-      register_plugin ();
-
-      // keep in sync with the internal XMLs!
-      unowned string dummy;
-      dummy = N_("DuckDuckGo");
-      dummy = N_("Search the web using duckduckgo.com");
-      dummy = N_("Google");
-      dummy = N_("Search the web using google.com");
-      dummy = N_("Google Maps");
-      dummy = N_("Search using Google Maps");
-    }
-
-    private Gee.List<SearchAction> actions;
-    private Config config;
-
-    construct
-    {
-      var cs = ConfigService.get_default ();
-      config = (Config) cs.get_config ("plugins", "opensearch", typeof (Config));
-    }
-
-    private async void load_xmls ()
-    {
-      OpenSearchParser parser;
-      if (config.use_internal)
-      {
-        Gee.List<unowned string> internals = new Gee.ArrayList<unowned string> ();
-        internals.add (DUCKDUCKGO_SEARCH_XML);
-        internals.add (GOOGLE_SEARCH_XML);
-        internals.add (GOOGLE_MAPS_XML);
-        foreach (unowned string s in internals)
-        {
-          parser = new OpenSearchParser ();
-          try
-          {
-            parser.parse (s);
-            if (parser.has_valid_result ())
-            {
-              actions.add (new SearchAction (_(parser.short_name),
-                                             _(parser.description),
-                                             parser.query_url));
+            construct {
+                context = new MarkupParseContext (parser, 0, this, null);
             }
-          }
-          catch (Error no_way) { /* this really shouldn't happen */ }
-        }
-      }
 
-      string[] xmls = config.search_engines;
-      foreach (unowned string xml in xmls)
-      {
-        string xml_path = xml;
-        if (xml_path.has_prefix ("~"))
-        {
-          xml_path = Environment.get_home_dir () +
-                     xml_path.substring (1);
-        }
-        var f = File.new_for_path (xml_path);
-        try
-        {
-          uint8[] file_contents;
-          string contents;
-          size_t len;
-          yield f.load_contents_async (null, out file_contents, null);
-          contents = (string) file_contents;
-          len = file_contents.length;
-
-          parser = new OpenSearchParser ();
-          parser.parse (contents);
-          if (parser.has_valid_result ())
-          {
-            actions.add (new SearchAction (parser.short_name,
-                                           parser.description,
-                                           parser.query_url));
-          }
-          else warning ("Unable to parse search plugin [%s]", xml);
-        }
-        catch (Error err)
-        {
-          warning ("Unable to load search plugin [%s]: %s", xml, err.message);
-        }
-      }
-    }
-
-    public bool handles_unknown ()
-    {
-      return true;
-    }
-
-    public ResultSet? find_for_match (ref Query query, Match match)
-    {
-      if (!(match is UnknownMatch || match is TextMatch)) return null;
-
-      var my_flags = QueryFlags.ACTIONS | QueryFlags.INTERNET;
-      if ((query.query_type & my_flags) == 0) return null;
-
-      bool query_empty = query.query_string == "";
-      var results = new ResultSet ();
-
-      if (query_empty)
-      {
-        foreach (var action in actions)
-        {
-          results.add (action, action.default_relevancy);
-        }
-      }
-      else
-      {
-        var matchers = Query.get_matchers_for_query (query.query_string, 0,
-          RegexCompileFlags.CASELESS);
-        foreach (var item in actions)
-        {
-          foreach (var matcher in matchers)
-          {
-            if (matcher.key.match (item.title))
-            {
-              results.add (item, matcher.value);
-              break;
+            public bool parse (string content) throws MarkupError {
+                return context.parse (content, -1);
             }
-          }
-        }
-      }
 
-      return results;
+            public bool has_valid_result () {
+                return is_opensearch && has_name && has_desc && has_url;
+            }
+
+            private void process_url (string[] attrs, string[] vals) {
+                uint len = strv_length (attrs);
+                bool main_type = false;
+                bool suggestion_type = false;
+
+                for (uint i = 0 ; i < len ; i++) {
+                    switch (attrs[i]) {
+                    case "type":
+                        if (vals[i] == "text/html") main_type = true;
+                        else if (vals[i] == "application/x-suggestions+json") suggestion_type = true;
+                        break;
+                    case "template":
+                        if (main_type) {
+                            query_url = vals[i];
+                            has_url = true;
+                        } else if (suggestion_type) suggestion_url = vals[i];
+                        break;
+                    default: break;
+                    }
+                }
+            }
+
+            private void start (MarkupParseContext ctx, string name,
+                                string[] attr_names, string[] attr_vals) throws MarkupError {
+                switch (name) {
+                case "SearchPlugin": //try to support Mozilla OpenSearch xmls
+                    if ("xmlns:os" in attr_names)
+                        is_opensearch = true;
+                    break;
+                case "OpenSearchDescription": is_opensearch = true; break;
+                case "os:ShortName":
+                case "ShortName": has_name = true; in_name_elem = true; break;
+                case "os:Description":
+                case "Description": has_desc = true; in_description_elem = true; break;
+                case "os:Url":
+                case "Url": process_url (attr_names, attr_vals); break;
+                default: break;
+                }
+            }
+
+            private void end (MarkupParseContext ctx, string name) throws MarkupError {
+                switch (name) {
+                case "os:ShortName":
+                case "ShortName": in_name_elem = false; break;
+                case "os:Description":
+                case "Description": in_description_elem = false; break;
+                default: break;
+                }
+            }
+
+            private void text (MarkupParseContext ctx, string text, size_t text_len) throws MarkupError {
+                if (in_name_elem) short_name = text;
+                else if (in_description_elem) description = text;
+            }
+
+        }
+
+        private class SearchAction : Match {
+            public int default_relevancy { get; set; default = MatchScore.INCREMENT_MINOR; }
+            public string query_template { get; construct set; }
+
+            public override void execute (Match match) {
+                try {
+                    string what = (match is TextMatch) ?
+                                  ((TextMatch) match).get_text () : match.title;
+                    AppInfo.launch_default_for_uri (get_query_url (what), null);
+                } catch (Error err) {
+                    warning ("%s", err.message);
+                }
+            }
+
+            protected string get_query_url (string query) {
+                string result;
+                result = query_template.replace ("{searchTerms}",
+                                                 Uri.escape_string (query, "", false));
+                result = result.replace ("{language}", get_lang ());
+                // FIXME: remove all other "{codes}"
+
+                return result;
+            }
+
+            protected string get_lang () {
+                string? result = null;
+                foreach (unowned string lang in Intl.get_language_names ()) {
+                    if (lang.length == 2) {
+                        result = lang;
+                        break;
+                    }
+                }
+
+                return result ?? "en";
+            }
+
+            public SearchAction (string name, string description, string url) {
+                Object (title: name,
+                        description: description,
+                        query_template: url,
+                        has_thumbnail: false, icon_name: "applications-internet");
+            }
+
+        }
+
+        private class Config : ConfigObject {
+            public bool use_internal { get; set; default = true; }
+
+            private string[] _search_engines;
+            public string[] search_engines {
+                get {
+                    return _search_engines;
+                }
+                set {
+                    _search_engines = value;
+                }
+            }
+        }
+
+        static void register_plugin () {
+            PluginRegistry.get_default ().register_plugin (
+                typeof (OpenSearchPlugin),
+                "OpenSearch",
+                _("Search the web."),
+                "applications-internet",
+                register_plugin
+                );
+        }
+
+        static construct {
+            register_plugin ();
+
+            // keep in sync with the internal XMLs!
+            unowned string dummy;
+            dummy = N_ ("DuckDuckGo");
+            dummy = N_ ("Search the web using duckduckgo.com");
+            dummy = N_ ("Google");
+            dummy = N_ ("Search the web using google.com");
+            dummy = N_ ("Google Maps");
+            dummy = N_ ("Search using Google Maps");
+        }
+
+        private Gee.List<SearchAction> actions;
+        private Config config;
+
+        construct {
+            var cs = ConfigService.get_default ();
+            config = (Config) cs.get_config ("plugins", "opensearch", typeof (Config));
+        }
+
+        private async void load_xmls () {
+            OpenSearchParser parser;
+            if (config.use_internal) {
+                Gee.List<unowned string> internals = new Gee.ArrayList<unowned string> ();
+                internals.add (DUCKDUCKGO_SEARCH_XML);
+                internals.add (GOOGLE_SEARCH_XML);
+                internals.add (GOOGLE_MAPS_XML);
+                foreach (unowned string s in internals) {
+                    parser = new OpenSearchParser ();
+                    try {
+                        parser.parse (s);
+                        if (parser.has_valid_result ()) {
+                            actions.add (new SearchAction (_(parser.short_name),
+                                                           _(parser.description),
+                                                           parser.query_url));
+                        }
+                    } catch (Error no_way) { /* this really shouldn't happen */
+                    }
+                }
+            }
+
+            string[] xmls = config.search_engines;
+            foreach (unowned string xml in xmls) {
+                string xml_path = xml;
+                if (xml_path.has_prefix ("~")) {
+                    xml_path = Environment.get_home_dir () +
+                               xml_path.substring (1);
+                }
+                var f = File.new_for_path (xml_path);
+                try {
+                    uint8[] file_contents;
+                    string contents;
+                    size_t len;
+                    yield f.load_contents_async (null, out file_contents, null);
+
+                    contents = (string) file_contents;
+                    len = file_contents.length;
+
+                    parser = new OpenSearchParser ();
+                    parser.parse (contents);
+                    if (parser.has_valid_result ()) {
+                        actions.add (new SearchAction (parser.short_name,
+                                                       parser.description,
+                                                       parser.query_url));
+                    } else warning ("Unable to parse search plugin [%s]", xml);
+                } catch (Error err) {
+                    warning ("Unable to load search plugin [%s]: %s", xml, err.message);
+                }
+            }
+        }
+
+        public bool handles_unknown () {
+            return true;
+        }
+
+        public ResultSet? find_for_match (ref Query query, Match match) {
+            if (!(match is UnknownMatch || match is TextMatch)) return null;
+
+            var my_flags = QueryFlags.ACTIONS | QueryFlags.INTERNET;
+            if ((query.query_type & my_flags) == 0) return null;
+
+            bool query_empty = query.query_string == "";
+            var results = new ResultSet ();
+
+            if (query_empty) {
+                foreach (var action in actions) {
+                    results.add (action, action.default_relevancy);
+                }
+            } else {
+                var matchers = Query.get_matchers_for_query (query.query_string, 0,
+                                                             RegexCompileFlags.CASELESS);
+                foreach (var item in actions) {
+                    foreach (var matcher in matchers) {
+                        if (matcher.key.match (item.title)) {
+                            results.add (item, matcher.value);
+                            break;
+                        }
+                    }
+                }
+            }
+
+            return results;
+        }
     }
-  }
 }

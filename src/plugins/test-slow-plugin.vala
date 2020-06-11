@@ -16,53 +16,42 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA.
  *
  * Authored by Michal Hruby <michal.mhr@gmail.com>
- *
  */
 
-namespace Synapse
-{
-  public class TestSlowPlugin : Object, Activatable, ItemProvider
-  {
-    public bool enabled { get; set; default = true; }
+namespace Synapse {
+    public class TestSlowPlugin : Object, Activatable, ItemProvider {
+        public bool enabled { get; set; default = true; }
 
-    public void activate ()
-    {
+        public void activate () {}
 
+        public void deactivate () {}
+
+        private class TestResult : UnknownMatch {
+            public TestResult (string query) {
+                Object (title: "Test result for " + query.strip (),
+                        description: "by TestSlowPlugin",
+                        icon_name: "unknown", has_thumbnail: false);
+            }
+
+        }
+
+        public async ResultSet? search (Query q) throws SearchError {
+            Idle.add (search.callback);
+            yield;
+
+            q.check_cancellable ();
+
+            Timeout.add (2000, search.callback);
+            yield;
+
+            q.check_cancellable ();
+
+            debug ("finished search for \"%s\"", q.query_string);
+
+            var rs = new ResultSet ();
+            rs.add (new TestResult (q.query_string), 0);
+
+            return rs;
+        }
     }
-
-    public void deactivate ()
-    {
-
-    }
-
-    private class TestResult : UnknownMatch
-    {
-      public TestResult (string query)
-      {
-        Object (title: "Test result for " + query.strip (),
-                description: "by TestSlowPlugin",
-                icon_name: "unknown", has_thumbnail: false);
-      }
-    }
-
-    public async ResultSet? search (Query q) throws SearchError
-    {
-      Idle.add (search.callback);
-      yield;
-
-      q.check_cancellable ();
-
-      Timeout.add (2000, search.callback);
-      yield;
-
-      q.check_cancellable ();
-
-      debug ("finished search for \"%s\"", q.query_string);
-
-      var rs = new ResultSet ();
-      rs.add (new TestResult (q.query_string), 0);
-
-      return rs;
-    }
-  }
 }

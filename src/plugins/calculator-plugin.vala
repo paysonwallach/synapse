@@ -16,132 +16,110 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA.
  *
  * Authored by Magnus Kulke <mkulke@gmail.com>
- *
  */
 
-namespace Synapse
-{
-  public class CalculatorPlugin : Object, Activatable, ItemProvider
-  {
-    public bool enabled { get; set; default = true; }
+namespace Synapse {
+    public class CalculatorPlugin : Object, Activatable, ItemProvider {
+        public bool enabled { get; set; default = true; }
 
-    public void activate ()
-    {
+        public void activate () {}
 
-    }
+        public void deactivate () {}
 
-    public void deactivate ()
-    {
+        private class Result : TextMatch {
+            public int default_relevancy { get; set; default = 0; }
 
-    }
+            public Result (double result, string match_string) {
+                Object (title: "%g".printf (result),
+                        description: "%s = %g".printf (match_string, result),
+                        has_thumbnail: false, icon_name: "accessories-calculator");
+            }
 
-    private class Result : TextMatch
-    {
-      public int default_relevancy { get; set; default = 0; }
+            public override string get_text () {
+                return title;
+            }
 
-      public Result (double result, string match_string)
-      {
-        Object (title: "%g".printf (result),
-                description: "%s = %g".printf (match_string, result),
-                has_thumbnail: false, icon_name: "accessories-calculator");
-      }
+        }
 
-      public override string get_text ()
-      {
-        return title;
-      }
-    }
+        static void register_plugin () {
+            PluginRegistry.get_default ().register_plugin (
+                typeof (CalculatorPlugin),
+                _("Calculator"),
+                _("Calculate basic expressions."),
+                "accessories-calculator",
+                register_plugin,
+                Environment.find_program_in_path ("bc") != null,
+                _("bc is not installed")
+                );
+        }
 
-    static void register_plugin ()
-    {
-      PluginRegistry.get_default ().register_plugin (
-        typeof (CalculatorPlugin),
-        _("Calculator"),
-        _("Calculate basic expressions."),
-        "accessories-calculator",
-        register_plugin,
-        Environment.find_program_in_path ("bc") != null,
-        _("bc is not installed")
-      );
-    }
+        static construct {
+            register_plugin ();
+        }
 
-    static construct
-    {
-      register_plugin ();
-    }
+        private Regex regex;
 
-    private Regex regex;
+        construct {
+            /* The regex describes a string which *resembles* a mathematical expression. It does not
+               check for pairs of parantheses to be used correctly and only whitespace-stripped strings
+               will match. Basically it matches strings of the form:
+               "paratheses_open* number (operator paratheses_open* number paratheses_close*)+"
+             */
+            try {
+                regex = new Regex ("^\\(*(-?\\d+([.,]\\d+)?)([*/+-^]\\(*(-?\\d+([.,]\\d+)?)\\)*)+$",
+                                   RegexCompileFlags.OPTIMIZE);
+            } catch (Error e) {
+                critical ("Error creating regexp.");
+            }
+        }
 
-    construct
-    {
-      /* The regex describes a string which *resembles* a mathematical expression. It does not
-         check for pairs of parantheses to be used correctly and only whitespace-stripped strings
-         will match. Basically it matches strings of the form:
-         "paratheses_open* number (operator paratheses_open* number paratheses_close*)+"
-      */
-      try
-      {
-        regex = new Regex ("^\\(*(-?\\d+([.,]\\d+)?)([*/+-^]\\(*(-?\\d+([.,]\\d+)?)\\)*)+$",
-                         RegexCompileFlags.OPTIMIZE);
-      } catch (Error e) {
-        critical ("Error creating regexp.");
-      }
-    }
+        public bool handles_query (Query query) {
+            return (QueryFlags.ACTIONS in query.query_type);
+        }
 
-    public bool handles_query (Query query)
-    {
-      return (QueryFlags.ACTIONS in query.query_type);
-    }
+        public async ResultSet? search (Query query) throws SearchError {
+            string input = query.query_string.replace (" ", "").replace (",", ".");
+            bool matched = regex.match (input);
+            if (!matched && input.length > 1) {
+                input = input[0 : input.length - 1];
+                matched = regex.match (input);
+            }
+            if (matched) {
+                Pid pid;
+                int read_fd, write_fd;
+                string[] argv = { "bc", "-l" };
+                string? solution = null;
 
-    public async ResultSet? search (Query query) throws SearchError
-    {
-      string input = query.query_string.replace (" ", "").replace (",", ".");
-      bool matched = regex.match (input);
-      if (!matched && input.length > 1)
-      {
-        input = input[0 : input.length - 1];
-        matched = regex.match (input);
-      }
-      if (matched)
-      {
-        Pid pid;
-        int read_fd, write_fd;
-        string[] argv = {"bc", "-l"};
-        string? solution = null;
+                try {
+                    Process.spawn_async_with_pipes (null, argv, null,
+                                                    SpawnFlags.SEARCH_PATH,
+                                                    null, out pid, out write_fd, out read_fd);
+                    UnixInputStream read_stream = new UnixInputStream (read_fd, true);
+                    DataInputStream bc_output = new DataInputStream (read_stream);
 
-        try
-        {
-          Process.spawn_async_with_pipes (null, argv, null,
-                                          SpawnFlags.SEARCH_PATH,
-                                          null, out pid, out write_fd, out read_fd);
-          UnixInputStream read_stream = new UnixInputStream (read_fd, true);
-          DataInputStream bc_output = new DataInputStream (read_stream);
+                    UnixOutputStream write_stream = new UnixOutputStream (write_fd, true);
+                    DataOutputStream bc_input = new DataOutputStream (write_stream);
 
-          UnixOutputStream write_stream = new UnixOutputStream (write_fd, true);
-          DataOutputStream bc_input = new DataOutputStream (write_stream);
+                    bc_input.put_string (input + "\n", query.cancellable);
+                    yield bc_input.close_async (Priority.DEFAULT, query.cancellable);
 
-          bc_input.put_string (input + "\n", query.cancellable);
-          yield bc_input.close_async (Priority.DEFAULT, query.cancellable);
-          solution = yield bc_output.read_line_async (Priority.DEFAULT_IDLE, query.cancellable);
+                    solution = yield bc_output.read_line_async (Priority.DEFAULT_IDLE, query.cancellable);
 
-          if (solution != null)
-          {
-            double d = double.parse (solution);
-            Result result = new Result (d, query.query_string);
-            ResultSet results = new ResultSet ();
-            results.add (result, MatchScore.AVERAGE);
+                    if (solution != null) {
+                        double d = double.parse (solution);
+                        Result result = new Result (d, query.query_string);
+                        ResultSet results = new ResultSet ();
+                        results.add (result, MatchScore.AVERAGE);
+                        query.check_cancellable ();
+                        return results;
+                    }
+                } catch (Error err) {
+                    if (!query.is_cancelled ()) warning ("%s", err.message);
+                }
+            }
+
             query.check_cancellable ();
-            return results;
-          }
+            return null;
         }
-        catch (Error err)
-        {
-          if (!query.is_cancelled ()) warning ("%s", err.message);
-        }
-      }
-
-      query.check_cancellable ();
-      return null;
     }
-  }
 }

@@ -1,0 +1,11 @@
+option('enable-indicator',
+  type: 'boolean',
+  value: true,
+  description: 'Build support for application indicators'
+)
+
+option('enable-zeitgeist',
+  type: 'boolean',
+  value: true,
+  description: 'Build with zeitgeist support'
+)

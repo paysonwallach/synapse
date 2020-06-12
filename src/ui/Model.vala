@@ -56,12 +56,14 @@ namespace Synapse.Gui {
 
         public void clear (int default_category = -1) {
             searching_for = SearchingFor.SOURCES;
+
             for (int i = 0 ; i < SearchingFor.COUNT ; i++) {
                 focus[i].key = 0;
                 focus[i].value = null;
                 results[i] = null;
                 query[i] = "";
             }
+
             if (default_category >= 0)
                 selected_category = default_category;
         }
@@ -71,13 +73,16 @@ namespace Synapse.Gui {
             focus[i].key = 0;
             focus[i].value = null;
             results[i] = null;
-            if (clear_query) query[i] = "";
+
+            if (clear_query)
+                query[i] = "";
         }
 
         construct {
             for (int i = 0 ; i < SearchingFor.COUNT ; i++) {
                 focus[i] = new Entry<int, Match> ();
             }
+
             clear ();
         }
     }

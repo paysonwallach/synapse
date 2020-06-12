@@ -108,16 +108,8 @@ namespace Synapse.Gui {
     }
 
     public class Entry<K, V> {
-        public K? key {
-            get; set;
-        }
-        public V? value {
-            get; set;
-        }
-
-        public Entry () {
-
-        }
+        public K? key { get; set; }
+        public V? value { get; set; }
 
         public Entry.kv (K? key, V? value) {
             this.key = key;

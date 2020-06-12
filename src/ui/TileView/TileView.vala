@@ -112,15 +112,16 @@ namespace UI.Widgets {
             return null;
         }
 
-        protected override void style_updated () {
-            /*if (changing_style) return;
-
-               changing_style = true;
-               base.style_updated ();
-               unowned Widget p = this.get_parent ();
-               p.modify_bg (StateType.NORMAL, style.@base[StateType.NORMAL]);
-               changing_style = false;*/
-        }
+        // protected override void style_updated () {
+        //     if (changing_style)
+        //         return;
+        //
+        //    changing_style = true;
+        //    base.style_updated ();
+        //    unowned Widget p = this.get_parent ();
+        //    p.modify_bg (StateType.NORMAL, style.@base[StateType.NORMAL]);
+        //    changing_style = false;
+        // }
 
         public virtual void on_tile_active_changed (Tile tile) {
             tile.owned_object.active_changed ();

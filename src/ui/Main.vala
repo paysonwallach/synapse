@@ -75,7 +75,8 @@ namespace Synapse {
 
             init_ui (settings.get_current_theme ());
 
-            if (!is_startup) controller.summon_or_vanish ();
+            if (!is_startup)
+                controller.summon_or_vanish ();
 
             settings.theme_selected.connect (init_ui);
             init_indicator ();
@@ -92,30 +93,35 @@ namespace Synapse {
         private void init_indicator () {
             var indicator_menu = new Gtk.Menu ();
             var activate_item = new Gtk.ImageMenuItem.with_label (_("Activate"));
+
             activate_item.set_image (new Gtk.Image.from_stock (Gtk.Stock.EXECUTE, Gtk.IconSize.MENU));
             activate_item.activate.connect (() => {
                 show_ui ();
             });
             indicator_menu.append (activate_item);
+
             var settings_item = new Gtk.ImageMenuItem.from_stock (Gtk.Stock.PREFERENCES, null);
+
             settings_item.activate.connect (() => {
                 settings.show ();
             });
             indicator_menu.append (settings_item);
             indicator_menu.append (new Gtk.SeparatorMenuItem ());
+
             var quit_item = new Gtk.ImageMenuItem.from_stock (Gtk.Stock.QUIT, null);
             quit_item.activate.connect (Gtk.main_quit);
             indicator_menu.append (quit_item);
             indicator_menu.show_all ();
 
 #if HAVE_INDICATOR
-            // Why Category.OTHER? See >
+            // Why Category.OTHER? See
             // https://bugs.launchpad.net/synapse-project/+bug/685634/comments/13
             indicator = new AppIndicator.Indicator ("synapse", "synapse",
                                                     AppIndicator.IndicatorCategory.OTHER);
 
             indicator.set_menu (indicator_menu);
-            if (settings.indicator_active) indicator.set_status (AppIndicator.IndicatorStatus.ACTIVE);
+            if (settings.indicator_active)
+                indicator.set_status (AppIndicator.IndicatorStatus.ACTIVE);
 
             settings.notify["indicator-active"].connect (() => {
                 indicator.set_status (settings.indicator_active ?
@@ -167,7 +173,9 @@ namespace Synapse {
         }
 
         protected void show_ui () {
-            if (this.controller == null) return;
+            if (this.controller == null)
+                return;
+
             this.controller.summon_or_vanish ();
         }
 
@@ -209,14 +217,19 @@ namespace Synapse {
         private static void ibus_fix () {
             /* try to fix IBUS input method adding synapse to no-snooper-apps */
             string ibus_no_snooper = GLib.Environment.get_variable ("IBUS_NO_SNOOPER_APPS");
-            if (ibus_no_snooper == null || ibus_no_snooper == "") {
+
+            if (ibus_no_snooper == null || ibus_no_snooper.length == 0) {
                 GLib.Environment.set_variable ("IBUS_NO_SNOOPER_APPS", "synapse", true);
                 return;
             }
-            if ("synapse" in ibus_no_snooper) return;
+
+            if ("synapse" in ibus_no_snooper)
+                return;
+
             /* add synapse */
             if (!ibus_no_snooper.has_suffix (","))
                 ibus_no_snooper = ibus_no_snooper + ",";
+
             ibus_no_snooper = ibus_no_snooper + "synapse";
             GLib.Environment.set_variable ("IBUS_NO_SNOOPER_APPS", ibus_no_snooper, true);
         }
@@ -243,7 +256,7 @@ namespace Synapse {
                 Notify.init ("synapse");
 
                 var app = new GLib.Application ("org.gnome.Synapse", ApplicationFlags.FLAGS_NONE);
-                if (!app.register () || app.get_is_remote ()) {
+                if (app.get_is_remote ()) {
                     message ("Synapse is already running, activating...");
                     app.activate ();
                 } else {

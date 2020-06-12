@@ -26,25 +26,25 @@ namespace Synapse.Gui {
         public int cell_vpadding { get; set; default = 2; }
         // left and right padding on each component of the row
         public int cell_hpadding { get; set; default = 3; }
-        //hilight matched text into selected match's title
+        // hilight matched text into selected match's title
         public bool hilight_on_selected { get; set; default = false; }
-        //shows the pattern after the title if hilight doesn't match the title
+        // shows the pattern after the title if hilight doesn't match the title
         public bool show_pattern_in_hilight { get; set; default = false; }
-        //shows extended info when present (ie "xx minutes ago")
+        // shows extended info when present (ie "xx minutes ago")
         public bool show_extended_info { get; set; default = true; }
-        //hides extended info on selected row if present
+        // hides extended info on selected row if present
         public bool hide_extended_on_selected { get; set; default = false; }
-        //overlay action icon to the text, or reserve space for action icon shrinking labels
+        // overlay action icon to the text, or reserve space for action icon shrinking labels
         public bool overlay_action { get; set; default = false; }
-        //the string pattern to use in the hilight
+        // the string pattern to use in the hilight
         public new string pattern { get; set; default = ""; }
-        //the Action match to use to retrive the action icon to show
+        // the Action match to use to retrive the action icon to show
         public Match action { get; set; default = null; }
-        //the markup of the title
+        // the markup of the title
         public string title_markup { get; set; default = "<span size=\"medium\"><b>%s</b></span>"; }
-        //the markup of the description
+        // the markup of the description
         public string description_markup { get; set; default = "<span size=\"small\">%s</span>"; }
-        //the markup of the extended info **extend info is already inserted into description markup**
+        // the markup of the extended info **extend info is already inserted into description markup**
         public string extended_info_markup { get; set; default = "%s"; }
 
         private int text_height = 1;
@@ -66,7 +66,8 @@ namespace Synapse.Gui {
              |_____| |____|__________________|____| |_____|
              */
             ctx.set_operator (Cairo.Operator.OVER);
-            //rtl = Gtk.TextDirection.RTL; // <-- uncomment to test RTL
+            // uncomment to test RTL
+            // rtl = Gtk.TextDirection.RTL;
             bool has_action = false;
             Gtk.StateFlags state = Gtk.StateFlags.NORMAL;
             if (selected_pct > 1.0) {
@@ -234,16 +235,16 @@ namespace Synapse.Gui {
             get; set; default = true;
         }
 
-        private int offset; //current offset
-        private int toffset; //target offset
+        private int offset; // current offset
+        private int toffset; // target offset
 
-        private int soffset; //current selection offset
-        private int tsoffset; //target selection offset
+        private int soffset; // current selection offset
+        private int tsoffset; // target selection offset
 
         private int astep; // animation step for offset
         private int sstep; // animation step for selection
 
-        private int row_height; //fixed row height (usually icon_size + 4)
+        private int row_height; // fixed row height (usually icon_size + 4)
 
         /* _________________      -> 0 coord for offset
          |                |
@@ -336,7 +337,7 @@ namespace Synapse.Gui {
             protected void draw_icon_in_position (Cairo.Context ctx, string? name, int pixel_size, double with_alpha = 1.0) {
                 ctx.rectangle (0, 0, pixel_size, pixel_size);
                 ctx.clip ();
-                if (name == null || name == "") name = "unknown";
+                if (name == null || name.length == 0) name = "unknown";
 
                 var icon_pixbuf = IconCacheService.get_default ().get_icon (name, pixel_size);
                 if (icon_pixbuf == null) return;
@@ -372,8 +373,7 @@ namespace Synapse.Gui {
             }
 
             public override bool draw (Cairo.Context ctx) {
-                //Transparent.
-                return true;
+                return true; // transparent
             }
 
         }
@@ -406,7 +406,6 @@ namespace Synapse.Gui {
                                  Gdk.DragAction.MOVE |
                                  Gdk.DragAction.LINK);
 
-            //this.above_child = true;
             this.visible_window = false;
             this.offset = this.toffset = 0;
             this.soffset = this.tsoffset = 0;
@@ -592,9 +591,12 @@ namespace Synapse.Gui {
                     ypos = int.max (this.soffset, 0);
                     unowned Gtk.StyleContext context = get_style_context ();
                     context.save ();
+                    context.add_class ("view");
                     context.set_state (Gtk.StateFlags.SELECTED);
                     context.render_background (ctx, 0, ypos,
                                                allocation.width, this.row_height);
+                    context.render_frame (ctx, 0, ypos,
+                                          allocation.width, this.row_height);
                     context.restore ();
                 }
             }
@@ -660,12 +662,12 @@ namespace Synapse.Gui {
                 if ((event.type == Gdk.EventType.BUTTON_PRESS || event.type == Gdk.EventType .2BUTTON_PRESS)
                     && this.select_index == this.dragdrop_target_item) {
                     this.set_indexes (this.dragdrop_target_item, this.dragdrop_target_item);
-                    if (event.type == Gdk.EventType .2BUTTON_PRESS) {
+                    if (event.type == Gdk.EventType .2BUTTON_PRESS)
                         this.fire_item ();
-                    } else if (event.type == Gdk.EventType.BUTTON_PRESS && event.button == 3) {
+                    else if (event.type == Gdk.EventType.BUTTON_PRESS && event.button == 3)
                         this.fire_item_context_switch ();
-                    }
-                    return true; //Fire item! So we don't need to drag things!
+
+                    return true; // Fire item! So we don't need to drag things!
                 } else {
                     this.inhibit_move = true;
                     this.set_indexes (this.dragdrop_target_item, this.dragdrop_target_item);
@@ -771,10 +773,17 @@ namespace Synapse.Gui {
                 this.get_allocation (out allocation);
                 status.get_allocation (out status_allocation);
 
+                /* Clip */
+                ctx.rectangle (0, 0, allocation.width, allocation.height);
+                ctx.clip ();
+
                 ctx.set_operator (Cairo.Operator.OVER);
                 /* Prepare bg's colors using GtkStyleContext */
                 Cairo.Pattern pat = new Cairo.Pattern.linear (0, 0, 0, status.get_allocated_height ());
 
+                Gtk.StateFlags t = this.get_state_flags ();
+                ch.add_color_stop_rgba (pat, 0.0, 0.95, StyleType.BG, t);
+                ch.add_color_stop_rgba (pat, 1.0, 0.95, StyleType.BG, t, Mod.DARKER);
                 /* Prepare and draw top bg's rect */
                 ctx.set_source (pat);
                 ctx.paint ();
@@ -913,9 +922,12 @@ namespace Synapse.Gui {
                 has_results = false;
                 switch (this.sf) {
                 case SearchingFor.SOURCES:
-                    if (controller.is_in_initial_state ()) base.set_list (tts);
-                    else if (controller.searched_for_recent ()) base.set_list (noact);
-                    else base.set_list (nores);
+                    if (controller.is_in_initial_state ())
+                        base.set_list (tts);
+                    else if (controller.searched_for_recent ())
+                        base.set_list (noact);
+                    else
+                        base.set_list (nores);
                     break;
                 case SearchingFor.ACTIONS:
                     if (model.focus[SearchingFor.SOURCES].value != null)
@@ -923,10 +935,13 @@ namespace Synapse.Gui {
                     else
                         base.set_list (null);
                     break;
-                default: //TARGETS
-                    if (!model.needs_target ()) base.set_list (null);
-                    else if (controller.searched_for_recent ()) base.set_list (noact);
-                    else base.set_list (nores);
+                default: // TARGETS
+                    if (!model.needs_target ())
+                        base.set_list (null);
+                    else if (controller.searched_for_recent ())
+                        base.set_list (noact);
+                    else
+                        base.set_list (nores);
                     break;
                 }
                 this.rend.pattern = "";

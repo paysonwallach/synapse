@@ -16,6 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * Authored by Alberto Aldegheri <albyrock87+dev@gmail.com>
+ *
  */
 
 namespace Synapse.Gui {
@@ -32,14 +33,14 @@ namespace Synapse.Gui {
 
             public Category.from_string (string key) {
                 string[] nameflags = key.split ("@", 2);
+
                 if (nameflags.length == 2) {
                     this.name = nameflags[0];
                     this.flags = (QueryFlags) uint64.parse (nameflags[1]);
                 } else if (nameflags.length == 1) {
                     this.name = nameflags[0];
                     this.flags = QueryFlags.ALL;
-                }
-                // else keep defaults
+                } // else keep defaults
             }
 
             public static string name_query_to_string (string name, QueryFlags flags) {
@@ -88,6 +89,7 @@ namespace Synapse.Gui {
         construct {
             _categories = new Gee.ArrayList<Category> ();
             _labels = new Gee.HashMap<QueryFlags, string> ();
+
             init_labels ();
             this.update_categories ();
         }
@@ -110,20 +112,23 @@ namespace Synapse.Gui {
 
         public void update_categories () {
             _categories.clear ();
+
             foreach (unowned string s in list) {
                 _categories.add (new Category.from_string (s));
             }
+
             if (_categories.size < 1) {
-                //Whooot?! This cannot be true!
                 list = {
                     Category.name_query_to_string (_("All"), QueryFlags.ALL)
                 };
+
                 update_categories ();
+
                 return;
             }
-            if (default_category_index >= _categories.size) {
+
+            if (default_category_index >= _categories.size)
                 default_category_index = _categories.size / 2;
-            }
         }
 
     }

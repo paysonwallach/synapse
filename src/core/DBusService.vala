@@ -46,14 +46,14 @@ namespace Synapse {
 
         private Utils.AsyncOnce<bool> init_once;
 
-        // singleton that can be easily destroyed
+        private static unowned DBusService? instance;
+
         public static DBusService get_default () {
             return instance ?? new DBusService ();
         }
 
         private DBusService () {}
 
-        private static unowned DBusService? instance;
         construct {
             instance = this;
             owned_names = new Gee.HashSet<string> ();
@@ -74,10 +74,10 @@ namespace Synapse {
                                          string new_owner) {
             if (name.has_prefix (":")) return;
 
-            if (old_owner == "") {
+            if (old_owner.length == 0) {
                 owned_names.add (name);
                 owner_changed (name, true);
-            } else if (new_owner == "") {
+            } else if (new_owner.length == 0) {
                 owned_names.remove (name);
                 owner_changed (name, false);
             }
@@ -98,10 +98,13 @@ namespace Synapse {
         }
 
         public async void initialize () {
-            if (init_once.is_initialized ()) return;
+            if (init_once.is_initialized ())
+                return;
+
             var is_locked = yield init_once.enter ();
 
-            if (!is_locked) return;
+            if (!is_locked)
+                return;
 
             string[] names;
             try {
@@ -113,7 +116,8 @@ namespace Synapse {
                 names = yield proxy.list_names ();
 
                 foreach (unowned string name in names) {
-                    if (name.has_prefix (":")) continue;
+                    if (name.has_prefix (":"))
+                        continue;
                     owned_names.add (name);
                 }
 
@@ -140,6 +144,7 @@ namespace Synapse {
             } catch (Error sys_err) {
                 warning ("%s", sys_err.message);
             }
+
             init_once.leave (true);
         }
 

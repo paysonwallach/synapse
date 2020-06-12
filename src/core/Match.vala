@@ -38,14 +38,13 @@ namespace Synapse {
     }
 
     public abstract class Match : Object {
-        public signal void executed ();
-
-        // properties
         public string title { get; construct set; }
         public string description { get; construct set; }
         public string icon_name { get; construct set; }
         public bool has_thumbnail { get; construct set; }
         public string thumbnail_path { get; construct set; }
+
+        public signal void executed ();
 
         public virtual void execute (Match match) {
             critical ("execute () is not implemented");
@@ -77,9 +76,10 @@ namespace Synapse {
         public string? filename { get; construct set; }
 
         public ApplicationMatch () {
-            Object (has_thumbnail : false,
-                            icon_name : "",
-                            thumbnail_path : "");
+            Object (
+                has_thumbnail : false,
+                icon_name : "",
+                thumbnail_path : "");
         }
     }
 
@@ -89,9 +89,10 @@ namespace Synapse {
         public string mime_type { get; set; }
 
         public UriMatch () {
-            Object (has_thumbnail : false,
-                            icon_name : "",
-                            thumbnail_path : "");
+            Object (
+                has_thumbnail : false,
+                icon_name : "",
+                thumbnail_path : "");
         }
     }
 
@@ -123,8 +124,11 @@ namespace Synapse {
 
     public class UnknownMatch : Match {
         public UnknownMatch (string query_string) {
-            Object (title: query_string, description: "", has_thumbnail: false,
-                            icon_name: "unknown");
+            Object (
+                title: query_string,
+                description: "",
+                has_thumbnail: false,
+                icon_name: "unknown");
         }
     }
 }

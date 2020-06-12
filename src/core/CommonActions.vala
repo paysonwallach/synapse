@@ -32,7 +32,9 @@ namespace Synapse {
 
         public override void execute_with_target (Match source, Match? target = null) {
             do_execute (source, target);
-            if (notify_match) source.executed ();
+
+            if (notify_match)
+                source.executed ();
         }
 
     }
@@ -73,11 +75,13 @@ namespace Synapse {
                 } else if (match is UriMatch) {
                     try {
                         unowned string uri = ((UriMatch) match).uri;
+
                         if (uri.has_prefix ("file:")) {
                             File file = File.new_for_uri (uri);
                             AppInfo app = AppInfo.create_from_commandline (
                                 file.get_path (), file.get_basename (),
                                 AppInfoCreateFlags.NONE);
+
                             app.launch (null, Gdk.Display.get_default ().get_app_launch_context ());
                         }
                     } catch (Error err) {
@@ -91,15 +95,18 @@ namespace Synapse {
             public override bool valid_for_match (Match match) {
                 if (match is UriMatch) {
                     unowned string uri = ((UriMatch) match).uri;
+
                     if (uri.has_prefix ("file:")) {
                         string path = File.new_for_uri (uri).get_path ();
-                        return (FileUtils.test (path, FileTest.IS_EXECUTABLE) && !FileUtils.test (path, FileTest.IS_DIR));
+                        return (FileUtils.test (path, FileTest.IS_EXECUTABLE) &&
+                                !FileUtils.test (path, FileTest.IS_DIR));
                     }
                 }
 
                 return (match is Action ||
                         match is ActionMatch ||
-                        (match is ApplicationMatch && !(((ApplicationMatch) match).needs_terminal)));
+                        (match is ApplicationMatch &&
+                         !(((ApplicationMatch) match).needs_terminal)));
             }
 
         }
@@ -130,12 +137,15 @@ namespace Synapse {
                 } else if (match is UriMatch) {
                     try {
                         unowned string uri = ((UriMatch) match).uri;
+
                         if (uri.has_prefix ("file:")) {
                             File file = File.new_for_uri (uri);
                             AppInfo app = AppInfo.create_from_commandline (
                                 file.get_path (), file.get_basename (),
                                 AppInfoCreateFlags.NEEDS_TERMINAL);
-                            app.launch (null, Gdk.Display.get_default ().get_app_launch_context ());
+
+                            app.launch (null,
+                                        Gdk.Display.get_default ().get_app_launch_context ());
                         }
                     } catch (Error err) {
                         warning ("%s", err.message);
@@ -146,9 +156,12 @@ namespace Synapse {
             public override bool valid_for_match (Match match) {
                 if (match is UriMatch) {
                     unowned string uri = ((UriMatch) match).uri;
+
                     if (uri.has_prefix ("file:")) {
                         string path = File.new_for_uri (uri).get_path ();
-                        return (FileUtils.test (path, FileTest.IS_EXECUTABLE) && !FileUtils.test (path, FileTest.IS_DIR));
+
+                        return (FileUtils.test (path, FileTest.IS_EXECUTABLE) &&
+                                !FileUtils.test (path, FileTest.IS_DIR));
                     }
                 }
                 return (match is ApplicationMatch);
@@ -171,10 +184,11 @@ namespace Synapse {
                     Utils.open_uri (uri_match.uri);
                 } else if (file_path.match (match.title)) {
                     File f;
+
                     if (match.title.has_prefix ("~")) {
-                        f = File.new_for_path (Path.build_filename (Environment.get_home_dir (),
-                                                                    match.title.substring (1),
-                                                                    null));
+                        f = File.new_for_path (
+                            Path.build_filename (Environment.get_home_dir (),
+                                                 match.title.substring (1), null));
                     } else {
                         f = File.new_for_path (match.title);
                     }
@@ -186,7 +200,8 @@ namespace Synapse {
 
             public override bool valid_for_match (Match match) {
                 return (match is UriMatch ||
-                        (match is UnknownMatch && (web_uri.match (match.title) || file_path.match (match.title))));
+                        (match is UnknownMatch && (web_uri.match (match.title) ||
+                                                   file_path.match (match.title))));
             }
 
             private Regex web_uri;
@@ -215,10 +230,13 @@ namespace Synapse {
                 return_if_fail (uri_match != null);
 
                 var f = File.new_for_uri (uri_match.uri);
+
                 f = f.get_parent ();
+
                 try {
                     var app_info = f.query_default_handler (null);
-                    List<File> files = new List<File> ();
+                    var files = new List<File> ();
+
                     files.prepend (f);
                     app_info.launch (files, Gdk.Display.get_default ().get_app_launch_context ());
                 } catch (Error err) {
@@ -247,22 +265,13 @@ namespace Synapse {
 
             public override void do_execute (Match match, Match? target = null) {
                 var cb = Gtk.Clipboard.get (Gdk.Atom.NONE);
+
                 if (match is UriMatch) {
                     unowned UriMatch uri_match = (UriMatch) match;
 
-                    /*
-                       // just wow, Gtk and also Vala are trying really hard to make this hard to do...
-                       Gtk.TargetEntry[] no_entries = {};
-                       Gtk.TargetList l = new Gtk.TargetList (no_entries);
-                       l.add_uri_targets (0);
-                       l.add_text_targets (0);
-                       Gtk.TargetEntry te = Gtk.target_table_new_from_list (l, 2);
-                       cb.set_with_data ();
-                     */
                     cb.set_text (uri_match.uri, -1);
                 } else if (match is TextMatch) {
                     unowned TextMatch text_match = (TextMatch) match;
-
                     string content = text_match != null ? text_match.get_text () : match.title;
 
                     cb.set_text (content, -1);
@@ -275,6 +284,7 @@ namespace Synapse {
 
             public override int get_relevancy_for_match (Match match) {
                 unowned TextMatch? text_match = match as TextMatch;
+
                 if (text_match != null && text_match.text_origin == TextOrigin.CLIPBOARD) {
                     return 0;
                 }
@@ -297,7 +307,7 @@ namespace Synapse {
         }
 
         public ResultSet? find_for_match (ref Query query, Match match) {
-            bool query_empty = query.query_string == "";
+            bool query_empty = query.query_string.length == 0;
             var results = new ResultSet ();
 
             if (query_empty) {
@@ -309,8 +319,10 @@ namespace Synapse {
             } else {
                 var matchers = Query.get_matchers_for_query (query.query_string, 0,
                                                              RegexCompileFlags.OPTIMIZE | RegexCompileFlags.CASELESS);
+
                 foreach (var action in actions) {
                     if (!action.valid_for_match (match)) continue;
+
                     foreach (var matcher in matchers) {
                         if (matcher.key.match (action.title)) {
                             results.add (action, matcher.value);

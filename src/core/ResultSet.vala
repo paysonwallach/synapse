@@ -64,16 +64,19 @@ namespace Synapse {
             matches.set (match, relevancy);
 
             unowned UriMatch? uri_match = match as UriMatch;
+
             if (uri_match != null) {
                 unowned string uri = uri_match.uri;
-                if (uri != null && uri != "") {
+
+                if (uri != null && uri != "")
                     uris.add (uri);
-                }
             }
         }
 
         public void add_all (ResultSet? rs) {
-            if (rs == null) return;
+            if (rs == null)
+                return;
+
             matches.set_all (rs.matches);
             uris.add_all (rs.uris);
         }
@@ -94,12 +97,16 @@ namespace Synapse {
                 unowned Gee.Map.Entry<Match, int> e1 = (Gee.Map.Entry<Match, int>)a;
                 unowned Gee.Map.Entry<Match, int> e2 = (Gee.Map.Entry<Match, int>)b;
                 int relevancy_delta = e2.value - e1.value;
-                if (relevancy_delta != 0) return relevancy_delta;
+
+                if (relevancy_delta != 0)
+                    return relevancy_delta;
                 // FIXME: utf8 compare!
-                else return e1.key.title.ascii_casecmp (e2.key.title);
+                else
+                    return e1.key.title.ascii_casecmp (e2.key.title);
             });
 
             var sorted_list = new Gee.ArrayList<Match> ();
+
             foreach (Gee.Map.Entry<Match, int> m in l) {
                 sorted_list.add (m.key);
             }

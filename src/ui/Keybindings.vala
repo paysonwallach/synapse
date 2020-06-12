@@ -16,13 +16,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * Authored by Alberto Aldegheri <albyrock87+dev@gmail.com>
+ *
  */
 
 namespace Synapse.Gui {
     public class KeyComboConfig : ConfigObject {
         /* Found in config:  ui->shortcuts */
         public enum Commands {
+#if HAVE_GALA
+#else
             ACTIVATE,
+#endif
             INVALID_COMMAND,
             SEARCH_DELETE_CHAR,
             SEARCH_DELETE_WORD,
@@ -71,6 +75,7 @@ namespace Synapse.Gui {
             private class ModCmd : GLib.Object {
                 public Gdk.ModifierType mods = 0;
                 public Commands cmd = 0;
+
                 public ModCmd (Gdk.ModifierType mods, Commands cmd) {
                     this.cmd = cmd;
                     this.mods = mods;
@@ -90,20 +95,25 @@ namespace Synapse.Gui {
 
             public void set_keycombo_command (uint keyval, Gdk.ModifierType mods, Commands cmd) {
                 Gee.List<ModCmd> list = null;
+
                 if (!map.has_key (keyval)) {
                     list = new Gee.ArrayList<ModCmd> ();
                     map.set (keyval, list);
                 } else {
                     list = map.get (keyval);
                 }
+
                 list.add (new ModCmd (mods, cmd));
                 list.sort (ModCmd.compare);
             }
 
             public Commands get_command_for_keycombo (uint keyval, Gdk.ModifierType mods) {
                 Gee.List<ModCmd> list = null;
+
                 list = map.get (keyval);
-                if (list == null) return Commands.INVALID_COMMAND;
+
+                if (list == null)
+                    return Commands.INVALID_COMMAND;
 
                 // if mods, and there aren't modded key combo, start with default cmd
                 Commands cmd = mods > 0 &&
@@ -120,6 +130,7 @@ namespace Synapse.Gui {
                         }
                     }
                 }
+
                 return cmd;
             }
 
@@ -188,21 +199,26 @@ namespace Synapse.Gui {
 
         public Commands get_command_from_eventkey (Gdk.EventKey event) {
             uint keyval = event.keyval;
-            if (keyval == Gdk.Key.KP_Enter || keyval == Gdk.Key.ISO_Enter) {
+
+            if (keyval == Gdk.Key.KP_Enter || keyval == Gdk.Key.ISO_Enter)
                 keyval = Gdk.Key.Return;
-            }
+
             Gdk.ModifierType mod = event.state & mod_normalize_mask;
             // message (get_name_from_key (keyval, mod));
+
             return kcs.get_command_for_keycombo (keyval, mod);
         }
 
         public static string? get_name_from_key (uint keyval, Gdk.ModifierType mods) {
             mods = mods & mod_normalize_mask;
-            if (keyval == Gdk.Key.KP_Enter || keyval == Gdk.Key.ISO_Enter) {
+
+            if (keyval == Gdk.Key.KP_Enter || keyval == Gdk.Key.ISO_Enter)
                 keyval = Gdk.Key.Return;
-            }
+
             unowned string keyname = Gdk.keyval_name (Gdk.keyval_to_lower (keyval));
-            if (keyname == null) return null;
+
+            if (keyname == null)
+                return null;
 
             string res = "";
             if (Gdk.ModifierType.SHIFT_MASK in mods) res += "<Shift>";
@@ -217,6 +233,7 @@ namespace Synapse.Gui {
             if (Gdk.ModifierType.HYPER_MASK in mods) res += "<Hyper>";
 
             res += keyname;
+
             return res;
         }
 
@@ -224,6 +241,7 @@ namespace Synapse.Gui {
             keyval = 0;
             mod = 0;
             string[] keys = name.split (">");
+
             foreach (string key in keys) {
                 if (key[0] != '<') {
                     keyval = Gdk.keyval_from_name (key);
@@ -262,9 +280,9 @@ namespace Synapse.Gui {
                     }
                 }
             }
-            if (keyval == Gdk.Key.KP_Enter || keyval == Gdk.Key.ISO_Enter) {
+
+            if (keyval == Gdk.Key.KP_Enter || keyval == Gdk.Key.ISO_Enter)
                 keyval = Gdk.Key.Return;
-            }
         }
 
     }

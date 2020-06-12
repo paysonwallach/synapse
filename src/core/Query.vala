@@ -59,10 +59,8 @@ namespace Synapse {
 
         PLACES = 1 << 8,
 
-        // FIXME: shouldn't this be FILES | INCLUDE_REMOTE?
         INTERNET = 1 << 9,
 
-        // FIXME: Text Query flag? kinda weird, why do we have this here?
         TEXT = 1 << 10,
 
         CONTACTS = 1 << 11,
@@ -103,9 +101,8 @@ namespace Synapse {
         }
 
         public void check_cancellable () throws SearchError {
-            if (cancellable.is_cancelled ()) {
+            if (cancellable.is_cancelled ())
                 throw new SearchError.SEARCH_CANCELLED ("Cancelled");
-            }
         }
 
         public static Gee.List<Gee.Map.Entry<Regex, int> > get_matchers_for_query (string query,
@@ -146,11 +143,14 @@ namespace Synapse {
 
             // split to individual words
             string[] individual_words = Regex.split_simple ("\\s+", stripped_query);
+
             if (individual_words.length >= 2) {
                 string[] escaped_words = {};
+
                 foreach (unowned string word in individual_words) {
                     escaped_words += Regex.escape_string (word);
                 }
+
                 string pattern = "\\b(%s)".printf (string.joinv (").+\\b(",
                                                                  escaped_words));
 
@@ -174,6 +174,7 @@ namespace Synapse {
                         // not too nice, but is quite fast to compute
                         var orred = "\\b((?:%s))".printf (string.joinv (")|(?:", escaped_words));
                         var any_order = "";
+
                         for (int i = 0 ; i < escaped_words.length ; i++) {
                             bool is_last = i == escaped_words.length - 1;
                             any_order += orred;
@@ -197,15 +198,17 @@ namespace Synapse {
             // split to individual characters
             string[] individual_chars = Regex.split_simple ("\\s*", query);
             string[] escaped_chars = {};
+
             foreach (unowned string word in individual_chars) {
                 escaped_chars += Regex.escape_string (word);
             }
 
-            // make  "aj" match "Activity Journal"
+            // make "aj" match "Activity Journal"
             if (!(MatcherFlags.NO_PARTIAL in match_flags) &&
                 individual_words.length == 1 && individual_chars.length <= 5) {
                 string pattern = "\\b(%s)".printf (string.joinv (").+\\b(",
                                                                  escaped_chars));
+
                 try {
                     re = new Regex (pattern, flags);
                     results[re] = MatchScore.ABOVE_AVERAGE;
@@ -215,6 +218,7 @@ namespace Synapse {
             if (!(MatcherFlags.NO_FUZZY in match_flags) && escaped_chars.length > 0) {
                 string pattern = "\\b(%s)".printf (string.joinv (").*(",
                                                                  escaped_chars));
+
                 try {
                     re = new Regex (pattern, flags);
                     results[re] = MatchScore.POOR;
@@ -223,7 +227,8 @@ namespace Synapse {
 
             var sorted_results = new Gee.ArrayList<Gee.Map.Entry<Regex, int> > ();
             var entries = results.entries;
-            // FIXME: why it doesn't work without this?
+
+            // FIXME: why doesn't it work without this?
             sorted_results.set_data ("entries-ref", entries);
             sorted_results.add_all (entries);
             sorted_results.sort ((a, b) => {

@@ -27,11 +27,13 @@ namespace Synapse {
             string? result;
             unowned string charset;
             GLib.get_charset (out charset);
+
             try {
                 result = GLib.convert (input, input.length,
                                        "US-ASCII//TRANSLIT", charset);
                 // no need to waste cpu cycles if the input is the same
-                if (input == result) return null;
+                if (input == result)
+                    return null;
             } catch (ConvertError err) {
                 result = null;
             }
@@ -41,8 +43,8 @@ namespace Synapse {
 
         public static string? remove_last_unichar (string input) {
             long char_count = input.char_count ();
-
             int len = input.index_of_nth_char (char_count - 1);
+
             return input.substring (0, len);
         }
 
@@ -57,10 +59,10 @@ namespace Synapse {
 
             int next_index = index;
 
-            do{
+            do {
                 index = next_index;
                 input.get_prev_char (ref next_index, out pchar);
-            }while (pchar != ' ' && next_index > 0);
+            } while (pchar != ' ' && next_index > 0);
 
             if (next_index <= 0)
                 return "";
@@ -70,6 +72,7 @@ namespace Synapse {
 
         public static async bool query_exists_async (GLib.File f) {
             bool exists;
+
             try {
                 yield f.query_info_async (FileAttribute.STANDARD_TYPE, 0, 0, null);
 
@@ -83,9 +86,11 @@ namespace Synapse {
 
         public static void open_uri (string uri) {
             var f = File.new_for_uri (uri);
+
             try {
                 var app_info = f.query_default_handler (null);
-                List<File> files = new List<File> ();
+                var files = new List<File> ();
+
                 files.prepend (f);
                 app_info.launch (files, Gdk.Display.get_default ().get_app_launch_context ());
             } catch (Error err) {
@@ -95,7 +100,9 @@ namespace Synapse {
 
         public static string extract_type_name (Type obj_type) {
             string obj_class = obj_type.name ();
-            if (obj_class.has_prefix ("Synapse")) return obj_class.substring (7);
+
+            if (obj_class.has_prefix ("Synapse"))
+                return obj_class.substring (7);
 
             return obj_class;
         }
@@ -154,11 +161,15 @@ namespace Synapse {
             public static void initialize () {
                 is_writing = false;
                 log_queue = new Gee.ArrayList<LogMessage> ();
+
                 try {
                     re = new Regex ("""[(]?.*?([^/]*?)(\.2)?\.vala(:\d+)[)]?:\s*(.*)""");
-                } catch {}
+                } catch (Erroer err) {
+                    warning (@"error: $(err.message)");
+                }
 
                 DisplayLevel = LogLevel.INFO;
+
                 if (Environment.get_variable ("SYNAPSE_DEBUG") != null)
                     DisplayLevel = LogLevel.DEBUG;
 
@@ -170,6 +181,7 @@ namespace Synapse {
                     var parts = re.split (msg);
                     return "[%s%s] %s".printf (parts[1], parts[3], parts[4]);
                 }
+
                 return msg;
             }
 
@@ -190,6 +202,7 @@ namespace Synapse {
 
                     if (log_queue.size > 0) {
                         var logs = log_queue;
+
                         lock (queue_lock)
                             log_queue = new Gee.ArrayList<LogMessage> ();
 
@@ -247,13 +260,16 @@ namespace Synapse {
 
             static void set_color (ConsoleColor color, bool isForeground) {
                 var color_code = color + 30 + 60;
+
                 if (!isForeground)
                     color_code += 10;
+
                 stdout.printf ("\x001b[%dm", color_code);
             }
 
             static void glib_log_func (string? d, LogLevelFlags flags, string msg) {
                 var domain = "";
+
                 if (d != null)
                     domain = "[%s] ".printf (d ?? "");
 
@@ -360,8 +376,10 @@ namespace Synapse {
                     warning ("Incorrect usage of AsyncOnce");
                     return;
                 }
+
                 state = OperationState.DONE;
                 inner = result;
+
                 notify_all ();
             }
 
@@ -379,6 +397,7 @@ namespace Synapse {
                 foreach (unowned DelegateWrapper wrapper in callbacks) {
                     wrapper.callback ();
                 }
+
                 callbacks = {};
             }
 
@@ -429,6 +448,7 @@ namespace Synapse {
             public async void initialize () {
                 initialized = true;
                 var f = File.new_for_uri (uri);
+
                 try {
                     var fi = yield f.query_info_async (interesting_attributes,
                                                        0, 0, null);
@@ -449,21 +469,19 @@ namespace Synapse {
                         // On UNIX this is the "application/octet-stream" mimetype
                         unowned string mime_type =
                             fi.get_attribute_string (FileAttribute.STANDARD_FAST_CONTENT_TYPE) ?? "application/octet-stream";
-                        if (ContentType.is_unknown (mime_type)) {
+
+                        if (ContentType.is_unknown (mime_type))
                             file_type = QueryFlags.UNCATEGORIZED;
-                        } else if (ContentType.is_a (mime_type, "audio/*")) {
+                        else if (ContentType.is_a (mime_type, "audio/*"))
                             file_type = QueryFlags.AUDIO;
-                        } else if (ContentType.is_a (mime_type, "video/*")) {
+                        else if (ContentType.is_a (mime_type, "video/*"))
                             file_type = QueryFlags.VIDEO;
-                        } else if (ContentType.is_a (mime_type, "image/*")) {
+                        else if (ContentType.is_a (mime_type, "image/*"))
                             file_type = QueryFlags.IMAGES;
-                        } else if (ContentType.is_a (mime_type, "text/*")) {
+                        else if (ContentType.is_a (mime_type, "text/*"))
                             file_type = QueryFlags.DOCUMENTS;
-                        }
-                        // FIXME: this isn't right
-                        else if (ContentType.is_a (mime_type, "application/*")) {
-                            file_type = QueryFlags.DOCUMENTS;
-                        }
+                        else if (ContentType.is_a (mime_type, "application/*"))
+                            file_type = QueryFlags.APPLICATIONS;
 
                         match_obj.file_type = file_type;
                         match_obj.mime_type = mime_type;

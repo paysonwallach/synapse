@@ -16,6 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * Authored by Alberto Aldegheri <albyrock87+dev@gmail.com>
+ *
  */
 
 namespace Synapse.Gui {
@@ -37,16 +38,22 @@ namespace Synapse.Gui {
         protected IView view = null;
 
         public void set_view (Type view_type) {
-            if (!view_type.is_a (typeof (IView))) return;
-            if (this.view != null) this.view.vanish ();
+            if (!view_type.is_a (typeof (IView)))
+                return;
+
+            if (this.view != null)
+                this.view.vanish ();
+
             IconCacheService.get_default ().clear_cache ();
+
             this.view = (IView) GLib.Object.new (view_type, "controller-model", this.model,
                                                  "controller", this);
+
             reset_search (true, true);
 
             // Input Method Fix
             unowned Gtk.Window? v = (this.view as Gtk.Window);
-            if (v != null) { //this has to be true, otherwise im_context will not work well
+            if (v != null) { // this has to be true, otherwise im_context will not work well
                 message ("Using %s input method.", im_context.get_context_id ());
 
                 v.focus_in_event.connect (() => {
@@ -63,6 +70,7 @@ namespace Synapse.Gui {
 
             this.view.summoned.connect ((view) => {
                 unowned Gtk.Window? window = (view as Gtk.Window);
+
                 warn_if_fail (window != null);
                 im_context.set_client_window (window.get_window ());
                 reset_search (true, true);
@@ -82,7 +90,8 @@ namespace Synapse.Gui {
             /* Check for text input */
             filtered = im_context.filter_keypress (event);
 
-            if (filtered && (event.state & KeyComboConfig.mod_normalize_mask) == 0) return;
+            if (filtered && (event.state & KeyComboConfig.mod_normalize_mask) == 0)
+                return;
 
             /* Check for commands */
             KeyComboConfig.Commands command =
@@ -102,7 +111,8 @@ namespace Synapse.Gui {
                 return;
             }
 
-            if (category_index == model.selected_category) return;
+            if (category_index == model.selected_category)
+                return;
 
             model.selected_category = category_index;
             model.searching_for = SearchingFor.SOURCES;
@@ -127,14 +137,20 @@ namespace Synapse.Gui {
         /* selected_index_changed should be fired when users clicks on an item in the list */
         /* Model.focus[Model.searching_for] will be changed */
         public void selected_index_changed_event (int focus_index) {
-            if (!model.has_results ()) return;
-            if (focus_index < 0) focus_index = 0;
+            if (!model.has_results ())
+                return;
+
+            if (focus_index < 0)
+                focus_index = 0;
+
             if (focus_index >= model.results[model.searching_for].size)
                 focus_index = model.results[model.searching_for].size - 1;
 
-            if (focus_index == model.focus[model.searching_for].key) return;
+            if (focus_index == model.focus[model.searching_for].key)
+                return;
 
             model.set_actual_focus (focus_index);
+
             switch (model.searching_for) {
             case SearchingFor.SOURCES:
                 model.clear_searching_for (SearchingFor.ACTIONS);
@@ -153,7 +169,7 @@ namespace Synapse.Gui {
 
                 view.update_focused_action (model.focus[model.searching_for]);
                 break;
-            default: //case SearchingFor.TARGETS:
+            default: // TARGETS
                 view.update_focused_target (model.focus[model.searching_for]);
                 break;
             }
@@ -163,7 +179,9 @@ namespace Synapse.Gui {
 
         /* Shows or hide the View */
         public void summon_or_vanish () {
-            if (this.view == null) return;
+            if (this.view == null)
+                return;
+
             this.view.summon_or_vanish ();
         }
 
@@ -177,13 +195,17 @@ namespace Synapse.Gui {
 
             /* Typing handle */
             im_context = new Gtk.IMMulticontext ();
+
             im_context.set_use_preedit (false);
             im_context.commit.connect (search_add_delete_char);
         }
 
         protected void execute (bool hide = true) {
-            if (this.model.focus[SearchingFor.SOURCES].value == null) return;
-            if (this.model.focus[SearchingFor.ACTIONS].value == null) return;
+            if (this.model.focus[SearchingFor.SOURCES].value == null)
+                return;
+
+            if (this.model.focus[SearchingFor.ACTIONS].value == null)
+                return;
 
             var source = this.model.focus[SearchingFor.SOURCES].value;
             var action = this.model.focus[SearchingFor.ACTIONS].value;
@@ -194,28 +216,28 @@ namespace Synapse.Gui {
                 sm.search_source = source;
 
                 model.searching_for = SearchingFor.SOURCES;
+
                 view.update_searching_for ();
                 search_for_matches (SearchingFor.SOURCES, true, sm);
                 model.clear_searching_for (SearchingFor.SOURCES, false);
                 view.update_sources (null);
+
                 return;
             }
 
             if ((action.needs_target () && target == null) ||
-                (!action.needs_target () && target != null)
-                ) return; // can't do that
+                (!action.needs_target () && target != null))
+                return; // can't do that
 
             Timeout.add (20, () => {
                 action.execute_with_target (source, target);
-                return false;
+                return Source.REMOVE;
             });
 
             if (hide) {
                 this.view.vanish ();
                 this.view.set_list_visible (false);
                 this.reset_search (true, true);
-            } else {
-                // TODO: and now?!
             }
         }
 
@@ -223,7 +245,9 @@ namespace Synapse.Gui {
             SearchingFor mode = model.searching_for;
             unowned string needle = model.query[mode];
 
-            if (needle == "") return;
+            if (needle.length == 0)
+                return;
+
             model.query[mode] = Synapse.Utils.remove_last_word (needle);
 
             search (mode);
@@ -235,7 +259,7 @@ namespace Synapse.Gui {
 
             if (newchar == null) {
                 // delete
-                if (needle == "") return;
+                if (needle.length == 0) return;
                 model.query[mode] = Synapse.Utils.remove_last_unichar (needle);
             } else {
                 // add
@@ -254,7 +278,7 @@ namespace Synapse.Gui {
             case SearchingFor.ACTIONS:
                 search_for_actions ();
                 break;
-            default: //case SearchingFor.TARGETS:
+            default: // TARGETS
                 search_for_matches (SearchingFor.TARGETS, true);
                 break;
             }
@@ -368,8 +392,8 @@ namespace Synapse.Gui {
                         }
                         view.update_searching_for ();
                         break;
-                    default: //TARGETS
-                        this.model.searching_for = SearchingFor.ACTIONS; //go back to actions
+                    default: // TARGETS
+                        this.model.searching_for = SearchingFor.ACTIONS; // go back to actions
                         view.update_searching_for ();
                         break;
                     }
@@ -377,15 +401,15 @@ namespace Synapse.Gui {
                 case KeyComboConfig.Commands.PREV_PANE:
                     switch (this.model.searching_for) {
                     case SearchingFor.ACTIONS:
-                        this.model.searching_for = SearchingFor.SOURCES; //go back to sources
+                        this.model.searching_for = SearchingFor.SOURCES; // go back to sources
                         view.update_searching_for ();
                         break;
                     case SearchingFor.TARGETS:
-                        this.model.searching_for = SearchingFor.ACTIONS; //go back to actions
+                        this.model.searching_for = SearchingFor.ACTIONS; // go back to actions
                         view.update_searching_for ();
                         break;
-                    default: //SOURCES
-                        //cannot go back from sources
+                    default: // SOURCES
+                        // cannot go back from sources
                         break;
                     }
                     break;
@@ -395,39 +419,42 @@ namespace Synapse.Gui {
                     view.set_list_visible (false);
                     break;
                 case KeyComboConfig.Commands.EXIT_SYNAPSE:
-                    Gtk.main_quit ();
+                    quit ();
                     break;
                 case KeyComboConfig.Commands.PASTE:
                     Gdk.Display? display = null;
-                    if (view is Gtk.Widget) {
+
+                    if (view is Gtk.Widget)
                         display = (view as Gtk.Widget).get_display ();
-                    }
-                    if (display == null) {
+
+                    if (display == null)
                         display = Gdk.Screen.get_default ().get_display ();
-                    }
+
                     var clipboard = Gtk.Clipboard.get_for_display (display,
                                                                    Gdk.SELECTION_CLIPBOARD);
                     // Get text from clipboard
                     string text = clipboard.wait_for_text ();
-                    if (text != null && text != "") {
+
+                    if (text != null && text != "")
                         search_add_delete_char (text);
-                    }
+
                     break;
                 case KeyComboConfig.Commands.PASTE_SELECTION :
                     Gdk.Display? display = null;
-                    if (view is Gtk.Widget) {
+                    if (view is Gtk.Widget)
                         display = (view as Gtk.Widget).get_display ();
-                    }
-                    if (display == null) {
+
+                    if (display == null)
                         display = Gdk.Screen.get_default ().get_display ();
-                    }
+
                     var clipboard = Gtk.Clipboard.get_for_display (display,
                                                                    Gdk.SELECTION_PRIMARY);
                     // Get text from clipboard
                     string text = clipboard.wait_for_text ();
-                    if (text != null && text != "") {
+
+                    if (text != null && text != "")
                         search_add_delete_char (text);
-                    }
+
                     break;
                 }
                 return true;
@@ -437,18 +464,23 @@ namespace Synapse.Gui {
 
         /* Tells if the controller is in initial state (no search active) */
         public bool is_in_initial_state () {
-            return model.query[SearchingFor.SOURCES] == "" &&
+            return model.query[SearchingFor.SOURCES].length == 0 &&
                    model.focus[SearchingFor.SOURCES].value == null &&
                    (!search_recent_activities);
         }
 
         /* Tells if the controller is searching for recent activities in current searching for */
         public bool searched_for_recent () {
-            if (searching[model.searching_for]) return false; //search in progress..
+            if (searching[model.searching_for])
+                return false; // search in progress..
+
             switch (model.searching_for) {
-            case SearchingFor.SOURCES: return search_recent_activities;
-            case SearchingFor.ACTIONS: return false;
-            default: return model.query[SearchingFor.TARGETS] == "";
+            case SearchingFor.SOURCES:
+                return search_recent_activities;
+            case SearchingFor.ACTIONS:
+                return false;
+            default:
+                return model.query[SearchingFor.TARGETS].length == 0;
             }
         }
 
@@ -456,13 +488,11 @@ namespace Synapse.Gui {
         private bool search_recent_activities = false;
         private bool handle_empty = false;
         private QueryFlags qf;
-        /* Stupid Vala: I can't use array[SearchingFor.COUNT] for declaration */
-        private Cancellable current_cancellable[3];
-        private uint tid[3];
-        private bool partial_result_sent[3];
-        private bool searching[3];
-
-        private ResultSet last_result_set; //FIXME: is this really needed here?!
+        private Cancellable current_cancellable[SearchingFor.COUNT];
+        private uint tid[SearchingFor.COUNT];
+        private bool partial_result_sent[SearchingFor.COUNT];
+        private bool searching[SearchingFor.COUNT];
+        private ResultSet last_result_set;
 
         private void init_search () {
             for (int i = 0 ; i < SearchingFor.COUNT ; i++) {
@@ -483,7 +513,10 @@ namespace Synapse.Gui {
         private void update_handle_empty () {
             handle_empty = data_sink.has_empty_handlers;
             DOWN_TO_SEE_RECENT = handle_empty ? _("...or press down key to browse recent activities") : "";
-            if (view != null) view.update_focused_source (model.focus[SearchingFor.SOURCES]);
+
+            if (view != null)
+                view.update_focused_source (model.focus[SearchingFor.SOURCES]);
+
             handle_recent_activities (handle_empty);
         }
 
@@ -497,21 +530,28 @@ namespace Synapse.Gui {
             for (int i = 0 ; i < SearchingFor.COUNT ; i++) {
                 current_cancellable[i].cancel ();
                 current_cancellable[i] = new Cancellable ();
+
                 if (tid[i] != 0) {
                     Source.remove (tid[i]);
                     tid[i] = 0;
                 }
+
                 partial_result_sent[i] = false;
                 searching[i] = false;
             }
             search_recent_activities = false;
             model.clear ();
+
             if (reset_flags) {
                 model.selected_category = this.category_config.default_category_index;
                 qf = this.category_config.categories.get (model.selected_category).flags;
-                if (view == null) return;
+
+                if (view == null)
+                    return;
+
                 view.update_selected_category ();
             }
+
             if (notify && view != null) {
                 view.set_throbber_visible (false);
                 view.update_sources ();
@@ -530,7 +570,8 @@ namespace Synapse.Gui {
             current_cancellable[what].cancel ();
             current_cancellable[what] = new Cancellable ();
 
-            if (search_provider == null) search_provider = data_sink;
+            if (search_provider == null)
+                search_provider = data_sink;
 
             if (what == SearchingFor.SOURCES) {
                 /* Stop search on targets, just in case */
@@ -547,7 +588,7 @@ namespace Synapse.Gui {
             }
 
             /* if string is empty, and not want to search recent activities, reset */
-            if (what == SearchingFor.SOURCES && !search_with_empty && model.query[what] == "") {
+            if (what == SearchingFor.SOURCES && !search_with_empty && model.query[what].length == 0) {
                 reset_search (true, false);
                 return;
             }
@@ -555,13 +596,13 @@ namespace Synapse.Gui {
             partial_result_sent[what] = false;
 
             last_result_set = new ResultSet ();
-            if (tid[what] == 0) {
+
+            if (tid[what] == 0)
                 tid[what] = Timeout.add (PARTIAL_RESULT_TIMEOUT, () => {
                     tid[what] = 0;
                     send_partial_results (what, this.last_result_set);
                     return false;
                 });
-            }
 
             searching[what] = true;
 
@@ -574,7 +615,7 @@ namespace Synapse.Gui {
                     var rs = (obj as SearchProvider).search.end (res);
                     search_ready (what, rs);
                 } catch (Error e) {
-                    //cancelled
+                    // TODO: cancelled
                 }
             });
         }
@@ -596,6 +637,7 @@ namespace Synapse.Gui {
                             view.update_focused_source (model.focus[what]);
                         else
                             view.update_focused_target (model.focus[what]);
+
                         return;
                     }
                 }
@@ -603,11 +645,11 @@ namespace Synapse.Gui {
             /* String didn't match, get partial results */
             model.focus[what].key = 0;
             model.results[what] = rs.get_sorted_list ();
-            if (model.results[what].size > 0) {
+
+            if (model.results[what].size > 0)
                 model.focus[what].value = model.results[what].first ();
-            } else {
+            else
                 model.focus[what].value = null;
-            }
 
             if (what == SearchingFor.SOURCES) {
                 /* It's important to search for actions before show the match */
@@ -629,6 +671,7 @@ namespace Synapse.Gui {
                 model.focus[what].value = null;
                 model.focus[what].key = 0;
             }
+
             model.results[what] = res;
 
             /* Search not cancelled and ready */
@@ -639,9 +682,8 @@ namespace Synapse.Gui {
 
             searching[what] = false;
 
-            if (tid[SearchingFor.SOURCES] == 0 && tid[SearchingFor.TARGETS] == 0) {
+            if (tid[SearchingFor.SOURCES] == 0 && tid[SearchingFor.TARGETS] == 0)
                 view.set_throbber_visible (false);
-            }
 
             if (model.results[what].size > 0) {
                 if (model.focus[what].value != null) {
@@ -696,12 +738,13 @@ namespace Synapse.Gui {
 
             model.results[SearchingFor.ACTIONS] =
                 data_sink.find_actions_for_match (model.focus[SearchingFor.SOURCES].value, model.query[SearchingFor.ACTIONS], qf);
-            if (model.results[SearchingFor.ACTIONS].size > 0) {
+
+            if (model.results[SearchingFor.ACTIONS].size > 0)
                 model.focus[SearchingFor.ACTIONS].value = model.results[SearchingFor.ACTIONS].first ();
-                // we'll search for targets only when users jumps to searching for actions
-            } else {
+            // we'll search for targets only when users jumps to searching for actions
+            else
                 model.focus[SearchingFor.ACTIONS].value = null;
-            }
+
             model.focus[SearchingFor.ACTIONS].key = 0;
 
             view.update_actions (model.results[SearchingFor.ACTIONS]);

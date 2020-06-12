@@ -40,6 +40,7 @@ namespace Synapse {
 
         private async void check_data_sources () {
             zg_dsr = new Zeitgeist.DataSourceRegistry ();
+
             try {
                 var array = yield zg_dsr.get_data_sources (null);
 
@@ -58,6 +59,7 @@ namespace Synapse {
         private bool refresh_popularity () {
             load_application_relevancies.begin ();
             load_uri_relevancies.begin ();
+
             return true;
         }
 
@@ -71,6 +73,7 @@ namespace Synapse {
 
             var event = new Zeitgeist.Event ();
             event.interpretation = "!" + Zeitgeist.ZG.LEAVE_EVENT;
+
             var subject = new Zeitgeist.Subject ();
             subject.interpretation = Zeitgeist.NFO.SOFTWARE;
             subject.uri = "application://*";
@@ -95,11 +98,14 @@ namespace Synapse {
                 // Zeitgeist (0.6) doesn't have any stats API, so let's approximate
 
                 foreach (Zeitgeist.Event e in rs) {
-                    if (e.num_subjects () <= 0) continue;
+                    if (e.num_subjects () <= 0)
+                        continue;
+
                     Zeitgeist.Subject s = e.subjects[0];
 
                     float power = index / (size * 2) + 0.5f; // linearly <0.5, 1.0>
                     float relevancy = 1.0f / Math.powf (index + 1, power);
+
                     application_popularity[s.uri] = (int) (relevancy * MULTIPLIER);
 
                     index++;
@@ -120,6 +126,7 @@ namespace Synapse {
 
             var event = new Zeitgeist.Event ();
             event.interpretation = "!" + Zeitgeist.ZG.LEAVE_EVENT;
+
             var subject = new Zeitgeist.Subject ();
             subject.interpretation = "!" + Zeitgeist.NFO.SOFTWARE;
             subject.uri = "file://*";
@@ -147,7 +154,9 @@ namespace Synapse {
                 // Zeitgeist (0.6) doesn't have any stats API, so let's approximate
 
                 foreach (Zeitgeist.Event e1 in rs) {
-                    if (e1.num_subjects () <= 0) continue;
+                    if (e1.num_subjects () <= 0)
+                        continue;
+
                     Zeitgeist.Subject s1 = e1.subjects[0];
 
                     power = index / (size * 2) + 0.5f; // linearly <0.5, 1.0>
@@ -175,7 +184,9 @@ namespace Synapse {
                 // Zeitgeist (0.6) doesn't have any stats API, so let's approximate
 
                 foreach (Zeitgeist.Event e2 in rs) {
-                    if (e2.num_subjects () <= 0) continue;
+                    if (e2.num_subjects () <= 0)
+                        continue;
+
                     Zeitgeist.Subject s2 = e2.subjects[0];
 
                     power = index / (size * 2) + 0.5f; // linearly <0.5, 1.0>
@@ -208,10 +219,12 @@ namespace Synapse {
         }
 
         private void reload_relevancies () {
-            Idle.add_full (Priority.LOW, () => {
+            Idle.add (
+                () => {
                 load_application_relevancies.begin ();
                 return false;
-            });
+            },
+                Priority.LOW);
         }
 
         public void application_launched (AppInfo app_info) {
@@ -233,11 +246,15 @@ namespace Synapse {
             }
 
             string app_uri = null;
+
             if (app_info.get_id () != null) {
                 app_uri = "application://" + app_info.get_id ();
             } else if (app_info is DesktopAppInfo) {
                 string? filename = ((DesktopAppInfo) app_info).get_filename ();
-                if (filename == null) return;
+
+                if (filename == null)
+                    return;
+
                 app_uri = "application://" + Path.get_basename (filename);
             }
 
@@ -249,7 +266,7 @@ namespace Synapse {
         }
 
         private void push_app_launch (string app_uri, string? display_name) {
-            //debug ("pushing launch event: %s [%s]", app_uri, display_name);
+            debug (@"pushing launch event: $(app_uri) ($(display_name))");
             var event = new Zeitgeist.Event ();
             var subject = new Zeitgeist.Subject ();
 

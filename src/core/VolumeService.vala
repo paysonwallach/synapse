@@ -19,8 +19,8 @@
 
 namespace Synapse {
     public class VolumeService : GLib.Object {
-        // singleton that can be easily destroyed
         private static unowned VolumeService? instance;
+
         public static VolumeService get_default () {
             return instance ?? new VolumeService ();
         }
@@ -38,6 +38,7 @@ namespace Synapse {
             instance = this;
 
             volumes = new Gee.HashMap<GLib.Volume, VolumeObject> ();
+
             initialize ();
         }
 
@@ -52,9 +53,12 @@ namespace Synapse {
             });
             vm.mount_added.connect ((mount) => {
                 var volume = mount.get_volume ();
-                if (volume == null) return;
 
-                if (volume in volumes.keys) volumes[volume].update_state ();
+                if (volume == null)
+                    return;
+
+                if (volume in volumes.keys)
+                    volumes[volume].update_state ();
             });
             // FIXME: connect also to other signals?
 
@@ -80,14 +84,19 @@ namespace Synapse {
             // FIXME: cache this somehow
             foreach (var volume in g_volumes) {
                 File? root = volume.get_activation_root ();
+
                 if (root == null) {
                     var mount = volume.get_mount ();
-                    if (mount == null) continue;
+
+                    if (mount == null)
+                        continue;
+
                     root = mount.get_root ();
                 }
 
                 if (f.has_prefix (root)) {
                     volume_path = root.get_path ();
+
                     return volume.get_name ();
                 }
             }
@@ -109,29 +118,23 @@ namespace Synapse {
                     description = ""; // FIXME
                     icon_name = value.get_icon ().to_string ();
                     has_thumbnail = false;
-                    // FIXME
-                    //match_type = value.get_mount () != null ?
-                    //  MatchType.GENERIC_URI : MatchType.ACTION;
 
-                    //if (match_type == MatchType.GENERIC_URI)
                     if (value.get_mount () != null) {
                         uri = value.get_mount ().get_root ().get_uri ();
                         file_type = QueryFlags.PLACES;
-                        mime_type = ""; // FIXME: do we need this?
                     } else {
                         uri = null;
                     }
 
-                    if (changed_signal_id == 0) {
+                    if (changed_signal_id == 0)
                         changed_signal_id = _volume.changed.connect (this.update_state);
-                    }
 
                     debug ("vo[%p]: %s [%s], has_mount: %d, uri: %s", this, title, icon_name, (value.get_mount () != null ? 1 : 0), uri);
                 }
             }
 
             public void update_state () {
-                this.volume = _volume; // call setter again
+                this.volume = _volume;
             }
 
             public bool is_mounted () {
@@ -144,8 +147,11 @@ namespace Synapse {
 
             ~VolumeObject () {
                 if (changed_signal_id != 0) {
-                    //FIXME leeds to lock up
-                    //SignalHandler.disconnect (_volume, changed_signal_id);
+                    // FIXME: the following commented line leads to lock up,
+                    // the line beneath it is a possible fix (?)
+                    // SignalHandler.disconnect (_volume, changed_signal_id);
+                    _volume.disconnect (changed_signal_id);
+
                     changed_signal_id = 0;
                 }
             }

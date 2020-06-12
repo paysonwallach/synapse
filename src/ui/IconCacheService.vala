@@ -21,7 +21,7 @@
 
 namespace Synapse.Gui {
     public class IconCacheService : GLib.Object {
-        private static IconCacheService instance = null;
+        private static IconCacheService instance;
 
         public static IconCacheService get_default () {
             return instance ?? new IconCacheService ();
@@ -38,10 +38,10 @@ namespace Synapse.Gui {
                 }
             }
             public time_t last_time_used;
-            //name?!
+
+            // FIXME: get name ?
             public PixbufInfo (Gdk.Pixbuf pixbuf) {
                 this._pixbuf = pixbuf;
-                //this.last_time_used = time_t ();
             }
 
         }
@@ -62,8 +62,11 @@ namespace Synapse.Gui {
 
         public void reduce_cache () {
             Gee.List<string> keys = new Gee.ArrayList<string> ();
+
             keys.add_all (map.keys);
+
             int i = 0;
+
             // remove all non-themed icons
             foreach (var key in keys) {
                 if (key.has_prefix ("/") || key.has_prefix ("~")) {
@@ -71,37 +74,50 @@ namespace Synapse.Gui {
                     i++;
                 }
             }
+
             keys.clear ();
             debug ("Cache freed/size: %d/%d", i, map.size);
         }
 
-        public Gdk.Pixbuf? get_icon (string name, int pixel_size)
-        {
-            if (name == "") return null;
+        public Gdk.Pixbuf? get_icon (string name, int pixel_size) {
+            if (name.length == 0)
+                return null;
+
             string key = "%s|%d".printf (name, pixel_size);
             PixbufInfo? info = map.get (key);
+
             if (info == null) {
                 var pixbuf = get_pixbuf (name, pixel_size);
-                if (pixbuf == null) pixbuf = get_pixbuf ("unknown", pixel_size);
-                if (pixbuf == null) return null;
+
+                if (pixbuf == null)
+                    pixbuf = get_pixbuf ("unknown", pixel_size);
+
+                if (pixbuf == null)
+                    return null;
+
                 info = new PixbufInfo (pixbuf);
+
                 map.set (key, info);
             }
+
             return info.pixbuf;
         }
 
-        private Gdk.Pixbuf? get_pixbuf (string name, int pixel_size)
-        {
+        private Gdk.Pixbuf? get_pixbuf (string name, int pixel_size) {
             try {
                 var icon = GLib.Icon.new_for_string (name);
-                if (icon == null) return null;
+                if (icon == null)
+                    return null;
 
                 Gtk.IconInfo iconinfo = this.theme.lookup_by_gicon (icon, pixel_size, Gtk.IconLookupFlags.FORCE_SIZE);
-                if (iconinfo == null) return null;
+                if (iconinfo == null)
+                    return null;
 
                 Gdk.Pixbuf icon_pixbuf = iconinfo.load_icon ();
-                if (icon_pixbuf != null) return icon_pixbuf;
+                if (icon_pixbuf != null)
+                    return icon_pixbuf;
             } catch (Error e) {}
+
             return null;
         }
     }

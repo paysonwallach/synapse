@@ -156,7 +156,6 @@ namespace Synapse.Gui {
 
             themes["default"] = Theme (_("Default"), "", typeof (Synapse.Gui.ViewDefault));
             themes["doish"] = Theme (_("Doish"), "", typeof (Synapse.Gui.ViewDoish));
-            themes["elementary"] = Theme ("Elementary", "", typeof (Synapse.Gui.ViewElementary));
             themes["essential"] = Theme (_("Essential"), "", typeof (Synapse.Gui.ViewEssential));
             themes["side-doish"] = Theme (_("Side Doish"), "", typeof (Synapse.Gui.ViewSideDoish));
             themes["pantheon"] = Theme (_("Pantheon"), "", typeof (Synapse.Gui.ViewPantheon));

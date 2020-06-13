@@ -1,5 +1,5 @@
 project(
-  'synapse',
+  'com.paysonwallach.synapse',
   'vala',
   'c',
   license: ['GPL2', 'LGPL2.1'],
@@ -17,6 +17,8 @@ vapi_dir = join_paths(meson.source_root(), 'vapi')
 prefix = get_option('prefix')
 lib_dir = join_paths(prefix, get_option('libdir'))
 data_dir = join_paths(prefix, get_option('datadir'))
+pkglib_dir = join_paths(lib_dir, meson.project_name())
+plugins_dir = join_paths(pkglib_dir, 'plugins')
 
 glib_version = '>=2.40.0'
 gtk_version = '>=3.0.0'
@@ -31,35 +33,26 @@ gio_unix_dep = dependency('gio-unix-2.0')
 glib_dep = dependency('glib-2.0', version: glib_version)
 glib_json_dep = dependency('json-glib-1.0', version: json_version)
 gtk_dep = dependency('gtk+-3.0', version: gtk_version)
+gmodule_dep = dependency('gmodule-2.0')
 keybinder_dep = dependency('keybinder-3.0')
 notify_dep = dependency('libnotify')
 thread_dep = dependency('gthread-2.0')
 m_dep = cc.find_library ('m', required : false)
 
-synapse_dependencies = [
-  gdk_dep,
-  gee_dep,
-  gio_dep,
-  gio_unix_dep,
-  glib_dep,
-  glib_json_dep,
-  gtk_dep,
-  keybinder_dep,
-  notify_dep,
-  m_dep
-]
-
+# configuration file
 conf = configuration_data()
-conf.set_quoted('DATADIR', data_dir)
-conf.set_quoted('RELEASE_NAME', 'Synapse')
+conf.set_quoted('DATA_DIR', data_dir)
+conf.set_quoted('PLUGINS_DIR', plugins_dir)
+conf.set_quoted('APP_NAME', 'Synapse')
+conf.set_quoted('APP_ID', meson.project_name())
 conf.set_quoted('VERSION', meson.project_version())
+conf.set_quoted('RELEASE_NAME', 'Synapse')
 
 if get_option('enable-indicator')
   indicator_dep = dependency('appindicator3-0.1',
     not_found_message: 'appindicator3-0.1 is not installed')
   indicator_vala_flags = '-D HAVE_INDICATOR'
   conf.set('HAVE_INDICATOR', 1, description: 'Have Indicator')
-  synapse_dependencies += indicator_dep
 endif
 
 if get_option('enable-zeitgeist')
@@ -68,13 +61,14 @@ if get_option('enable-zeitgeist')
     not_found_message: 'zeitgeist-2.0 is not installed')
   zeitgeist_vala_flags = ['--define', 'HAVE_ZEITGEIST']
   conf.set('HAVE_ZEITGEIST', 1, description: 'Have Zeitgeist')
-  synapse_dependencies += zeitgeist_dep
 endif
 
 config_h = configure_file(
   output: 'config.h',
   configuration: conf
 )
+
+config_inc_dir = include_directories('.')
 
 config_dep = declare_dependency(
   dependencies: vala.find_library('config', dirs: vapi_dir),
@@ -100,17 +94,6 @@ add_project_arguments([
 
 subdir('data')
 subdir('po')
+subdir('lib')
 subdir('src')
-
-executable(
-  meson.project_name(),
-  synapse_core_sources,
-  synapse_plugins_sources,
-  synapse_ui_sources,
-  vala_args: common_vala_flags,
-  dependencies: [
-    synapse_dependencies,
-    config_dep
-  ],
-  install: true,
-)
+subdir('plugins')

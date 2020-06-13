@@ -16,6 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * Authored by Alberto Aldegheri <albyrock87+dev@gmail.com>
+ *
  */
 
 namespace Synapse.Gui {
@@ -121,7 +122,7 @@ namespace Synapse.Gui {
             this.xalign = 0.0f;
             this.yalign = 1.0f;
 
-            //do not remove this, it's important to create the first scale attr
+            // do not remove this, it's important to create the first scale attr
             this.set_text ("");
         }
 
@@ -199,7 +200,7 @@ namespace Synapse.Gui {
             Gtk.Requisition req;
 
             var attrs = layout.get_attributes ();
-            var iter = attrs.get_iterator (); //the first iterator is a scale
+            var iter = attrs.get_iterator (); // the first iterator is a scale
             unowned Pango.Attribute? attr = iter.get (Pango.AttrType.SCALE);
             unowned Pango.AttrFloat a = (Pango.AttrFloat)attr;
 
@@ -421,9 +422,7 @@ namespace Synapse.Gui {
             widget.set_parent (this);
         }
 
-        public override void remove (Gtk.Widget widget) {
-            // cannot remove for now :P TODO
-        }
+        public override void remove (Gtk.Widget widget) {}
 
         public void size_request (out Gtk.Requisition req) {
             req = {};
@@ -632,7 +631,7 @@ namespace Synapse.Gui {
         }
 
         public override bool draw (Cairo.Context ctx) {
-            if (current == null || current == "") return true;
+            if (current == null || current.length == 0) return true;
             ctx.set_operator (Cairo.Operator.OVER);
 
             Gtk.Allocation allocation;
@@ -668,7 +667,7 @@ namespace Synapse.Gui {
             if (name == current && name != "")
                 return;
             else {
-                if (name == "") {
+                if (name.length == 0) {
                     name = not_found_name;
                 }
                 current = name;
@@ -1018,7 +1017,7 @@ namespace Synapse.Gui {
             artists += "Ian Cylkowski <designbyizo@gmail.com>";
             GLib.Object (artists: artists,
                          authors: devs,
-                         copyright: "Copyright (C) 2010-2016 " + string.joinv ("\n", devs),
+                         copyright: "Copyright (C) 2010-2018 " + string.joinv ("\n", devs),
                          program_name: "Synapse",
                          logo_icon_name: "synapse",
                          version: Config.VERSION + "\n" + Config.RELEASE_NAME,
@@ -1184,7 +1183,7 @@ namespace Synapse.Gui {
         }
 
         public override void get_preferred_width (out int min_width, out int nat_width) {
-            min_width = nat_width = wmax * 3; //triple for fading
+            min_width = nat_width = wmax * 3; // triple for fading
         }
 
         public override void get_preferred_height (out int min_height, out int nat_height) {
@@ -1205,7 +1204,7 @@ namespace Synapse.Gui {
             PangoReadyText txt;
             txt = texts.last ();
             w = txt.offset + txt.width;
-            h = hmax * 3; //triple h for nice vertical placement
+            h = hmax * 3; // triple h for nice vertical placement
             var window_context = Gdk.cairo_create (this.get_window ());
             this.cached_surface = new Cairo.Surface.similar (window_context.get_target (), Cairo.Content.COLOR_ALPHA, w, h);
             var ctx = new Cairo.Context (this.cached_surface);
@@ -1236,7 +1235,7 @@ namespace Synapse.Gui {
             txt = texts.get (_selected);
             double asize = double.min (ARROW_SIZE, h);
             double px, py = h / 2;
-            double f = 2; //curvature
+            double f = 2; // curvature
             f = asize - f;
             if (_selected < texts.size - 1) {
                 px = txt.offset + txt.width + asize + (padding - asize) / 2;
@@ -1258,7 +1257,7 @@ namespace Synapse.Gui {
 
         private uint tid;
         private bool update_current_offset () {
-            double draw_offset = 0; //target offset
+            double draw_offset = 0; // target offset
             PangoReadyText txt = texts.get (_selected);
             draw_offset = this.get_allocated_width () / 2 - txt.offset - txt.width / 2;
             int target = (int) Math.round (draw_offset);

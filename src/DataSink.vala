@@ -18,19 +18,6 @@
  */
 
 namespace Synapse {
-    public errordomain SearchError {
-        SEARCH_CANCELLED,
-        UNKNOWN_ERROR
-    }
-
-    public interface SearchProvider : Object {
-        public abstract async Gee.List<Match> search (string query,
-                                                      QueryFlags flags,
-                                                      ResultSet? dest_result_set,
-                                                      Cancellable? cancellable = null) throws SearchError;
-
-    }
-
     public class DataSink : Object, SearchProvider {
         private class DataSinkConfiguration : ConfigObject {
             // vala keeps array lengths, and therefore doesn't support setting arrays
@@ -46,34 +33,46 @@ namespace Synapse {
             }
 
             public void set_plugin_enabled (Type t, bool enabled) {
-                if (enabled) enable_plugin (t.name ());
-                else disable_plugin (t.name ());
+                if (enabled)
+                    enable_plugin (t.name ());
+                else
+                    disable_plugin (t.name ());
             }
 
             public bool is_plugin_enabled (Type t) {
-                if (_disabled_plugins == null) return true;
+                if (_disabled_plugins == null)
+                    return true;
+
                 unowned string plugin_name = t.name ();
+
                 foreach (string s in _disabled_plugins) {
-                    if (s == plugin_name) return false;
+                    if (s == plugin_name)
+                        return false;
                 }
+
                 return true;
             }
 
             private void enable_plugin (string name) {
-                if (_disabled_plugins == null) return;
-                if (!(name in _disabled_plugins)) return;
+                if (_disabled_plugins == null)
+                    return;
+
+                if (!(name in _disabled_plugins))
+                    return;
 
                 string[] cpy = {};
+
                 foreach (string s in _disabled_plugins) {
-                    if (s != name) cpy += s;
+                    if (s != name)
+                        cpy += s;
                 }
+
                 _disabled_plugins = (owned) cpy;
             }
 
             private void disable_plugin (string name) {
-                if (_disabled_plugins == null || !(name in _disabled_plugins)) {
+                if (_disabled_plugins == null || !(name in _disabled_plugins))
                     _disabled_plugins += name;
-                }
             }
 
         }
@@ -107,17 +106,18 @@ namespace Synapse {
             config = (DataSinkConfiguration)
                      cfg.get_config ("data-sink", "global", typeof (DataSinkConfiguration));
 
-            // oh well, yea we need a few singletons
+            // TODO: should these be singletons ?
             registry = PluginRegistry.get_default ();
             relevancy_service = RelevancyService.get_default ();
             volume_service = VolumeService.get_default ();
-
+            info ("initializing caches...");
             initialize_caches.begin ();
+
             register_static_plugin (typeof (CommonActions));
         }
 
         private async void initialize_caches () {
-            Idle.add_full (Priority.LOW, initialize_caches.callback);
+            Idle.add (initialize_caches.callback, Priority.LOW);
             yield;
 
             int initialized_components = 0;
@@ -126,37 +126,26 @@ namespace Synapse {
             dbus_name_cache = DBusService.get_default ();
             dbus_name_cache.initialize.begin (() => {
                 initialized_components++;
-                if (initialized_components >= NUM_COMPONENTS) {
+
+                if (initialized_components >= NUM_COMPONENTS)
                     initialize_caches.callback ();
-                }
             });
 
             desktop_file_service = DesktopFileService.get_default ();
-            desktop_file_service.reload_done.connect (this.check_plugins);
+
             desktop_file_service.initialize.begin (() => {
                 initialized_components++;
-                if (initialized_components >= NUM_COMPONENTS) {
+
+                if (initialized_components >= NUM_COMPONENTS)
                     initialize_caches.callback ();
-                }
             });
 
             yield;
 
             Idle.add (() => {
                 this.load_plugins ();
-                return false;
+                return Source.REMOVE;
             });
-        }
-
-        private void check_plugins () {
-            PluginRegisterFunc[] reg_funcs = {};
-            foreach (var pi in registry.get_plugins ()) {
-                reg_funcs += pi.register_func;
-            }
-
-            foreach (PluginRegisterFunc func in reg_funcs) {
-                func ();
-            }
         }
 
         public bool has_empty_handlers { get; set; default = false; }
@@ -169,11 +158,14 @@ namespace Synapse {
         protected void register_plugin (Object plugin) {
             if (plugin is ActionProvider) {
                 unowned ActionProvider action_plugin = (ActionProvider) plugin;
+
                 action_plugins.add (action_plugin);
                 has_unknown_handlers |= action_plugin.handles_unknown ();
             }
+
             if (plugin is ItemProvider) {
                 unowned ItemProvider item_plugin = (ItemProvider) plugin;
+
                 item_plugins.add (item_plugin);
                 has_empty_handlers |= item_plugin.handles_empty_query ();
             }
@@ -183,43 +175,49 @@ namespace Synapse {
 
         private void update_has_unknown_handlers () {
             bool tmp = false;
+
             foreach (var action in action_plugins) {
                 if (action.enabled && action.handles_unknown ()) {
                     tmp = true;
                     break;
                 }
             }
+
             has_unknown_handlers = tmp;
         }
 
         private void update_has_empty_handlers () {
             bool tmp = false;
+
             foreach (var item_plugin in item_plugins) {
                 if (item_plugin.enabled && item_plugin.handles_empty_query ()) {
                     tmp = true;
                     break;
                 }
             }
+
             has_empty_handlers = tmp;
         }
 
         private Object? create_plugin (Type t) {
             var obj_class = (ObjectClass) t.class_ref ();
-            if (obj_class != null && obj_class.find_property ("data-sink") != null) {
+
+            if (obj_class != null && obj_class.find_property ("data-sink") != null)
                 return Object.new (t, "data-sink", this, null);
-            } else {
+            else
                 return Object.new (t, null);
-            }
         }
 
-        private void load_plugins () {
-            // FIXME: fetch and load modules
+        private async void load_plugins () {
             foreach (Type t in plugin_types) {
                 t.class_ref (); // makes the plugin register itself into PluginRegistry
+
                 PluginInfo? info = registry.get_plugin_info_for_type (t);
                 bool skip = info != null && info.runnable == false;
+
                 if (config.is_plugin_enabled (t) && !skip) {
                     var plugin = create_plugin (t);
+
                     register_plugin (plugin);
                     ((Activatable) plugin).activate ();
                 }
@@ -231,7 +229,9 @@ namespace Synapse {
         /* This needs to be called right after instantiation,
          * if plugins_loaded == true, it won't have any effect. */
         public void register_static_plugin (Type plugin_type) {
-            if (plugin_type in plugin_types) return;
+            if (plugin_type in plugin_types)
+                return;
+
             plugin_types += plugin_type;
         }
 
@@ -268,9 +268,14 @@ namespace Synapse {
             foreach (var plugin in item_plugins) {
                 if (plugin.get_type () == plugin_type) {
                     plugin.enabled = enabled;
-                    if (enabled) plugin.activate ();
-                    else plugin.deactivate ();
+
+                    if (enabled)
+                        plugin.activate ();
+                    else
+                        plugin.deactivate ();
+
                     update_has_empty_handlers ();
+
                     return;
                 }
             }
@@ -278,9 +283,14 @@ namespace Synapse {
             foreach (var action in action_plugins) {
                 if (action.get_type () == plugin_type) {
                     action.enabled = enabled;
-                    if (enabled) action.activate ();
-                    else action.deactivate ();
+
+                    if (enabled)
+                        action.activate ();
+                    else
+                        action.deactivate ();
+
                     update_has_unknown_handlers ();
+
                     return;
                 }
             }
@@ -288,6 +298,7 @@ namespace Synapse {
             // plugin isn't instantiated yet
             if (enabled) {
                 var new_instance = create_plugin (plugin_type);
+
                 register_plugin (new_instance);
                 ((Activatable) new_instance).activate ();
             }
@@ -304,10 +315,11 @@ namespace Synapse {
             while (!plugins_loaded) {
                 Timeout.add (100, search.callback);
                 yield;
-                if (cancellable != null && cancellable.is_cancelled ()) {
+
+                if (cancellable != null && cancellable.is_cancelled ())
                     throw new SearchError.SEARCH_CANCELLED ("Cancelled");
-                }
             }
+
             var q = Query (query_id++, query, flags);
             string query_stripped = query.strip ();
 
@@ -315,13 +327,11 @@ namespace Synapse {
 
             var current_result_set = dest_result_set ?? new ResultSet ();
             int search_size = item_plugins.size;
-            // FIXME: this is probably useless, if async method finishes immediately,
-            // it'll call complete_in_idle
             bool waiting = false;
 
             foreach (var data_plugin in item_plugins) {
                 bool skip = !data_plugin.enabled ||
-                            (query == "" && !data_plugin.handles_empty_query ()) ||
+                            (query.length == 0 && !data_plugin.handles_empty_query ()) ||
                             !data_plugin.handles_query (q);
                 if (skip) {
                     search_size--;
@@ -339,46 +349,50 @@ namespace Synapse {
 
                     try {
                         var results = plugin.search.end (res);
+
                         this.search_done[plugin.get_type ().name ()](results, q.query_id);
                         current_result_set.add_all (results);
                     } catch (SearchError err) {
-                        if (!(err is SearchError.SEARCH_CANCELLED)) {
+                        if (!(err is SearchError.SEARCH_CANCELLED))
                             warning ("%s returned error: %s",
                                      plugin.get_type ().name (), err.message);
-                        }
                     }
 
-                    if (--search_size == 0 && waiting) search.callback ();
+                    if (--search_size == 0 && waiting)
+                        search.callback ();
                 });
             }
+
             cancellables.reverse ();
 
-            if (cancellable != null) {
+            if (cancellable != null)
                 cancellable.connect (() => {
                     foreach (var c in cancellables) c.cancel ();
                 });
-            }
 
             waiting = true;
-            if (search_size > 0) yield;
+            if (search_size > 0)
+                yield;
 
-            if (cancellable != null && cancellable.is_cancelled ()) {
+            if (cancellable != null && cancellable.is_cancelled ())
                 throw new SearchError.SEARCH_CANCELLED ("Cancelled");
-            }
 
             if (has_unknown_handlers && query_stripped != "") {
                 var unknown_match = new UnknownMatch (query);
                 bool add_to_rs = false;
+
                 if (QueryFlags.ACTIONS in flags || QueryFlags.TEXT in flags) {
                     // FIXME: maybe we should also check here if there are any matches
                     add_to_rs = true;
                 } else {
                     // check whether any of the actions support this category
                     var unknown_match_actions = find_actions_for_unknown_match (unknown_match, flags);
-                    if (unknown_match_actions.size > 0) add_to_rs = true;
+                    if (unknown_match_actions.size > 0)
+                        add_to_rs = true;
                 }
 
-                if (add_to_rs) current_result_set.add (unknown_match, 0);
+                if (add_to_rs)
+                    current_result_set.add (unknown_match, 0);
             }
 
             return current_result_set.get_sorted_list ();
@@ -388,9 +402,14 @@ namespace Synapse {
                                                                   QueryFlags flags) {
             var rs = new ResultSet ();
             var q = Query (0, "", flags);
+
             foreach (var action_plugin in action_plugins) {
-                if (!action_plugin.enabled) continue;
-                if (!action_plugin.handles_unknown ()) continue;
+                if (!action_plugin.enabled)
+                    continue;
+
+                if (!action_plugin.handles_unknown ())
+                    continue;
+
                 rs.add_all (action_plugin.find_for_match (ref q, match));
             }
 
@@ -401,8 +420,11 @@ namespace Synapse {
                                                        QueryFlags flags) {
             var rs = new ResultSet ();
             var q = Query (0, query ?? "", flags);
+
             foreach (var action_plugin in action_plugins) {
-                if (!action_plugin.enabled) continue;
+                if (!action_plugin.enabled)
+                    continue;
+
                 rs.add_all (action_plugin.find_for_match (ref q, match));
             }
 

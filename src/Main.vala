@@ -33,6 +33,7 @@ namespace Synapse {
 
         private Gui.SettingsWindow settings;
         private DataSink data_sink;
+        private PluginRegistry registry;
         private Gui.KeyComboConfig key_combo_config;
         private Gui.CategoryConfig category_config;
         private string current_shortcut;
@@ -47,10 +48,14 @@ namespace Synapse {
         public UILauncher () {
             config = ConfigService.get_default ();
             data_sink = new DataSink ();
+            registry = PluginRegistry.get_default ();
+
             key_combo_config = (Gui.KeyComboConfig)config.bind_config ("ui", "shortcuts", typeof (Gui.KeyComboConfig));
             category_config = (Gui.CategoryConfig)config.get_config ("ui", "categories", typeof (Gui.CategoryConfig));
+
             key_combo_config.update_bindings ();
             register_plugins ();
+
             settings = new Gui.SettingsWindow (data_sink, key_combo_config);
             settings.keybinding_changed.connect (this.change_keyboard_shortcut);
 
@@ -72,6 +77,7 @@ namespace Synapse {
                 settings.get_window ().focus (timestamp);
                 controller.summon_or_vanish ();
             });
+            controller.quit.connect (this.quit);
 
             init_ui (settings.get_current_theme ());
 
@@ -109,7 +115,8 @@ namespace Synapse {
             indicator_menu.append (new Gtk.SeparatorMenuItem ());
 
             var quit_item = new Gtk.ImageMenuItem.from_stock (Gtk.Stock.QUIT, null);
-            quit_item.activate.connect (Gtk.main_quit);
+
+            quit_item.activate.connect (quit);
             indicator_menu.append (quit_item);
             indicator_menu.show_all ();
 
@@ -120,6 +127,7 @@ namespace Synapse {
                                                     AppIndicator.IndicatorCategory.OTHER);
 
             indicator.set_menu (indicator_menu);
+
             if (settings.indicator_active)
                 indicator.set_status (AppIndicator.IndicatorStatus.ACTIVE);
 
@@ -145,30 +153,8 @@ namespace Synapse {
         }
 
         private void register_plugins () {
-            // while we don't install proper plugin .so files, we'll do it this way
-            Type[] plugin_types = {
-#if TEST_PLUGINS
-                typeof (TestSlowPlugin),
-                typeof (HelloWorldPlugin),
-#endif
-                // item providing plugins
-                typeof (DesktopFilePlugin),
-                typeof (SystemManagementPlugin),
-                typeof (CommandPlugin),
-                typeof (CalculatorPlugin),
-                typeof (SelectionPlugin),
-                typeof (SshPlugin),
-                typeof (PassPlugin),
-#if HAVE_ZEITGEIST
-                typeof (ZeitgeistPlugin),
-                typeof (ZeitgeistRelated),
-#endif
-                // action-only plugins
-                typeof (OpenSearchPlugin),
-                typeof (DictionaryPlugin)
-            };
-            foreach (Type t in plugin_types) {
-                data_sink.register_static_plugin (t);
+            foreach (var plugin_info in registry.get_plugins ()) {
+                data_sink.register_static_plugin (plugin_info.plugin_type);
             }
         }
 
@@ -200,6 +186,10 @@ namespace Synapse {
             Environment.unset_variable ("DESKTOP_AUTOSTART_ID");
             Gdk.Window.process_all_updates ();
             Gtk.main ();
+        }
+
+        public void quit () {
+            Gtk.main_quit ();
         }
 
         private static void load_custom_style () {
@@ -240,22 +230,27 @@ namespace Synapse {
             ibus_fix ();
 
             Intl.setlocale (LocaleCategory.ALL, "");
-            Intl.bindtextdomain (Config.GETTEXT_PACKAGE, Config.DATADIR + "/locale");
+            Intl.bindtextdomain (Config.GETTEXT_PACKAGE,
+                                 Path.build_filename (Config.DATA_DIR, "locale"));
             Intl.bind_textdomain_codeset (Config.GETTEXT_PACKAGE, "UTF-8");
             Intl.textdomain (Config.GETTEXT_PACKAGE);
 
-            var context = new OptionContext (" - Synapse");
+            var context = new OptionContext (@"- $(Config.APP_NAME)");
+
             context.add_main_entries (options, null);
             context.add_group (Gtk.get_option_group (false));
+
             try {
                 context.parse (ref argv);
 
                 /* Custom style loading must be done before Gtk.init */
                 load_custom_style ();
                 Gtk.init (ref argv);
-                Notify.init ("synapse");
+                Notify.init (Config.APP_ID);
+                Environment.set_application_name (Config.APP_NAME);
 
-                var app = new GLib.Application ("org.gnome.Synapse", ApplicationFlags.FLAGS_NONE);
+                var app = new GLib.Application (
+                    Config.APP_ID, ApplicationFlags.FLAGS_NONE);
                 if (app.get_is_remote ()) {
                     message ("Synapse is already running, activating...");
                     app.activate ();

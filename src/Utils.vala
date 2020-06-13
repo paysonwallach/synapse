@@ -17,6 +17,7 @@
  *
  * Authored by Michal Hruby <michal.mhr@gmail.com>
  *             Alberto Aldegheri <albyrock87+dev@gmail.com>
+ *
  */
 
 namespace Synapse.Gui {
@@ -46,11 +47,11 @@ namespace Synapse.Gui {
             if (size != "") {
                 markup = "<span size=\"%s\">%s</span>".printf (size, "%s");
             }
-            if (pattern == "") {
+            if (pattern.length == 0) {
                 return markup.printf (Markup.escape_text (text));
             }
             // if no text found, use pattern
-            if (text == "") {
+            if (text.length == 0) {
                 return markup.printf (Markup.escape_text (pattern));
             }
 
@@ -71,7 +72,7 @@ namespace Synapse.Gui {
                         warn_if_fail (start_pos >= 0 && end_pos >= 0);
                         res.append (Markup.escape_text (text.substring (last_pos, start_pos - last_pos)));
                         last_pos = end_pos;
-                        res.append (Markup.printf_escaped ("<u><b>%s</b></u>", mi.fetch (i)));
+                        res.append (Markup.printf_escaped ("<b>%s</b>", mi.fetch (i)));
                         if (i == cnt - 1) {
                             res.append (Markup.escape_text (text.substring (last_pos)));
                         }
@@ -92,14 +93,11 @@ namespace Synapse.Gui {
 
         public static string get_printable_description (Match match) {
             unowned UriMatch? m = match as UriMatch;
-            if (m == null) {
-                return match.description; // not an UriMatch
-            }
+            if (m == null)
+                return match.description;
 
-            if (!m.uri.has_prefix ("file://")) return m.uri; //fix only local files
-
-            //unowned string? desc = m.get_data<string> ("printable-description");
-            //if (desc != null) return desc; // already fixed
+            if (!m.uri.has_prefix ("file://"))
+                return m.uri;
 
             string desc_fixed = m.description;
 
@@ -107,25 +105,24 @@ namespace Synapse.Gui {
                 home_directory = Environment.get_home_dir ();
                 home_directory_length = home_directory.length;
             }
-            if (desc_fixed.has_prefix (home_directory)) { //if is home dir
+
+            if (desc_fixed.has_prefix (home_directory)) {
                 desc_fixed = _("Home") + desc_fixed.substring (home_directory_length);
-            } else { // is root
+            } else {
                 var vs = VolumeService.get_default ();
+
                 string? volume_path;
                 string? volume_name = vs.uri_to_volume_name (m.uri, out volume_path);
 
-                if (volume_path != null && desc_fixed.has_prefix (volume_path)) {
+                if (volume_path != null && desc_fixed.has_prefix (volume_path))
                     desc_fixed = volume_name + desc_fixed.substring (volume_path.length);
-                } else {
+                else
                     desc_fixed = _("Root") + desc_fixed;
-                }
             }
 
             // convert "/" to " > "
             string[] parts = Regex.split_simple ("/", desc_fixed);
             desc_fixed = string.joinv (" > ", parts);
-
-            //m.set_data<string> ("printable-description", desc_fixed);
 
             return desc_fixed;
         }
@@ -383,7 +380,7 @@ namespace Synapse.Gui {
             private ColorHelper () {
                 this.colormap = new Gee.HashMap<string, Color> ();
 
-                //FIXME get ourselves a number of dummy widgets
+                // FIXME: get ourselves a number of dummy widgets
                 // messing with stylecontexts directly resulted in deep frustation
                 var window = new Gtk.Window ();
                 var box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 0);
@@ -423,13 +420,13 @@ namespace Synapse.Gui {
                 else {
                     col = new Color ();
                     switch (t) {
-                    //FIXME no base and foreground colors in gtk3 anymore
+                    // FIXME no base and foreground colors in gtk3 anymore
                     case StyleType.BG:
-                    case StyleType.BASE:
+                        // case StyleType.BASE:
                         col.init_from_gdk_color (bg_context.get_background_color (st));
                         break;
                     case StyleType.TEXT:
-                    case StyleType.FG:
+                        // case StyleType.FG:
                         col.init_from_gdk_color (fg_context.get_color (st));
                         break;
                     }
@@ -487,13 +484,15 @@ namespace Synapse.Gui {
                 }
 
                 /*
-                   public void clone (Color col) {
+                   public void clone (Color col)
+                   {
                    this.r = col.r;
                    this.g = col.g;
                    this.b = col.b;
                    }
 
-                   public void init_from_rgb (double r, double g, double b) {
+                   public void init_from_rgb (double r, double g, double b)
+                   {
                    this.r = r;
                    this.g = g;
                    this.b = b;
@@ -546,7 +545,9 @@ namespace Synapse.Gui {
 
                 public static void colorize (double * r, double * g, double * b,
                                              double cr, double cg, double cb) {
-                    if (!(*r == *g && *g == *b)) return; //nothing to do
+                    if (!(*r == *g && *g == *b))
+                        return;
+
                     murrine_rgb_to_hls (r, g, b);
                     murrine_rgb_to_hls (&cr, &cg, &cb);
 
@@ -757,7 +758,6 @@ namespace Synapse.Gui {
             return data[3 + x * 4 + mask.get_stride () * y] != 0;
         }
 
-        /* Code from Gnome-Do */
         public static void present_window (Gtk.Window window) {
             // raise without grab
             uint32 timestamp = Gtk.get_current_event_time ();
@@ -776,7 +776,6 @@ namespace Synapse.Gui {
             });
         }
 
-        /* Code from Gnome-Do */
         public static void unpresent_window (Gtk.Window window) {
             if (Synapse.Utils.Logger.DisplayLevel == Synapse.Utils.Logger.LogLevel.DEBUG) return;
             uint32 time = Gtk.get_current_event_time ();
@@ -790,7 +789,6 @@ namespace Synapse.Gui {
             Gtk.grab_remove (window);
         }
 
-        /* Code from Gnome-Do */
         private static bool try_grab_window (Gtk.Window window) {
             uint time = Gtk.get_current_event_time ();
             var pointer = Gdk.Display.get_default ().get_device_manager ().get_client_pointer ();

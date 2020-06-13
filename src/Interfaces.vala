@@ -61,7 +61,7 @@ namespace Synapse.Gui {
         /* Model.focus[Model.searching_for] will be changed */
         public abstract void selected_index_changed_event (int focus_index);
 
-        /* Events called by Synapse-Main */
+        /* Events called by Main */
         public abstract void set_view (Type view_type);
 
         /* Shows or hide the View */
@@ -78,6 +78,8 @@ namespace Synapse.Gui {
 
         /* Tells to views that now it can/cant search for recent activities */
         public signal void handle_recent_activities (bool can);
+
+        public signal void quit ();
     }
 
     public interface IView : Object {

@@ -16,6 +16,7 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA.
  *
  * Authored by Michal Hruby <michal.mhr@gmail.com>
+ *
  */
 
 namespace Synapse {
@@ -42,24 +43,6 @@ namespace Synapse {
         // this method is called when a plugin is disabled
         // use it to free the resources you're using
         public void deactivate () {}
-
-        // register your plugin in the UI
-        static void register_plugin () {
-            PluginRegistry.get_default ().register_plugin (
-                typeof (HelloWorldPlugin),
-                _("Hello world"), // plugin title
-                _("An example plugin."), // description
-                "system-run", // icon name
-                register_plugin, // reference to this function
-                Environment.find_program_in_path ("ls") != null, // true if user's system has all required components which the plugin needs
-                _("ls is not installed") // error message
-                );
-        }
-
-        static construct {
-            // register the plugin when the class is constructed
-            register_plugin ();
-        }
 
         // an optional method to improve the speed of searches,
         // if you return false here, the search method won't be called
@@ -95,4 +78,16 @@ namespace Synapse {
 
         }
     }
+}
+
+public Synapse.PluginInfo register_plugin () {
+    return new Synapse.PluginInfo (
+        typeof (Synapse.HelloWorldPlugin),
+        _("Hello world"), // plugin title
+        _("An example plugin."), // description
+        "system-run", // icon name
+        null, // optional string containing gettext domain name
+        Environment.find_program_in_path ("ls") != null, // true if user's system has all required components which the plugin needs
+        _("ls is not installed") // error message
+        );
 }

@@ -16,6 +16,7 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA.
  *
  * Authored by Magnus Kulke <mkulke@gmail.com>
+ *
  */
 
 namespace Synapse {
@@ -41,29 +42,14 @@ namespace Synapse {
 
         }
 
-        static void register_plugin () {
-            PluginRegistry.get_default ().register_plugin (
-                typeof (CalculatorPlugin),
-                _("Calculator"),
-                _("Calculate basic expressions."),
-                "accessories-calculator",
-                register_plugin,
-                Environment.find_program_in_path ("bc") != null,
-                _("bc is not installed")
-                );
-        }
-
-        static construct {
-            register_plugin ();
-        }
-
         private Regex regex;
 
         construct {
-            /* The regex describes a string which *resembles* a mathematical expression. It does not
-               check for pairs of parantheses to be used correctly and only whitespace-stripped strings
-               will match. Basically it matches strings of the form:
-               "paratheses_open* number (operator paratheses_open* number paratheses_close*)+"
+            /* The regex describes a string which *resembles* a mathematical
+             * expression. It does not check for pairs of parantheses to be
+             * used correctly and only whitespace-stripped strings will match.
+             * Basically it matches strings of the form:
+             *   "paratheses_open* number (operator paratheses_open* number paratheses_close*)+"
              */
             try {
                 regex = new Regex ("^\\(*(-?\\d+([.,]\\d+)?)([*/+-^]\\(*(-?\\d+([.,]\\d+)?)\\)*)+$",
@@ -122,4 +108,16 @@ namespace Synapse {
             return null;
         }
     }
+}
+
+public Synapse.PluginInfo register_plugin () {
+    return new Synapse.PluginInfo (
+        typeof (Synapse.CalculatorPlugin),
+        _("Calculator"),
+        _("Calculate basic expressions."),
+        "accessories-calculator",
+        "com.paysonwallach.synapse.calculator",
+        Environment.find_program_in_path ("bc") != null,
+        _("bc is not installed")
+        );
 }

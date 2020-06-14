@@ -23,18 +23,18 @@ namespace Synapse {
         public const string UNIQUE_NAME = "org.freedesktop.DBus";
         public const string OBJECT_PATH = "/org/freedesktop/DBus";
 
-        public abstract async string[] list_queued_owners (string name) throws IOError;
+        public abstract async string[] list_queued_owners (string name) throws Error;
 
-        public abstract async string[] list_names () throws IOError;
+        public abstract async string[] list_names () throws Error;
 
-        public abstract async string[] list_activatable_names () throws IOError;
-        public abstract async bool name_has_owner (string name) throws IOError;
+        public abstract async string[] list_activatable_names () throws Error;
+        public abstract async bool name_has_owner (string name) throws Error;
         public signal void name_owner_changed (string name,
                                                string old_owner,
                                                string new_owner);
         public abstract async uint32 start_service_by_name (string name,
-                                                            uint32 flags) throws IOError;
-        public abstract async string get_name_owner (string name) throws IOError;
+                                                            uint32 flags) throws Error;
+        public abstract async string get_name_owner (string name) throws Error;
 
     }
 
@@ -93,7 +93,37 @@ namespace Synapse {
             return name in activatable_names;
         }
 
+        public async bool name_is_activatable_async (string name) {
+            var id = Idle.add (() => {
+                name_is_activatable_async.callback ();
+                return Source.CONTINUE;
+            });
+
+            while (!init_once.is_initialized ()) {
+                yield;
+            }
+
+            Source.remove (id);
+
+            return name in activatable_names;
+        }
+
         public bool service_is_available (string name) {
+            return name in system_activatable_names;
+        }
+
+        public async bool service_is_available_async (string name) {
+            var id = Idle.add (() => {
+                service_is_available_async.callback ();
+                return Source.CONTINUE;
+            });
+
+            while (!init_once.is_initialized ()) {
+                yield;
+            }
+
+            Source.remove (id);
+
             return name in system_activatable_names;
         }
 
@@ -107,10 +137,11 @@ namespace Synapse {
                 return;
 
             string[] names;
+
             try {
-                proxy = Bus.get_proxy_sync (BusType.SESSION,
-                                            FreeDesktopDBus.UNIQUE_NAME,
-                                            FreeDesktopDBus.OBJECT_PATH);
+                proxy = Bus.get_proxy_sync<FreeDesktopDBus>(BusType.SESSION,
+                                                            FreeDesktopDBus.UNIQUE_NAME,
+                                                            FreeDesktopDBus.OBJECT_PATH);
 
                 proxy.name_owner_changed.connect (this.name_owner_changed);
                 names = yield proxy.list_names ();
@@ -118,12 +149,15 @@ namespace Synapse {
                 foreach (unowned string name in names) {
                     if (name.has_prefix (":"))
                         continue;
+
+                    debug (@"found name: $name");
                     owned_names.add (name);
                 }
 
                 names = yield proxy.list_activatable_names ();
 
                 foreach (unowned string session_act in names) {
+                    debug (@"found activatable: $session_act");
                     activatable_names.add (session_act);
                 }
             } catch (Error err) {

@@ -344,19 +344,6 @@ msgstr "Buscar definiciones de palabras."
 msgid "No compatible Dictionary installed"
 msgstr "No hay ningún diccionario compatible instalado"
 
-#: ../src/plugins/selection-plugin.vala:55
-msgid "Selection"
-msgstr "Selección"
-
-#. plugin title
-#: ../src/plugins/selection-plugin.vala:56
-msgid "Provides actions for currently selected text."
-msgstr "Permite ejecutar acciones sobre el texto seleccionado."
-
-#: ../src/plugins/selection-plugin.vala:72
-msgid "Selected text"
-msgstr "Texto seleccionado"
-
 #. Plugin title
 #: ../src/plugins/ssh-plugin.vala:67
 msgid "Connect to host with SSH"

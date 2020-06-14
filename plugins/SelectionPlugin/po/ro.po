@@ -1,0 +1,33 @@
+# Romanian translation for synapse-selection-plugin
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# This file is distributed under the same license as the synapse-selection-plugin package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: synapse-selection-plugin\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2015-11-30 14:48+0000\n"
+"PO-Revision-Date: 2012-03-29 18:44+0000\n"
+"Last-Translator: Cristian Moldovan <crism@gentoo-land.org>\n"
+"Language-Team: Romanian <ro@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n == 1 ? 0: (((n % 100 > 19) || ((n % 100 "
+"== 0) && (n != 0))) ? 2: 1));\n"
+"X-Launchpad-Export-Date: 2015-12-01 05:19+0000\n"
+"X-Generator: Launchpad (build 17850)\n"
+
+#: ../src/Main.vala:55
+msgid "Selection"
+msgstr "Selecție"
+
+#: ../src/Main.vala:56
+msgid "Provides actions for currently selected text."
+msgstr "Prevede acţiuni pentru textul selectat."
+
+#: ../src/Main.vala:72
+msgid "Selected text"
+msgstr "Text selectat"
+

@@ -344,19 +344,6 @@ msgstr "查找单词的定义."
 msgid "No compatible Dictionary installed"
 msgstr ""
 
-#: ../src/plugins/selection-plugin.vala:55
-msgid "Selection"
-msgstr "选择"
-
-#. plugin title
-#: ../src/plugins/selection-plugin.vala:56
-msgid "Provides actions for currently selected text."
-msgstr "为当前选中文本内容提供动作。"
-
-#: ../src/plugins/selection-plugin.vala:72
-msgid "Selected text"
-msgstr "选择的文本"
-
 #. Plugin title
 #: ../src/plugins/ssh-plugin.vala:67
 msgid "Connect to host with SSH"

@@ -330,25 +330,6 @@ msgstr "انسخ إلى الحافظة"
 msgid "Copy selection to clipboard"
 msgstr "انسخ المختار إلى الحافظة"
 
-#: ../src/plugins/desktop-file-plugin.vala:70
-msgid "Search for and run applications on your computer."
-msgstr "ابحث و شغل التطبيقات على حاسبك"
-
-#: ../src/plugins/desktop-file-plugin.vala:232
-#, c-format
-msgid "Open with %s"
-msgstr "افتح بواسطة %s"
-
-#: ../src/plugins/desktop-file-plugin.vala:234
-#, c-format
-msgid "Opens current selection using %s"
-msgstr "افتح الخيار الحالي بواسطة %s"
-
-#: ../src/plugins/desktop-file-plugin.vala:280
-#, c-format
-msgid "Launch action '%s'"
-msgstr ""
-
 #: ../src/plugins/dictionary.vala:61
 msgid "Define"
 msgstr "عرّف"

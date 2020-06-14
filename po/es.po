@@ -328,25 +328,6 @@ msgstr "Copiar en el portapapeles"
 msgid "Copy selection to clipboard"
 msgstr "Copiar selección en el portapapeles"
 
-#: ../src/plugins/desktop-file-plugin.vala:70
-msgid "Search for and run applications on your computer."
-msgstr "Buscar y ejecutar aplicaciones en su equipo."
-
-#: ../src/plugins/desktop-file-plugin.vala:232
-#, c-format
-msgid "Open with %s"
-msgstr "Abrir con %s"
-
-#: ../src/plugins/desktop-file-plugin.vala:234
-#, c-format
-msgid "Opens current selection using %s"
-msgstr "Abrir la selección actual con %s"
-
-#: ../src/plugins/desktop-file-plugin.vala:280
-#, c-format
-msgid "Launch action '%s'"
-msgstr "Ejecutar acción «%s»"
-
 #: ../src/plugins/dictionary.vala:61
 msgid "Define"
 msgstr "Definir"

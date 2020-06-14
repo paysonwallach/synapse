@@ -16,6 +16,7 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA.
  *
  * Authored by Michal Hruby <michal.mhr@gmail.com>
+ *
  */
 
 namespace Synapse {
@@ -50,20 +51,6 @@ namespace Synapse {
             }
         }
 
-        static void register_plugin () {
-            PluginRegistry.get_default ().register_plugin (
-                typeof (DesktopFilePlugin),
-                "Application Search",
-                _("Search for and run applications on your computer."),
-                "system-run",
-                register_plugin
-                );
-        }
-
-        static construct {
-            register_plugin ();
-        }
-
         private Gee.List<DesktopFileMatch> desktop_files;
 
         construct {
@@ -90,7 +77,7 @@ namespace Synapse {
 
         private async void load_all_desktop_files () {
             loading_in_progress = true;
-            Idle.add_full (Priority.LOW, load_all_desktop_files.callback);
+            Idle.add (load_all_desktop_files.callback, Priority.LOW);
             yield;
 
             var dfs = DesktopFileService.get_default ();
@@ -114,7 +101,7 @@ namespace Synapse {
         }
 
         private void full_search (Query q, ResultSet results,
-                                  MatcherFlags flags = 0) {
+                                  MatcherFlags flags = 0) throws SearchError {
             // try to match against global matchers and if those fail, try also exec
             var matchers = Query.get_matchers_for_query (q.query_string_folded,
                                                          flags);
@@ -141,13 +128,15 @@ namespace Synapse {
                     results.add (dfm, compute_relevancy (dfm, dfm.exec == q.query_string ?
                                                          MatchScore.VERY_GOOD : MatchScore.AVERAGE - MatchScore.INCREMENT_SMALL));
                 }
+
+                q.check_cancellable ();
             }
         }
 
         public bool handles_query (Query q) {
             // we only search for applications
             if (!(QueryFlags.APPLICATIONS in q.query_type)) return false;
-            if (q.query_string.strip () == "") return false;
+            if (q.query_string.strip ().length == 0) return false;
 
             return true;
         }
@@ -164,13 +153,10 @@ namespace Synapse {
                 // we'll do this so other plugins can send their DBus requests etc.
                 // and they don't have to wait for our blocking (though fast) search
                 // to finish
-                Idle.add_full (Priority.HIGH_IDLE, search.callback);
+                Idle.add (search.callback, Priority.HIGH_IDLE);
                 yield;
             }
 
-            q.check_cancellable ();
-
-            // FIXME: spawn new thread and do the search there?
             var result = new ResultSet ();
 
             if (q.query_string.char_count () == 1) {
@@ -301,7 +287,7 @@ namespace Synapse {
 
             var rs = new ResultSet ();
 
-            if (query.query_string == "") {
+            if (query.query_string.length == 0) {
                 foreach (var action in any_list) {
                     rs.add (action, MatchScore.POOR);
                 }
@@ -321,4 +307,16 @@ namespace Synapse {
             return rs;
         }
     }
+}
+
+public Synapse.PluginInfo register_plugin () {
+    return new Synapse.PluginInfo (
+        typeof (Synapse.DesktopFilePlugin),
+        "Application Search",
+        _("Search for and run applications on your computer."),
+        "system-run",
+        "com.paysonwallach.synapse.desktopfile",
+        true,
+        ""
+        );
 }

@@ -330,25 +330,6 @@ msgstr "Copia al porta-retalls"
 msgid "Copy selection to clipboard"
 msgstr "Copia la selecció al porta-retalls"
 
-#: ../src/plugins/desktop-file-plugin.vala:70
-msgid "Search for and run applications on your computer."
-msgstr "Cerqueu i executeu aplicacions al vostre ordinador."
-
-#: ../src/plugins/desktop-file-plugin.vala:232
-#, c-format
-msgid "Open with %s"
-msgstr "Obre amb %s"
-
-#: ../src/plugins/desktop-file-plugin.vala:234
-#, c-format
-msgid "Opens current selection using %s"
-msgstr "Obre la selecció actual fent servir %s"
-
-#: ../src/plugins/desktop-file-plugin.vala:280
-#, c-format
-msgid "Launch action '%s'"
-msgstr ""
-
 #: ../src/plugins/devhelp-search.vala:59
 msgid "Search in Devhelp"
 msgstr "Cerca a Devhelp"

@@ -328,14 +328,6 @@ msgstr "Salin ke Papan Klip"
 msgid "Copy selection to clipboard"
 msgstr "Salin pilihan ke papan klip"
 
-#: ../src/plugins/command-plugin.vala:44
-msgid "Run command"
-msgstr "Jalankan perintah"
-
-#: ../src/plugins/command-plugin.vala:64
-msgid "Find and execute arbitrary commands."
-msgstr "Cari dan jalankan perintah-perintah semaunya"
-
 #: ../src/plugins/desktop-file-plugin.vala:70
 msgid "Search for and run applications on your computer."
 msgstr "Telusur dan jalankan aplikasi pada komputer Anda"

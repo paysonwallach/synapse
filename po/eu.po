@@ -328,14 +328,6 @@ msgstr "Kopiatu arbelean"
 msgid "Copy selection to clipboard"
 msgstr "Hautapena arbelean kopiatu"
 
-#: ../src/plugins/command-plugin.vala:44
-msgid "Run command"
-msgstr "Komandoa exekutatu"
-
-#: ../src/plugins/command-plugin.vala:64
-msgid "Find and execute arbitrary commands."
-msgstr ""
-
 #: ../src/plugins/desktop-file-plugin.vala:70
 msgid "Search for and run applications on your computer."
 msgstr "Zure ordenagailuko aplikazioak bilatu eta exekutatu."

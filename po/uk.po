@@ -330,14 +330,6 @@ msgstr "Копіювати у буфер обміну"
 msgid "Copy selection to clipboard"
 msgstr "Копіювати виділене у буфер обміну"
 
-#: ../src/plugins/command-plugin.vala:44
-msgid "Run command"
-msgstr "Виконати команду"
-
-#: ../src/plugins/command-plugin.vala:64
-msgid "Find and execute arbitrary commands."
-msgstr "Пошук та вионання довільних команд."
-
 #: ../src/plugins/desktop-file-plugin.vala:70
 msgid "Search for and run applications on your computer."
 msgstr "Пошук та виконання програм на Вашому комп’ютері."

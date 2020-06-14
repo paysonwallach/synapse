@@ -16,6 +16,7 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA.
  *
  * Authored by Michal Hruby <michal.mhr@gmail.com>
+ *
  */
 
 namespace Synapse {
@@ -41,20 +42,6 @@ namespace Synapse {
                 }
             }
 
-        }
-
-        static void register_plugin () {
-            PluginRegistry.get_default ().register_plugin (
-                typeof (CommandPlugin),
-                "Command Search",
-                _("Find and execute arbitrary commands."),
-                "system-run",
-                register_plugin
-                );
-        }
-
-        static construct {
-            register_plugin ();
         }
 
         private Gee.Set<string> past_commands;
@@ -101,7 +88,8 @@ namespace Synapse {
 
         public async ResultSet? search (Query q) throws SearchError {
             // we only search for applications
-            if (!(QueryFlags.APPLICATIONS in q.query_type)) return null;
+            if (!(QueryFlags.APPLICATIONS in q.query_type))
+                return null;
 
             Idle.add (search.callback);
             yield;
@@ -109,16 +97,16 @@ namespace Synapse {
             var result = new ResultSet ();
 
             string stripped = q.query_string.strip ();
-            if (stripped == "") return null;
-            if (stripped.has_prefix ("~/")) {
+
+            if (stripped.length == 0)
+                return null;
+            if (stripped.has_prefix ("~/"))
                 stripped = stripped.replace ("~", Environment.get_home_dir ());
-            }
 
             if (!(stripped in past_commands)) {
                 foreach (var command in past_commands) {
-                    if (command.has_prefix (stripped)) {
+                    if (command.has_prefix (stripped))
                         result.add (create_co (command), MatchScore.AVERAGE);
-                    }
                 }
 
                 string[] args = split_regex.split (stripped);
@@ -126,9 +114,14 @@ namespace Synapse {
 
                 if (valid_cmd != null) {
                     // don't allow dangerous commands
-                    if (args[0] == "rm") return null;
+                    if (args[0] == "rm")
+                        return null;
+
                     CommandObject? co = create_co (stripped);
-                    if (co == null) return null;
+
+                    if (co == null)
+                        return null;
+
                     result.add (co, MatchScore.POOR);
                     co.executed.connect (this.command_executed);
                 }
@@ -141,4 +134,16 @@ namespace Synapse {
             return result;
         }
     }
+}
+
+public Synapse.PluginInfo register_plugin () {
+    return new Synapse.PluginInfo (
+        typeof (Synapse.CommandPlugin),
+        "Command Search",
+        _("Find and execute arbitrary commands."),
+        "system-run",
+        "com.paysonwallach.synapse.command",
+        true,
+        ""
+        );
 }

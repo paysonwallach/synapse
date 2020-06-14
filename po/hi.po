@@ -328,14 +328,6 @@ msgstr "क्लिपबोर्ड पर प्रति बनाएँ"
 msgid "Copy selection to clipboard"
 msgstr "चुने हुए की प्रति क्लिपबोर्ड पर बनाएँ"
 
-#: ../src/plugins/command-plugin.vala:44
-msgid "Run command"
-msgstr "कमांड चलाएँ"
-
-#: ../src/plugins/command-plugin.vala:64
-msgid "Find and execute arbitrary commands."
-msgstr ""
-
 #: ../src/plugins/desktop-file-plugin.vala:70
 msgid "Search for and run applications on your computer."
 msgstr ""

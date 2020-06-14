@@ -329,14 +329,6 @@ msgstr "Skopiuj do schowka"
 msgid "Copy selection to clipboard"
 msgstr "Skopiuj zaznaczenie do schowka"
 
-#: ../src/plugins/command-plugin.vala:44
-msgid "Run command"
-msgstr "Uruchom polecenie"
-
-#: ../src/plugins/command-plugin.vala:64
-msgid "Find and execute arbitrary commands."
-msgstr "Znajdź i wykonaj dowolne polecenia."
-
 #: ../src/plugins/desktop-file-plugin.vala:70
 msgid "Search for and run applications on your computer."
 msgstr "Wyszukuj i uruchamiaj programy na tym komputerze."

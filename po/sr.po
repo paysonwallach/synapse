@@ -330,14 +330,6 @@ msgstr "Умножи у оставу исечака"
 msgid "Copy selection to clipboard"
 msgstr "Убаци изабрано међу исечке"
 
-#: ../src/plugins/command-plugin.vala:44
-msgid "Run command"
-msgstr "Покрени наредбу"
-
-#: ../src/plugins/command-plugin.vala:64
-msgid "Find and execute arbitrary commands."
-msgstr "Додељује пречице произвољним наредбама."
-
 #: ../src/plugins/desktop-file-plugin.vala:70
 msgid "Search for and run applications on your computer."
 msgstr "Тражење датотека на рачунару."

@@ -328,62 +328,6 @@ msgstr "클립보드로 복사"
 msgid "Copy selection to clipboard"
 msgstr "선택한것을 클립보드로 복사"
 
-#: ../src/plugins/dictionary.vala:61
-msgid "Define"
-msgstr "정의"
-
-#: ../src/plugins/dictionary.vala:62
-msgid "Look up definition in dictionary"
-msgstr "사전에서 정의를 찾아봅니다"
-
-#: ../src/plugins/dictionary.vala:73
-msgid "Look up definitions of words."
-msgstr "단어의 정의를 찾아봅니다."
-
-#: ../src/plugins/dictionary.vala:78
-msgid "No compatible Dictionary installed"
-msgstr ""
-
-#: ../src/plugins/system-management.vala:89
-msgid "Suspend"
-msgstr "절전"
-
-#: ../src/plugins/system-management.vala:90
-msgid "Put your computer into suspend mode"
-msgstr "컴퓨터를 절전 모드로 만듭니다"
-
-#: ../src/plugins/system-management.vala:189
-msgid "Hibernate"
-msgstr "최대 절전"
-
-#: ../src/plugins/system-management.vala:190
-msgid "Put your computer into hibernation mode"
-msgstr "컴퓨터를 최대 절전 모드로 만듭니다"
-
-#: ../src/plugins/system-management.vala:288
-msgid "Shut Down"
-msgstr "전원 끄기"
-
-#: ../src/plugins/system-management.vala:289
-msgid "Turn your computer off"
-msgstr "컴퓨터의 전원을 끕니다"
-
-#: ../src/plugins/system-management.vala:372
-msgid "Restart"
-msgstr "다시 시작"
-
-#: ../src/plugins/system-management.vala:373
-msgid "Restart your computer"
-msgstr "컴퓨터를 다시 시작합니다"
-
-#: ../src/plugins/system-management.vala:457
-msgid "Suspend, hibernate, restart or shutdown your computer."
-msgstr "컴퓨터를 끄거나 디시 시작하거나 최대 절전 혹은 절전 모드로 만듭니다."
-
-#: ../src/plugins/system-management.vala:462
-msgid "ConsoleKit wasn't found"
-msgstr "콘솔 키트(ConsoleKit)를 찾을 수 없습니다"
-
 #: ../src/plugins/zeitgeist-plugin.vala:162
 msgid "few moments ago"
 msgstr "조금 전"

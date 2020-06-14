@@ -330,62 +330,6 @@ msgstr "Copia negli Appunti"
 msgid "Copy selection to clipboard"
 msgstr "Copia la selezione negli appunti"
 
-#: ../src/plugins/dictionary.vala:61
-msgid "Define"
-msgstr "Definisci"
-
-#: ../src/plugins/dictionary.vala:62
-msgid "Look up definition in dictionary"
-msgstr "Cerca la definizione nel dizionario"
-
-#: ../src/plugins/dictionary.vala:73
-msgid "Look up definitions of words."
-msgstr "Cerca definizioni di parole."
-
-#: ../src/plugins/dictionary.vala:78
-msgid "No compatible Dictionary installed"
-msgstr ""
-
-#: ../src/plugins/system-management.vala:89
-msgid "Suspend"
-msgstr "Sospendi"
-
-#: ../src/plugins/system-management.vala:90
-msgid "Put your computer into suspend mode"
-msgstr "Imposta il computer nella modalità di sospensione"
-
-#: ../src/plugins/system-management.vala:189
-msgid "Hibernate"
-msgstr "Iberna"
-
-#: ../src/plugins/system-management.vala:190
-msgid "Put your computer into hibernation mode"
-msgstr "Imposta in modalità di ibernazione"
-
-#: ../src/plugins/system-management.vala:288
-msgid "Shut Down"
-msgstr "Arresta"
-
-#: ../src/plugins/system-management.vala:289
-msgid "Turn your computer off"
-msgstr "Spegni il computer"
-
-#: ../src/plugins/system-management.vala:372
-msgid "Restart"
-msgstr "Riavvia"
-
-#: ../src/plugins/system-management.vala:373
-msgid "Restart your computer"
-msgstr "Riavvia il computer"
-
-#: ../src/plugins/system-management.vala:457
-msgid "Suspend, hibernate, restart or shutdown your computer."
-msgstr "sospendi, iberna, riavvia o spegni il tuo computer"
-
-#: ../src/plugins/system-management.vala:462
-msgid "ConsoleKit wasn't found"
-msgstr "ConsoleKit non è stato trovato"
-
 #: ../src/plugins/zeitgeist-plugin.vala:162
 msgid "few moments ago"
 msgstr "poco fa"

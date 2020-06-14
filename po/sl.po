@@ -331,64 +331,6 @@ msgstr "Kopiraj v odložišče"
 msgid "Copy selection to clipboard"
 msgstr "Kopiraj izbrano na odložišče"
 
-#: ../src/plugins/dictionary.vala:61
-msgid "Define"
-msgstr "Določi"
-
-#: ../src/plugins/dictionary.vala:62
-msgid "Look up definition in dictionary"
-msgstr "Poišči definicijo v slovarju"
-
-#: ../src/plugins/dictionary.vala:73
-msgid "Look up definitions of words."
-msgstr "Poišči definicije besed"
-
-#: ../src/plugins/dictionary.vala:78
-msgid "No compatible Dictionary installed"
-msgstr ""
-
-#: ../src/plugins/system-management.vala:89
-msgid "Suspend"
-msgstr "V pripravljenost"
-
-#: ../src/plugins/system-management.vala:90
-msgid "Put your computer into suspend mode"
-msgstr "Postavi računalnik v stanje pripravljenosti"
-
-#: ../src/plugins/system-management.vala:189
-msgid "Hibernate"
-msgstr "V mirovanje"
-
-#: ../src/plugins/system-management.vala:190
-msgid "Put your computer into hibernation mode"
-msgstr "Postavi računalnik v mirovanje"
-
-#: ../src/plugins/system-management.vala:288
-msgid "Shut Down"
-msgstr "Izklop"
-
-#: ../src/plugins/system-management.vala:289
-msgid "Turn your computer off"
-msgstr "Izklopi računalnik"
-
-#: ../src/plugins/system-management.vala:372
-msgid "Restart"
-msgstr "Ponovni zagon"
-
-#: ../src/plugins/system-management.vala:373
-msgid "Restart your computer"
-msgstr "Ponovno zaženi računalnik"
-
-#: ../src/plugins/system-management.vala:457
-msgid "Suspend, hibernate, restart or shutdown your computer."
-msgstr ""
-"Postavi računalnik v stanje pripravljenosti, mirovanje, ponovni zagon ali "
-"izklop."
-
-#: ../src/plugins/system-management.vala:462
-msgid "ConsoleKit wasn't found"
-msgstr "ConsoleKit ni najden"
-
 #: ../src/plugins/zeitgeist-plugin.vala:162
 msgid "few moments ago"
 msgstr "pred nekaj trenutki"

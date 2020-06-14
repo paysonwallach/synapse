@@ -330,62 +330,6 @@ msgstr "Copier vers le presse-papiers"
 msgid "Copy selection to clipboard"
 msgstr "Copier la sélection vers le presse-papier"
 
-#: ../src/plugins/dictionary.vala:61
-msgid "Define"
-msgstr "Définir"
-
-#: ../src/plugins/dictionary.vala:62
-msgid "Look up definition in dictionary"
-msgstr "Rechercher la définition dans le dictionnaire"
-
-#: ../src/plugins/dictionary.vala:73
-msgid "Look up definitions of words."
-msgstr "Rechercher des définitions de mots."
-
-#: ../src/plugins/dictionary.vala:78
-msgid "No compatible Dictionary installed"
-msgstr ""
-
-#: ../src/plugins/system-management.vala:89
-msgid "Suspend"
-msgstr "Mettre en veille"
-
-#: ../src/plugins/system-management.vala:90
-msgid "Put your computer into suspend mode"
-msgstr "Mettre votre ordinateur en mode veille"
-
-#: ../src/plugins/system-management.vala:189
-msgid "Hibernate"
-msgstr "Mise en veille prolongée"
-
-#: ../src/plugins/system-management.vala:190
-msgid "Put your computer into hibernation mode"
-msgstr "Mettre votre ordinateur en mode de veille prolongée"
-
-#: ../src/plugins/system-management.vala:288
-msgid "Shut Down"
-msgstr "Éteindre"
-
-#: ../src/plugins/system-management.vala:289
-msgid "Turn your computer off"
-msgstr "Éteindre votre ordinateur"
-
-#: ../src/plugins/system-management.vala:372
-msgid "Restart"
-msgstr "Redémarrer"
-
-#: ../src/plugins/system-management.vala:373
-msgid "Restart your computer"
-msgstr "Redémarrer votre ordinateur"
-
-#: ../src/plugins/system-management.vala:457
-msgid "Suspend, hibernate, restart or shutdown your computer."
-msgstr "Mettre en veille, hiberner, redémarrer ou éteindre votre ordinateur."
-
-#: ../src/plugins/system-management.vala:462
-msgid "ConsoleKit wasn't found"
-msgstr "ConsoleKit est introuvable"
-
 #: ../src/plugins/zeitgeist-plugin.vala:162
 msgid "few moments ago"
 msgstr "il y a peu de temps"

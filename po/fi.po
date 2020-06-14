@@ -328,63 +328,6 @@ msgstr "Kopioi leikepöydälle"
 msgid "Copy selection to clipboard"
 msgstr "Kopioi valinta leikepöydälle"
 
-#: ../src/plugins/dictionary.vala:61
-msgid "Define"
-msgstr "Määritä"
-
-#: ../src/plugins/dictionary.vala:62
-msgid "Look up definition in dictionary"
-msgstr "Etsi määritelmää sanakirjasta"
-
-#: ../src/plugins/dictionary.vala:73
-msgid "Look up definitions of words."
-msgstr "Etsi sanojen merkityksiä."
-
-#: ../src/plugins/dictionary.vala:78
-msgid "No compatible Dictionary installed"
-msgstr ""
-
-#: ../src/plugins/system-management.vala:89
-msgid "Suspend"
-msgstr "Valmiustila"
-
-#: ../src/plugins/system-management.vala:90
-msgid "Put your computer into suspend mode"
-msgstr "Aseta tietokone valmiustilaan"
-
-#: ../src/plugins/system-management.vala:189
-msgid "Hibernate"
-msgstr "Lepotila"
-
-#: ../src/plugins/system-management.vala:190
-msgid "Put your computer into hibernation mode"
-msgstr "Aseta tietokone lepotilaan"
-
-#: ../src/plugins/system-management.vala:288
-msgid "Shut Down"
-msgstr "Sammuta"
-
-#: ../src/plugins/system-management.vala:289
-msgid "Turn your computer off"
-msgstr "Sammuta tietokoneesi"
-
-#: ../src/plugins/system-management.vala:372
-msgid "Restart"
-msgstr "Käynnistä uudelleen"
-
-#: ../src/plugins/system-management.vala:373
-msgid "Restart your computer"
-msgstr "Käynnistä tietokonesi uudelleen"
-
-#: ../src/plugins/system-management.vala:457
-msgid "Suspend, hibernate, restart or shutdown your computer."
-msgstr ""
-"Aseta tietokone valmius- tai lepotilaan, käynnistä uudelleen tai sammuta."
-
-#: ../src/plugins/system-management.vala:462
-msgid "ConsoleKit wasn't found"
-msgstr "ConsoleKit-taustapalvelua ei löytynyt"
-
 #: ../src/plugins/zeitgeist-plugin.vala:162
 msgid "few moments ago"
 msgstr "hetki sitten"

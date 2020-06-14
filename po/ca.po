@@ -346,62 +346,6 @@ msgstr "Cerca a la documentació fent servir el Devhelp."
 msgid "Devhelp is not installed"
 msgstr "El Devhelp no està instal·lat"
 
-#: ../src/plugins/dictionary.vala:61
-msgid "Define"
-msgstr "Defineix"
-
-#: ../src/plugins/dictionary.vala:62
-msgid "Look up definition in dictionary"
-msgstr "Cerca la definició al diccionari"
-
-#: ../src/plugins/dictionary.vala:73
-msgid "Look up definitions of words."
-msgstr "Cerca definicions de paraules"
-
-#: ../src/plugins/dictionary.vala:78
-msgid "No compatible Dictionary installed"
-msgstr ""
-
-#: ../src/plugins/system-management.vala:89
-msgid "Suspend"
-msgstr "Atura temporalment"
-
-#: ../src/plugins/system-management.vala:90
-msgid "Put your computer into suspend mode"
-msgstr "Posa el l'ordinador en mode d'aturada temporal"
-
-#: ../src/plugins/system-management.vala:189
-msgid "Hibernate"
-msgstr "Hiberna"
-
-#: ../src/plugins/system-management.vala:190
-msgid "Put your computer into hibernation mode"
-msgstr "Posa l'ordinador en mode d'hibernació"
-
-#: ../src/plugins/system-management.vala:288
-msgid "Shut Down"
-msgstr "Atura"
-
-#: ../src/plugins/system-management.vala:289
-msgid "Turn your computer off"
-msgstr "Atura el vostre ordinador"
-
-#: ../src/plugins/system-management.vala:372
-msgid "Restart"
-msgstr "Reinicia"
-
-#: ../src/plugins/system-management.vala:373
-msgid "Restart your computer"
-msgstr "Reinicia el vostre ordinador"
-
-#: ../src/plugins/system-management.vala:457
-msgid "Suspend, hibernate, restart or shutdown your computer."
-msgstr "Atura temporalment, hiberna, reinicia o atura el vostre ordinador."
-
-#: ../src/plugins/system-management.vala:462
-msgid "ConsoleKit wasn't found"
-msgstr "No s'ha trobat ConsoleKit"
-
 #: ../src/plugins/zeitgeist-plugin.vala:162
 msgid "few moments ago"
 msgstr "fa uns moments"

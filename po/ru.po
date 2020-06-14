@@ -332,62 +332,6 @@ msgstr "Скопировать в буфер обмена"
 msgid "Copy selection to clipboard"
 msgstr "Скопировать выделенное в буфер обмена"
 
-#: ../src/plugins/dictionary.vala:61
-msgid "Define"
-msgstr "Определение"
-
-#: ../src/plugins/dictionary.vala:62
-msgid "Look up definition in dictionary"
-msgstr "Найти определение в словаре"
-
-#: ../src/plugins/dictionary.vala:73
-msgid "Look up definitions of words."
-msgstr "Посмотреть определения слов"
-
-#: ../src/plugins/dictionary.vala:78
-msgid "No compatible Dictionary installed"
-msgstr ""
-
-#: ../src/plugins/system-management.vala:89
-msgid "Suspend"
-msgstr "Ждущий режим"
-
-#: ../src/plugins/system-management.vala:90
-msgid "Put your computer into suspend mode"
-msgstr "Перейти в режим ожидания"
-
-#: ../src/plugins/system-management.vala:189
-msgid "Hibernate"
-msgstr "Гибернация"
-
-#: ../src/plugins/system-management.vala:190
-msgid "Put your computer into hibernation mode"
-msgstr "Перейти в режим гибернации"
-
-#: ../src/plugins/system-management.vala:288
-msgid "Shut Down"
-msgstr "Выключение"
-
-#: ../src/plugins/system-management.vala:289
-msgid "Turn your computer off"
-msgstr "Выключить компьютер"
-
-#: ../src/plugins/system-management.vala:372
-msgid "Restart"
-msgstr "Перезагрузка"
-
-#: ../src/plugins/system-management.vala:373
-msgid "Restart your computer"
-msgstr "Перезагрузить компьютер"
-
-#: ../src/plugins/system-management.vala:457
-msgid "Suspend, hibernate, restart or shutdown your computer."
-msgstr "Приостановить, усыпить, перезагрузить или выключить компьютер"
-
-#: ../src/plugins/system-management.vala:462
-msgid "ConsoleKit wasn't found"
-msgstr "Не найден ConsoleKit"
-
 #: ../src/plugins/zeitgeist-plugin.vala:162
 msgid "few moments ago"
 msgstr "Несколько минут назад"

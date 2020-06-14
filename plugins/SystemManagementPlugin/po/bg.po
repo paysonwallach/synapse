@@ -1,0 +1,60 @@
+# Bulgarian translation for synapse-systemmanagement-plugin
+# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
+# This file is distributed under the same license as the synapse-systemmanagement-plugin package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: synapse-systemmanagement-plugin\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2015-11-30 14:48+0000\n"
+"PO-Revision-Date: 2011-09-24 10:05+0000\n"
+"Last-Translator: Viktor Reseleshki <Unknown>\n"
+"Language-Team: Bulgarian <bg@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Launchpad-Export-Date: 2015-12-01 05:19+0000\n"
+"X-Generator: Launchpad (build 17850)\n"
+
+#: ../src/Main.vala:89
+msgid "Suspend"
+msgstr "Приспиване"
+
+#: ../src/Main.vala:90
+msgid "Put your computer into suspend mode"
+msgstr "Сложете вашият компютър в режим \"Заспал\""
+
+#: ../src/Main.vala:189
+msgid "Hibernate"
+msgstr "Дълбоко заспиване"
+
+#: ../src/Main.vala:190
+msgid "Put your computer into hibernation mode"
+msgstr "Сложете вашият компютър в режим \"Дълбоко заспал\""
+
+#: ../src/Main.vala:288
+msgid "Shut Down"
+msgstr "Изключване"
+
+#: ../src/Main.vala:289
+msgid "Turn your computer off"
+msgstr "Изключва вашият компютър"
+
+#: ../src/Main.vala:372
+msgid "Restart"
+msgstr "Рестартиране"
+
+#: ../src/Main.vala:373
+msgid "Restart your computer"
+msgstr "Рестартира вашият на компютъра"
+
+#: ../src/Main.vala:457
+msgid "Suspend, hibernate, restart or shutdown your computer."
+msgstr "Приспива, хибернира, рестартира или изключва вашият компютър"
+
+#: ../src/Main.vala:462
+msgid "ConsoleKit wasn't found"
+msgstr "ConsoleKit не беше намерен"
+

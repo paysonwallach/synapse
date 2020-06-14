@@ -331,64 +331,6 @@ msgstr "In die Zwischenablage kopieren"
 msgid "Copy selection to clipboard"
 msgstr "Auswahl in die Zwischenablage kopieren"
 
-#: ../src/plugins/dictionary.vala:61
-msgid "Define"
-msgstr "Definiere"
-
-#: ../src/plugins/dictionary.vala:62
-msgid "Look up definition in dictionary"
-msgstr "Definition im Wörterbuch nachschlagen"
-
-#: ../src/plugins/dictionary.vala:73
-msgid "Look up definitions of words."
-msgstr "Definitionen von Wörtern nachschlagen."
-
-#: ../src/plugins/dictionary.vala:78
-msgid "No compatible Dictionary installed"
-msgstr ""
-
-#: ../src/plugins/system-management.vala:89
-msgid "Suspend"
-msgstr "Bereitschaft"
-
-#: ../src/plugins/system-management.vala:90
-msgid "Put your computer into suspend mode"
-msgstr "Versetzen Sie Ihren Computer in den Bereitschaftsmodus"
-
-#: ../src/plugins/system-management.vala:189
-msgid "Hibernate"
-msgstr "Ruhezustand"
-
-#: ../src/plugins/system-management.vala:190
-msgid "Put your computer into hibernation mode"
-msgstr "Versetzen Sie Ihren Computer in den Ruhezustand"
-
-#: ../src/plugins/system-management.vala:288
-msgid "Shut Down"
-msgstr "Herunterfahren"
-
-#: ../src/plugins/system-management.vala:289
-msgid "Turn your computer off"
-msgstr "Fahren Sie Ihren Computer herunter"
-
-#: ../src/plugins/system-management.vala:372
-msgid "Restart"
-msgstr "Neu starten"
-
-#: ../src/plugins/system-management.vala:373
-msgid "Restart your computer"
-msgstr "Starten Sie Ihren Computer neu"
-
-#: ../src/plugins/system-management.vala:457
-msgid "Suspend, hibernate, restart or shutdown your computer."
-msgstr ""
-"Computer in Bereitschaftsmodus oder Ruhezustand versetzen, Neustarten oder "
-"Herunterfahren."
-
-#: ../src/plugins/system-management.vala:462
-msgid "ConsoleKit wasn't found"
-msgstr "ConsoleKit wurde nicht gefunden"
-
 #: ../src/plugins/zeitgeist-plugin.vala:162
 msgid "few moments ago"
 msgstr "vor Kurzem"

@@ -330,62 +330,6 @@ msgstr "انسخ إلى الحافظة"
 msgid "Copy selection to clipboard"
 msgstr "انسخ المختار إلى الحافظة"
 
-#: ../src/plugins/dictionary.vala:61
-msgid "Define"
-msgstr "عرّف"
-
-#: ../src/plugins/dictionary.vala:62
-msgid "Look up definition in dictionary"
-msgstr "ابحث عن تعريف في القاموس"
-
-#: ../src/plugins/dictionary.vala:73
-msgid "Look up definitions of words."
-msgstr "ابحث عن تعريفات للكلمات."
-
-#: ../src/plugins/dictionary.vala:78
-msgid "No compatible Dictionary installed"
-msgstr ""
-
-#: ../src/plugins/system-management.vala:89
-msgid "Suspend"
-msgstr ""
-
-#: ../src/plugins/system-management.vala:90
-msgid "Put your computer into suspend mode"
-msgstr ""
-
-#: ../src/plugins/system-management.vala:189
-msgid "Hibernate"
-msgstr "إسبات"
-
-#: ../src/plugins/system-management.vala:190
-msgid "Put your computer into hibernation mode"
-msgstr "وضع الحاسب في وضع الإسبات"
-
-#: ../src/plugins/system-management.vala:288
-msgid "Shut Down"
-msgstr "اطفئ الحاسب"
-
-#: ../src/plugins/system-management.vala:289
-msgid "Turn your computer off"
-msgstr "قم بإيقاف تشغيل الحاسب"
-
-#: ../src/plugins/system-management.vala:372
-msgid "Restart"
-msgstr "أعد تشغيل الحاسب"
-
-#: ../src/plugins/system-management.vala:373
-msgid "Restart your computer"
-msgstr "قم بإطفاء ثم إعادة تشغيل الحاسب"
-
-#: ../src/plugins/system-management.vala:457
-msgid "Suspend, hibernate, restart or shutdown your computer."
-msgstr ""
-
-#: ../src/plugins/system-management.vala:462
-msgid "ConsoleKit wasn't found"
-msgstr ""
-
 #: ../src/plugins/zeitgeist-plugin.vala:162
 msgid "few moments ago"
 msgstr "منذ دقائق معدودة"

@@ -1,0 +1,48 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-07-04 00:44-0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../src/Main.vala:27
+msgid "Copy decrypted PGP password to clipboard"
+msgstr ""
+
+#: ../src/Main.vala:49
+#, c-format
+msgid "Copied %s password to clipboard"
+msgstr ""
+
+#: ../src/Main.vala:52
+#, c-format
+msgid "Unable to decrypt %s password"
+msgstr ""
+
+#: ../src/Main.vala:58
+msgid "Synapse - Pass"
+msgstr ""
+
+#: ../src/Main.vala:199
+msgid "Pass Integration"
+msgstr ""
+
+#: ../src/Main.vala:200
+msgid "Quickly place passwords from your password store in the clipboard."
+msgstr ""
+
+#: ../src/Main.vala:204
+msgid "pass is not installed"
+msgstr ""

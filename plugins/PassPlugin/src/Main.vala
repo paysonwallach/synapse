@@ -16,6 +16,7 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA.
  *
  * Authored by Michael Aquilina <michaelaquilina@gmail.com>
+ *
  */
 
 namespace Synapse {
@@ -85,22 +86,6 @@ namespace Synapse {
         }
 
         public void deactivate () {}
-
-        static void register_plugin () {
-            PluginRegistry.get_default ().register_plugin (
-                typeof (PassPlugin),
-                _("Pass Integration"),
-                _("Quickly place passwords from your password store in the clipboard."),
-                "dialog-password",
-                register_plugin,
-                Environment.find_program_in_path ("pass") != null,
-                _("pass is not installed")
-                );
-        }
-
-        static construct {
-            register_plugin ();
-        }
 
         public bool handles_query (Query query) {
             return (QueryFlags.ACTIONS in query.query_type);
@@ -187,13 +172,19 @@ namespace Synapse {
                 );
 
             var results = new ResultSet ();
+            var num_passwords = passwords.length ();
+            var index = 0;
             foreach (unowned string password in passwords) {
                 foreach (var matcher in matchers) {
                     if (matcher.key.match (password)) {
-                        results.add (new PassMatch (password), MatchScore.GOOD);
+                        results.add (
+                            new PassMatch (password),
+                            (int) (matcher.value * (num_passwords - index) / num_passwords)
+                            );
                         break;
                     }
                 }
+                index++;
             }
 
             // make sure this method is called before returning any results
@@ -205,4 +196,16 @@ namespace Synapse {
             }
         }
     }
+}
+
+public Synapse.PluginInfo register_plugin () {
+    return new Synapse.PluginInfo (
+        typeof (Synapse.PassPlugin),
+        _("Pass Integration"),
+        _("Quickly place passwords from your password store in the clipboard."),
+        "dialog-password",
+        null,
+        Environment.find_program_in_path ("pass") != null,
+        _("pass is not installed")
+        );
 }

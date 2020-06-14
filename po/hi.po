@@ -344,19 +344,6 @@ msgstr ""
 msgid "No compatible Dictionary installed"
 msgstr ""
 
-#: ../src/plugins/selection-plugin.vala:55
-msgid "Selection"
-msgstr "चयन"
-
-#. plugin title
-#: ../src/plugins/selection-plugin.vala:56
-msgid "Provides actions for currently selected text."
-msgstr ""
-
-#: ../src/plugins/selection-plugin.vala:72
-msgid "Selected text"
-msgstr ""
-
 #. Plugin title
 #: ../src/plugins/ssh-plugin.vala:67
 msgid "Connect to host with SSH"

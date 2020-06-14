@@ -347,19 +347,6 @@ msgstr "Търси дефиниция на думи."
 msgid "No compatible Dictionary installed"
 msgstr ""
 
-#: ../src/plugins/selection-plugin.vala:55
-msgid "Selection"
-msgstr "Избрано"
-
-#. plugin title
-#: ../src/plugins/selection-plugin.vala:56
-msgid "Provides actions for currently selected text."
-msgstr "Предоставя действия за текущия избран текст."
-
-#: ../src/plugins/selection-plugin.vala:72
-msgid "Selected text"
-msgstr "Избран текст"
-
 #. Plugin title
 #: ../src/plugins/ssh-plugin.vala:67
 msgid "Connect to host with SSH"

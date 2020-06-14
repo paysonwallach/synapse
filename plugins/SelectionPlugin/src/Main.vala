@@ -16,6 +16,7 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA.
  *
  * Authored by Michal Hruby <michal.mhr@gmail.com>
+ *
  */
 
 namespace Synapse {
@@ -39,22 +40,6 @@ namespace Synapse {
 
         private void cb_owner_change () {
             cb_changed = true;
-        }
-
-        // register your plugin in the UI
-        static void register_plugin () {
-            PluginRegistry.get_default ().register_plugin (
-                typeof (SelectionPlugin),
-                _("Selection"), // plugin title
-                _("Provides actions for currently selected text."), // description
-                "edit-select-all", // icon name
-                register_plugin // reference to this function
-                );
-        }
-
-        static construct {
-            // register the plugin when the class is constructed
-            register_plugin ();
         }
 
         private class SelectedTextItem : TextMatch {
@@ -135,4 +120,16 @@ namespace Synapse {
             return null;
         }
     }
+}
+
+public Synapse.PluginInfo register_plugin () {
+    return new Synapse.PluginInfo (
+        typeof (Synapse.SelectionPlugin),
+        _("Selection"),
+        _("Provides actions for currently selected text."),
+        "edit-select-all",
+        "com.paysonwallach.synapse.selection",
+        true,
+        ""
+        );
 }

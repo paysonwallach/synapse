@@ -1,0 +1,51 @@
+# Czech translation for synapse-opensearch-plugin
+# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
+# This file is distributed under the same license as the synapse-opensearch-plugin package.
+#
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
+# Petr Gajdůšek <gajdusek.petr@centrum.cz>, 2011.
+msgid ""
+msgstr ""
+"Project-Id-Version: synapse-opensearch-plugin\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2015-11-30 14:48+0000\n"
+"PO-Revision-Date: 2012-05-13 18:30+0000\n"
+"Last-Translator: Michal Horáček <horacekm@email.cz>\n"
+"Language-Team: Czech <cs@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Launchpad-Export-Date: 2015-12-01 05:19+0000\n"
+"X-Generator: Launchpad (build 17850)\n"
+"Language: cs\n"
+
+#: ../src/Main.vala:254
+msgid "Search the web."
+msgstr "Umožňuje vyhledávat na webu."
+
+#. keep in sync with the internal XMLs!
+#: ../src/Main.vala:266
+msgid "DuckDuckGo"
+msgstr ""
+
+#: ../src/Main.vala:267
+msgid "Search the web using duckduckgo.com"
+msgstr ""
+
+#: ../src/Main.vala:268
+msgid "Google"
+msgstr "Google"
+
+#: ../src/Main.vala:269
+msgid "Search the web using google.com"
+msgstr "Vyhledat na webu použitím google.com"
+
+#: ../src/Main.vala:270
+msgid "Google Maps"
+msgstr "Mapy Google"
+
+#: ../src/Main.vala:271
+msgid "Search using Google Maps"
+msgstr "Hledat pomocí Google Mapy"
+

@@ -1,0 +1,49 @@
+# Korean translation for synapse-opensearch-plugin
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# This file is distributed under the same license as the synapse-opensearch-plugin package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: synapse-opensearch-plugin\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2015-11-30 14:48+0000\n"
+"PO-Revision-Date: 2014-05-01 11:36+0000\n"
+"Last-Translator: Kim Boram <boramism@gmail.com>\n"
+"Language-Team: Kim Boram <Boramism@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Launchpad-Export-Date: 2015-12-01 05:19+0000\n"
+"X-Generator: Launchpad (build 17850)\n"
+
+#: ../src/Main.vala:254
+msgid "Search the web."
+msgstr "웹을 검색합니다."
+
+#. keep in sync with the internal XMLs!
+#: ../src/Main.vala:266
+msgid "DuckDuckGo"
+msgstr ""
+
+#: ../src/Main.vala:267
+msgid "Search the web using duckduckgo.com"
+msgstr ""
+
+#: ../src/Main.vala:268
+msgid "Google"
+msgstr "구글"
+
+#: ../src/Main.vala:269
+msgid "Search the web using google.com"
+msgstr "구글(영문)을 이용해 웹을 검색합니다"
+
+#: ../src/Main.vala:270
+msgid "Google Maps"
+msgstr "구글 지도"
+
+#: ../src/Main.vala:271
+msgid "Search using Google Maps"
+msgstr "구글 지도를 이용해 검색합니다."
+

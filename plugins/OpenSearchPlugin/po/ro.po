@@ -1,0 +1,50 @@
+# Romanian translation for synapse-opensearch-plugin
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# This file is distributed under the same license as the synapse-opensearch-plugin package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: synapse-opensearch-plugin\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2015-11-30 14:48+0000\n"
+"PO-Revision-Date: 2012-03-29 18:44+0000\n"
+"Last-Translator: Cristian Moldovan <crism@gentoo-land.org>\n"
+"Language-Team: Romanian <ro@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n == 1 ? 0: (((n % 100 > 19) || ((n % 100 "
+"== 0) && (n != 0))) ? 2: 1));\n"
+"X-Launchpad-Export-Date: 2015-12-01 05:19+0000\n"
+"X-Generator: Launchpad (build 17850)\n"
+
+#: ../src/Main.vala:254
+msgid "Search the web."
+msgstr "Caută pe web."
+
+#. keep in sync with the internal XMLs!
+#: ../src/Main.vala:266
+msgid "DuckDuckGo"
+msgstr ""
+
+#: ../src/Main.vala:267
+msgid "Search the web using duckduckgo.com"
+msgstr ""
+
+#: ../src/Main.vala:268
+msgid "Google"
+msgstr "Google"
+
+#: ../src/Main.vala:269
+msgid "Search the web using google.com"
+msgstr "Caută pe web folosind google.com"
+
+#: ../src/Main.vala:270
+msgid "Google Maps"
+msgstr "Google Maps"
+
+#: ../src/Main.vala:271
+msgid "Search using Google Maps"
+msgstr "Caută folosind Google Maps"
+

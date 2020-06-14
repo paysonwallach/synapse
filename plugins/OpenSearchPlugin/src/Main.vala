@@ -16,6 +16,7 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA.
  *
  * Authored by Michal Hruby <michal.mhr@gmail.com>
+ *
  */
 
 namespace Synapse {
@@ -27,7 +28,6 @@ namespace Synapse {
   <Description>Search the web using google.com</Description>
   <Url type="text/html" method="get" template="http://www.google.com/search?q={searchTerms}&amp;hl={language}"/>
   <Url type="application/x-suggestions+json" template="http://suggestqueries.google.com/complete/search?output=firefox&amp;client=firefox&amp;hl=en&amp;q={searchTerms}"/>
-
   <Developer>Synapse dev team</Developer>
   <InputEncoding>UTF-8</InputEncoding>
 </OpenSearchDescription>
@@ -38,7 +38,6 @@ namespace Synapse {
   <ShortName>Google Maps</ShortName>
   <Description>Search using Google Maps</Description>
   <Url type="text/html" method="get" template="http://maps.google.com/maps?q={searchTerms}&amp;hl={language}"/>
-
   <Developer>Synapse dev team</Developer>
   <InputEncoding>UTF-8</InputEncoding>
 </OpenSearchDescription>
@@ -122,7 +121,7 @@ namespace Synapse {
             private void start (MarkupParseContext ctx, string name,
                                 string[] attr_names, string[] attr_vals) throws MarkupError {
                 switch (name) {
-                case "SearchPlugin": //try to support Mozilla OpenSearch xmls
+                case "SearchPlugin": // try to support Mozilla OpenSearch xmls
                     if ("xmlns:os" in attr_names)
                         is_opensearch = true;
                     break;
@@ -213,19 +212,7 @@ namespace Synapse {
             }
         }
 
-        static void register_plugin () {
-            PluginRegistry.get_default ().register_plugin (
-                typeof (OpenSearchPlugin),
-                "OpenSearch",
-                _("Search the web."),
-                "applications-internet",
-                register_plugin
-                );
-        }
-
         static construct {
-            register_plugin ();
-
             // keep in sync with the internal XMLs!
             unowned string dummy;
             dummy = N_ ("DuckDuckGo");
@@ -305,13 +292,12 @@ namespace Synapse {
             var my_flags = QueryFlags.ACTIONS | QueryFlags.INTERNET;
             if ((query.query_type & my_flags) == 0) return null;
 
-            bool query_empty = query.query_string == "";
+            bool query_empty = query.query_string.length == 0;
             var results = new ResultSet ();
 
             if (query_empty) {
-                foreach (var action in actions) {
+                foreach (var action in actions)
                     results.add (action, action.default_relevancy);
-                }
             } else {
                 var matchers = Query.get_matchers_for_query (query.query_string, 0,
                                                              RegexCompileFlags.CASELESS);
@@ -328,4 +314,16 @@ namespace Synapse {
             return results;
         }
     }
+}
+
+public Synapse.PluginInfo register_plugin () {
+    return new Synapse.PluginInfo (
+        typeof (Synapse.OpenSearchPlugin),
+        "OpenSearch",
+        _("Search the web."),
+        "applications-internet",
+        "com.paysonwallach.synapse.opensearch",
+        true,
+        ""
+        );
 }

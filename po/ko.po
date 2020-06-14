@@ -344,35 +344,6 @@ msgstr "단어의 정의를 찾아봅니다."
 msgid "No compatible Dictionary installed"
 msgstr ""
 
-#: ../src/plugins/opensearch.vala:254
-msgid "Search the web."
-msgstr "웹을 검색합니다."
-
-#. keep in sync with the internal XMLs!
-#: ../src/plugins/opensearch.vala:266
-msgid "DuckDuckGo"
-msgstr ""
-
-#: ../src/plugins/opensearch.vala:267
-msgid "Search the web using duckduckgo.com"
-msgstr ""
-
-#: ../src/plugins/opensearch.vala:268
-msgid "Google"
-msgstr "구글"
-
-#: ../src/plugins/opensearch.vala:269
-msgid "Search the web using google.com"
-msgstr "구글(영문)을 이용해 웹을 검색합니다"
-
-#: ../src/plugins/opensearch.vala:270
-msgid "Google Maps"
-msgstr "구글 지도"
-
-#: ../src/plugins/opensearch.vala:271
-msgid "Search using Google Maps"
-msgstr "구글 지도를 이용해 검색합니다."
-
 #: ../src/plugins/selection-plugin.vala:55
 msgid "Selection"
 msgstr "선택"

@@ -346,35 +346,6 @@ msgstr "വാക്കുകളുടെ അര്‍ഥം നോക്കു�
 msgid "No compatible Dictionary installed"
 msgstr ""
 
-#: ../src/plugins/opensearch.vala:254
-msgid "Search the web."
-msgstr "വെബ്ബില്‍ തിരയുക"
-
-#. keep in sync with the internal XMLs!
-#: ../src/plugins/opensearch.vala:266
-msgid "DuckDuckGo"
-msgstr ""
-
-#: ../src/plugins/opensearch.vala:267
-msgid "Search the web using duckduckgo.com"
-msgstr ""
-
-#: ../src/plugins/opensearch.vala:268
-msgid "Google"
-msgstr "ഗൂഗിള്‍"
-
-#: ../src/plugins/opensearch.vala:269
-msgid "Search the web using google.com"
-msgstr "google.com ഉപയോഗിച്ച് തെരയുക"
-
-#: ../src/plugins/opensearch.vala:270
-msgid "Google Maps"
-msgstr "ഗൂഗിള്‍ മാപ്സ്"
-
-#: ../src/plugins/opensearch.vala:271
-msgid "Search using Google Maps"
-msgstr "ഗൂഗിള്‍ മാപ്സ് ഉപയോഗിച്ച് തെരയുക"
-
 #: ../src/plugins/selection-plugin.vala:55
 msgid "Selection"
 msgstr "തെരഞ്ഞെടുക്കല്‍"

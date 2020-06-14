@@ -345,35 +345,6 @@ msgstr "Szukaj definicji słów."
 msgid "No compatible Dictionary installed"
 msgstr "Nie zainstalowano pasującego słownika"
 
-#: ../src/plugins/opensearch.vala:254
-msgid "Search the web."
-msgstr "Szukaj w internecie."
-
-#. keep in sync with the internal XMLs!
-#: ../src/plugins/opensearch.vala:266
-msgid "DuckDuckGo"
-msgstr "DuckDuckGo"
-
-#: ../src/plugins/opensearch.vala:267
-msgid "Search the web using duckduckgo.com"
-msgstr "Przeszukuj sieć używając duckduckgo.com"
-
-#: ../src/plugins/opensearch.vala:268
-msgid "Google"
-msgstr "Google"
-
-#: ../src/plugins/opensearch.vala:269
-msgid "Search the web using google.com"
-msgstr "Szukaj w internecie używając google.com"
-
-#: ../src/plugins/opensearch.vala:270
-msgid "Google Maps"
-msgstr "Mapy Google"
-
-#: ../src/plugins/opensearch.vala:271
-msgid "Search using Google Maps"
-msgstr "Szukaj używając Map Google"
-
 #: ../src/plugins/selection-plugin.vala:55
 msgid "Selection"
 msgstr "Zaznaczenie"

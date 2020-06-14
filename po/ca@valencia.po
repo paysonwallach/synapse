@@ -346,23 +346,6 @@ msgstr "Cerca definicions de paraules"
 msgid "No compatible Dictionary installed"
 msgstr ""
 
-#. Plugin title
-#: ../src/plugins/ssh-plugin.vala:67
-msgid "Connect to host with SSH"
-msgstr "Connecta a l'amfitrió per SSH"
-
-#. description
-#. icon name
-#. reference to this function
-#. true if user's system has all required components which the plugin needs
-#: ../src/plugins/ssh-plugin.vala:72
-msgid "ssh is not installed"
-msgstr "ssh no està instal·lat"
-
-#: ../src/plugins/ssh-plugin.vala:190
-msgid "Connect with SSH"
-msgstr "Connecta amb SSH"
-
 #: ../src/plugins/system-management.vala:89
 msgid "Suspend"
 msgstr "Para temporalment"

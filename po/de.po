@@ -347,23 +347,6 @@ msgstr "Definitionen von Wörtern nachschlagen."
 msgid "No compatible Dictionary installed"
 msgstr ""
 
-#. Plugin title
-#: ../src/plugins/ssh-plugin.vala:67
-msgid "Connect to host with SSH"
-msgstr "Per SSH zum Host verbinden"
-
-#. description
-#. icon name
-#. reference to this function
-#. true if user's system has all required components which the plugin needs
-#: ../src/plugins/ssh-plugin.vala:72
-msgid "ssh is not installed"
-msgstr "SSH ist nicht installiert"
-
-#: ../src/plugins/ssh-plugin.vala:190
-msgid "Connect with SSH"
-msgstr "Mit SSH verbinden"
-
 #: ../src/plugins/system-management.vala:89
 msgid "Suspend"
 msgstr "Bereitschaft"

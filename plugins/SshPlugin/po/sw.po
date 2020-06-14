@@ -1,0 +1,36 @@
+# Swahili translation for synapse-ssh-plugin
+# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
+# This file is distributed under the same license as the synapse-ssh-plugin package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: synapse-ssh-plugin\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2015-11-30 14:48+0000\n"
+"PO-Revision-Date: 2011-01-24 07:10+0000\n"
+"Last-Translator: Sovello Hildebrand <Unknown>\n"
+"Language-Team: Swahili <sw@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Launchpad-Export-Date: 2015-12-01 05:19+0000\n"
+"X-Generator: Launchpad (build 17850)\n"
+
+#: ../src/Main.vala:67
+msgid "Connect to host with SSH"
+msgstr ""
+
+#. description
+#. icon name
+#. reference to this function
+#. true if user's system has all required components which the plugin needs
+#: ../src/Main.vala:72
+msgid "ssh is not installed"
+msgstr ""
+
+#: ../src/Main.vala:190
+msgid "Connect with SSH"
+msgstr ""
+

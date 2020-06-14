@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2011 Antono Vasiljev <self@antono.info>
+ * Copyright (C) 2020 Payson Wallach <payson@paysonwallach.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,9 +17,29 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA.
  *
  * Authored by Antono Vasiljev <self@antono.info>
+ *
  */
 
 namespace Synapse {
+    private class SshHost : ActionMatch {
+        public string host_query { get; construct set; }
+
+        public override void do_action () {
+            Utils.open_command_line ("ssh %s".printf (title), null, true);
+        }
+
+        public SshHost (string host_name) {
+            Object (
+                title: host_name,
+                description: _("Connect with SSH"),
+                has_thumbnail: false,
+                icon_name: "terminal",
+                host_query: host_name
+                );
+        }
+
+    }
+
     public class SshPlugin : Object, Activatable, ItemProvider {
         public bool enabled { get; set; default = true; }
         private Gee.HashMap<string, SshHost> hosts;
@@ -26,16 +47,12 @@ namespace Synapse {
         protected File config_file;
         protected FileMonitor monitor;
 
-        static construct {
-            register_plugin ();
-        }
-
         construct {
             hosts = new Gee.HashMap<string, SshHost> ();
         }
 
         public void activate () {
-            this.config_file = File.new_for_path (Environment.get_home_dir () + "/.ssh/config");
+            this.config_file = File.new_build_filename (Environment.get_home_dir (), ".ssh", "config");
 
             parse_ssh_config.begin ();
 
@@ -48,19 +65,6 @@ namespace Synapse {
         }
 
         public void deactivate () {}
-
-        static void register_plugin () {
-            PluginRegistry.get_default ().register_plugin (
-                typeof (SshPlugin),
-                "SSH", // Plugin title
-                _("Connect to host with SSH"), // description
-                "terminal", // icon name
-                register_plugin, // reference to this function
-                // true if user's system has all required components which the plugin needs
-                (Environment.find_program_in_path ("ssh") != null),
-                _("ssh is not installed") // error message
-                );
-        }
 
         private async void parse_ssh_config () {
             hosts.clear ();
@@ -109,9 +113,7 @@ namespace Synapse {
         }
 
         public bool handles_query (Query query) {
-            return hosts.size > 0 &&
-                   (QueryFlags.ACTIONS in query.query_type ||
-                    QueryFlags.INTERNET in query.query_type);
+            return hosts.size > 0 && (QueryFlags.ACTIONS in query.query_type || QueryFlags.INTERNET in query.query_type);
         }
 
         public async ResultSet? search (Query q) throws SearchError {
@@ -124,7 +126,8 @@ namespace Synapse {
             var matchers = Query.get_matchers_for_query (q.query_string, 0,
                                                          RegexCompileFlags.OPTIMIZE | RegexCompileFlags.CASELESS);
 
-            foreach (var host in hosts.values) { //workaround for missing HashMap.iterator() method
+            foreach (var host in hosts.values) {
+                // FIXME: use Gee.HashMap.map_iterator () instead
                 foreach (var matcher in matchers) {
                     if (matcher.key.match (host.host_query)) {
                         results.add (host, matcher.value - MatchScore.INCREMENT_SMALL);
@@ -137,32 +140,17 @@ namespace Synapse {
 
             return results;
         }
-
-        private class SshHost : ActionMatch {
-            public string host_query { get; construct set; }
-
-            public override void do_action () {
-                try {
-                    AppInfo ai = AppInfo.create_from_commandline (
-                        "ssh %s".printf (this.title),
-                        "ssh", AppInfoCreateFlags.NEEDS_TERMINAL);
-                    ai.launch (null, null);
-                } catch (Error err) {
-                    warning ("%s", err.message);
-                }
-            }
-
-            public SshHost (string host_name) {
-                Object (
-                    title: host_name,
-                    description: _("Connect with SSH"),
-                    has_thumbnail: false,
-                    icon_name: "terminal",
-                    host_query: host_name
-                    );
-
-            }
-
-        }
     }
+}
+
+public Synapse.PluginInfo register_plugin () {
+    return new Synapse.PluginInfo (
+        typeof (Synapse.SshPlugin),
+        "SSH",
+        _("Connect to host with SSH"),
+        "terminal",
+        "com.paysonwallach.synapse.ssh",
+        (Environment.find_program_in_path ("ssh") != null),
+        _("ssh is not installed")
+        );
 }

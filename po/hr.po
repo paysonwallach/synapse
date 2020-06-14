@@ -345,23 +345,6 @@ msgstr "Potraži definicije riječi."
 msgid "No compatible Dictionary installed"
 msgstr ""
 
-#. Plugin title
-#: ../src/plugins/ssh-plugin.vala:67
-msgid "Connect to host with SSH"
-msgstr "Povezivanje sa računalom putem SSH protokola"
-
-#. description
-#. icon name
-#. reference to this function
-#. true if user's system has all required components which the plugin needs
-#: ../src/plugins/ssh-plugin.vala:72
-msgid "ssh is not installed"
-msgstr "ssh nije instaliran"
-
-#: ../src/plugins/ssh-plugin.vala:190
-msgid "Connect with SSH"
-msgstr "Spoji se s SSH"
-
 #: ../src/plugins/system-management.vala:89
 msgid "Suspend"
 msgstr "Suspendirati"

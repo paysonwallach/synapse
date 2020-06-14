@@ -344,23 +344,6 @@ msgstr "Lihat makna dari kata-kata"
 msgid "No compatible Dictionary installed"
 msgstr ""
 
-#. Plugin title
-#: ../src/plugins/ssh-plugin.vala:67
-msgid "Connect to host with SSH"
-msgstr "Sambungkan ke host dengan SSH"
-
-#. description
-#. icon name
-#. reference to this function
-#. true if user's system has all required components which the plugin needs
-#: ../src/plugins/ssh-plugin.vala:72
-msgid "ssh is not installed"
-msgstr "ssh tidak terpasang"
-
-#: ../src/plugins/ssh-plugin.vala:190
-msgid "Connect with SSH"
-msgstr "Sambungkan dengan SSH"
-
 #: ../src/plugins/system-management.vala:89
 msgid "Suspend"
 msgstr "Suspensi"

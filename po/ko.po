@@ -344,23 +344,6 @@ msgstr "단어의 정의를 찾아봅니다."
 msgid "No compatible Dictionary installed"
 msgstr ""
 
-#. Plugin title
-#: ../src/plugins/ssh-plugin.vala:67
-msgid "Connect to host with SSH"
-msgstr "SSH로 호스트에 연결"
-
-#. description
-#. icon name
-#. reference to this function
-#. true if user's system has all required components which the plugin needs
-#: ../src/plugins/ssh-plugin.vala:72
-msgid "ssh is not installed"
-msgstr "SSH를 설치하지 않았습니다"
-
-#: ../src/plugins/ssh-plugin.vala:190
-msgid "Connect with SSH"
-msgstr "SSH로 연결"
-
 #: ../src/plugins/system-management.vala:89
 msgid "Suspend"
 msgstr "절전"

@@ -344,23 +344,6 @@ msgstr "查找单词的定义."
 msgid "No compatible Dictionary installed"
 msgstr ""
 
-#. Plugin title
-#: ../src/plugins/ssh-plugin.vala:67
-msgid "Connect to host with SSH"
-msgstr "链接至SSH主机"
-
-#. description
-#. icon name
-#. reference to this function
-#. true if user's system has all required components which the plugin needs
-#: ../src/plugins/ssh-plugin.vala:72
-msgid "ssh is not installed"
-msgstr "没有安装ssh"
-
-#: ../src/plugins/ssh-plugin.vala:190
-msgid "Connect with SSH"
-msgstr "用 SSH 连接"
-
 #: ../src/plugins/system-management.vala:89
 msgid "Suspend"
 msgstr "待机"

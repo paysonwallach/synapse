@@ -328,25 +328,6 @@ msgstr "클립보드로 복사"
 msgid "Copy selection to clipboard"
 msgstr "선택한것을 클립보드로 복사"
 
-#: ../src/plugins/desktop-file-plugin.vala:70
-msgid "Search for and run applications on your computer."
-msgstr "컴퓨터에서 응용 프로그램을 검색하고 실행합니다."
-
-#: ../src/plugins/desktop-file-plugin.vala:232
-#, c-format
-msgid "Open with %s"
-msgstr "%s(으)로 열기"
-
-#: ../src/plugins/desktop-file-plugin.vala:234
-#, c-format
-msgid "Opens current selection using %s"
-msgstr "현재 선택한 것을 %s(으)로 엽니다"
-
-#: ../src/plugins/desktop-file-plugin.vala:280
-#, c-format
-msgid "Launch action '%s'"
-msgstr ""
-
 #: ../src/plugins/dictionary.vala:61
 msgid "Define"
 msgstr "정의"

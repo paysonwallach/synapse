@@ -330,25 +330,6 @@ msgstr ""
 msgid "Copy selection to clipboard"
 msgstr ""
 
-#: ../src/plugins/desktop-file-plugin.vala:70
-msgid "Search for and run applications on your computer."
-msgstr "Alkalmazások keresése és indítása a számítógépen"
-
-#: ../src/plugins/desktop-file-plugin.vala:232
-#, c-format
-msgid "Open with %s"
-msgstr "Megnyitás ezzel: %s"
-
-#: ../src/plugins/desktop-file-plugin.vala:234
-#, c-format
-msgid "Opens current selection using %s"
-msgstr ""
-
-#: ../src/plugins/desktop-file-plugin.vala:280
-#, c-format
-msgid "Launch action '%s'"
-msgstr ""
-
 #: ../src/plugins/dictionary.vala:61
 msgid "Define"
 msgstr ""

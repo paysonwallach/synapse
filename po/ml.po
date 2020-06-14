@@ -330,25 +330,6 @@ msgstr "ക്ലിപ്പ് ബോർഡിലേയ്ക്ക് പക�
 msgid "Copy selection to clipboard"
 msgstr "തിരഞ്ഞെടുത്തത് ക്ലിപ്പ് ബോര്‍ഡിലേക്ക് പകര്‍ത്തുക"
 
-#: ../src/plugins/desktop-file-plugin.vala:70
-msgid "Search for and run applications on your computer."
-msgstr ""
-
-#: ../src/plugins/desktop-file-plugin.vala:232
-#, c-format
-msgid "Open with %s"
-msgstr "%s ഉപയോഗിച്ചു് തുറക്കുക"
-
-#: ../src/plugins/desktop-file-plugin.vala:234
-#, c-format
-msgid "Opens current selection using %s"
-msgstr "സെലക്ട്‌ ചെയ്തത്  %s ഉപയോഗിച്ച് തുറക്കുക"
-
-#: ../src/plugins/desktop-file-plugin.vala:280
-#, c-format
-msgid "Launch action '%s'"
-msgstr ""
-
 #: ../src/plugins/dictionary.vala:61
 msgid "Define"
 msgstr "നിര്‍വ്വചിക്കുക"

@@ -328,25 +328,6 @@ msgstr "Kopioi leikepöydälle"
 msgid "Copy selection to clipboard"
 msgstr "Kopioi valinta leikepöydälle"
 
-#: ../src/plugins/desktop-file-plugin.vala:70
-msgid "Search for and run applications on your computer."
-msgstr "Etsi ja suorita koneelle asennettuja sovelluksia."
-
-#: ../src/plugins/desktop-file-plugin.vala:232
-#, c-format
-msgid "Open with %s"
-msgstr "Avaa sovelluksella %s"
-
-#: ../src/plugins/desktop-file-plugin.vala:234
-#, c-format
-msgid "Opens current selection using %s"
-msgstr "Avaa nykyisen valinnan sovelluksessa %s"
-
-#: ../src/plugins/desktop-file-plugin.vala:280
-#, c-format
-msgid "Launch action '%s'"
-msgstr ""
-
 #: ../src/plugins/dictionary.vala:61
 msgid "Define"
 msgstr "Määritä"

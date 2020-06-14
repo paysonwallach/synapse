@@ -328,14 +328,6 @@ msgstr "클립보드로 복사"
 msgid "Copy selection to clipboard"
 msgstr "선택한것을 클립보드로 복사"
 
-#: ../src/plugins/command-plugin.vala:44
-msgid "Run command"
-msgstr "명령 실행"
-
-#: ../src/plugins/command-plugin.vala:64
-msgid "Find and execute arbitrary commands."
-msgstr "임의의 명령을 찾거나 실행합니다."
-
 #: ../src/plugins/desktop-file-plugin.vala:70
 msgid "Search for and run applications on your computer."
 msgstr "컴퓨터에서 응용 프로그램을 검색하고 실행합니다."

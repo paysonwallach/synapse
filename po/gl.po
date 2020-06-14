@@ -330,14 +330,6 @@ msgstr "Copiar no Portapapeis"
 msgid "Copy selection to clipboard"
 msgstr "Copiala selección ó portarretallos"
 
-#: ../src/plugins/command-plugin.vala:44
-msgid "Run command"
-msgstr "Executar orde"
-
-#: ../src/plugins/command-plugin.vala:64
-msgid "Find and execute arbitrary commands."
-msgstr "Buscar e executar ordes arbitrarias."
-
 #: ../src/plugins/desktop-file-plugin.vala:70
 msgid "Search for and run applications on your computer."
 msgstr "Buscar e executar aplicativos no seu computador."

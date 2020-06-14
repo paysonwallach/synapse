@@ -332,14 +332,6 @@ msgstr "In die Zwischenablage kopieren"
 msgid "Copy selection to clipboard"
 msgstr "Auswahl in die Zwischenablage kopieren"
 
-#: ../src/plugins/command-plugin.vala:44
-msgid "Run command"
-msgstr "Befehl ausführen"
-
-#: ../src/plugins/command-plugin.vala:64
-msgid "Find and execute arbitrary commands."
-msgstr "Finde beliebige Befehle und führe sie aus."
-
 #: ../src/plugins/desktop-file-plugin.vala:70
 msgid "Search for and run applications on your computer."
 msgstr "Suche nach Programmen und führe sie auf deinem Computer aus"

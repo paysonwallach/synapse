@@ -333,14 +333,6 @@ msgstr "Kopiera till klippminnet"
 msgid "Copy selection to clipboard"
 msgstr "Kopiera markeringen till klippminnet"
 
-#: ../src/plugins/command-plugin.vala:44
-msgid "Run command"
-msgstr "Kör kommando"
-
-#: ../src/plugins/command-plugin.vala:64
-msgid "Find and execute arbitrary commands."
-msgstr "Hitta och kör godtyckliga kommandon."
-
 #: ../src/plugins/desktop-file-plugin.vala:70
 msgid "Search for and run applications on your computer."
 msgstr "Sök och starta program på din dator"

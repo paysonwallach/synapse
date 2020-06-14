@@ -332,14 +332,6 @@ msgstr "Copiază în clipboard"
 msgid "Copy selection to clipboard"
 msgstr "Copiază selecția în clipboard"
 
-#: ../src/plugins/command-plugin.vala:44
-msgid "Run command"
-msgstr "Executa comanda"
-
-#: ../src/plugins/command-plugin.vala:64
-msgid "Find and execute arbitrary commands."
-msgstr "Găsește și executa comenzi arbitrare."
-
 #: ../src/plugins/desktop-file-plugin.vala:70
 msgid "Search for and run applications on your computer."
 msgstr "Caută și execută aplicații pe calculator."

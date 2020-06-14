@@ -328,14 +328,6 @@ msgstr "Kopioi leikepöydälle"
 msgid "Copy selection to clipboard"
 msgstr "Kopioi valinta leikepöydälle"
 
-#: ../src/plugins/command-plugin.vala:44
-msgid "Run command"
-msgstr "Suorita komento"
-
-#: ../src/plugins/command-plugin.vala:64
-msgid "Find and execute arbitrary commands."
-msgstr "Etsi ja suorita komentoja."
-
 #: ../src/plugins/desktop-file-plugin.vala:70
 msgid "Search for and run applications on your computer."
 msgstr "Etsi ja suorita koneelle asennettuja sovelluksia."

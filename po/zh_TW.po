@@ -328,14 +328,6 @@ msgstr "複製至剪貼簿"
 msgid "Copy selection to clipboard"
 msgstr "將選擇範圍複製至剪貼簿"
 
-#: ../src/plugins/command-plugin.vala:44
-msgid "Run command"
-msgstr "執行指令"
-
-#: ../src/plugins/command-plugin.vala:64
-msgid "Find and execute arbitrary commands."
-msgstr "找尋並執行任意指令。"
-
 #: ../src/plugins/desktop-file-plugin.vala:70
 msgid "Search for and run applications on your computer."
 msgstr "搜尋並執行電腦的應用程式。"

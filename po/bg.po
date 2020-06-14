@@ -331,62 +331,6 @@ msgstr "Копиране в буфера"
 msgid "Copy selection to clipboard"
 msgstr "Копиране на избраното в буфера"
 
-#: ../src/plugins/dictionary.vala:61
-msgid "Define"
-msgstr "Дефинициране"
-
-#: ../src/plugins/dictionary.vala:62
-msgid "Look up definition in dictionary"
-msgstr "Виж дефиницията в енциклопедия"
-
-#: ../src/plugins/dictionary.vala:73
-msgid "Look up definitions of words."
-msgstr "Търси дефиниция на думи."
-
-#: ../src/plugins/dictionary.vala:78
-msgid "No compatible Dictionary installed"
-msgstr ""
-
-#: ../src/plugins/system-management.vala:89
-msgid "Suspend"
-msgstr "Приспиване"
-
-#: ../src/plugins/system-management.vala:90
-msgid "Put your computer into suspend mode"
-msgstr "Сложете вашият компютър в режим \"Заспал\""
-
-#: ../src/plugins/system-management.vala:189
-msgid "Hibernate"
-msgstr "Дълбоко заспиване"
-
-#: ../src/plugins/system-management.vala:190
-msgid "Put your computer into hibernation mode"
-msgstr "Сложете вашият компютър в режим \"Дълбоко заспал\""
-
-#: ../src/plugins/system-management.vala:288
-msgid "Shut Down"
-msgstr "Изключване"
-
-#: ../src/plugins/system-management.vala:289
-msgid "Turn your computer off"
-msgstr "Изключва вашият компютър"
-
-#: ../src/plugins/system-management.vala:372
-msgid "Restart"
-msgstr "Рестартиране"
-
-#: ../src/plugins/system-management.vala:373
-msgid "Restart your computer"
-msgstr "Рестартира вашият на компютъра"
-
-#: ../src/plugins/system-management.vala:457
-msgid "Suspend, hibernate, restart or shutdown your computer."
-msgstr "Приспива, хибернира, рестартира или изключва вашият компютър"
-
-#: ../src/plugins/system-management.vala:462
-msgid "ConsoleKit wasn't found"
-msgstr "ConsoleKit не беше намерен"
-
 #: ../src/plugins/zeitgeist-plugin.vala:162
 msgid "few moments ago"
 msgstr "Преди няколко секунди"

@@ -1,0 +1,60 @@
+# Chinese (Traditional) translation for synapse-systemmanagement-plugin
+# Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
+# This file is distributed under the same license as the synapse-systemmanagement-plugin package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: synapse-systemmanagement-plugin\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2015-11-30 14:48+0000\n"
+"PO-Revision-Date: 2013-09-21 08:31+0000\n"
+"Last-Translator: Walter Cheuk <wwycheuk@gmail.com>\n"
+"Language-Team: Chinese (Traditional) <zh_TW@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Launchpad-Export-Date: 2015-12-01 05:20+0000\n"
+"X-Generator: Launchpad (build 17850)\n"
+
+#: ../src/Main.vala:89
+msgid "Suspend"
+msgstr "暫停"
+
+#: ../src/Main.vala:90
+msgid "Put your computer into suspend mode"
+msgstr "將電腦進入暫停模式"
+
+#: ../src/Main.vala:189
+msgid "Hibernate"
+msgstr "休眠"
+
+#: ../src/Main.vala:190
+msgid "Put your computer into hibernation mode"
+msgstr "將電腦進入休眠模式"
+
+#: ../src/Main.vala:288
+msgid "Shut Down"
+msgstr "關機"
+
+#: ../src/Main.vala:289
+msgid "Turn your computer off"
+msgstr "關掉電腦"
+
+#: ../src/Main.vala:372
+msgid "Restart"
+msgstr "重新啟動"
+
+#: ../src/Main.vala:373
+msgid "Restart your computer"
+msgstr "重新啟動電腦"
+
+#: ../src/Main.vala:457
+msgid "Suspend, hibernate, restart or shutdown your computer."
+msgstr "暫停、休眠、重新啟動或關掉電腦。"
+
+#: ../src/Main.vala:462
+msgid "ConsoleKit wasn't found"
+msgstr "找不到 ConsoleKit"
+

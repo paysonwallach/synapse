@@ -331,64 +331,6 @@ msgstr "Kopírovat do schránky"
 msgid "Copy selection to clipboard"
 msgstr "Vybrané zkopírovat do schránky"
 
-#: ../src/plugins/dictionary.vala:61
-msgid "Define"
-msgstr "Definovat"
-
-#: ../src/plugins/dictionary.vala:62
-msgid "Look up definition in dictionary"
-msgstr "Hledat definici ve slovníku"
-
-#: ../src/plugins/dictionary.vala:73
-msgid "Look up definitions of words."
-msgstr "Umožňuje vyhledat definice slov."
-
-#: ../src/plugins/dictionary.vala:78
-msgid "No compatible Dictionary installed"
-msgstr ""
-
-#: ../src/plugins/system-management.vala:89
-msgid "Suspend"
-msgstr "Uspat do paměti"
-
-#: ../src/plugins/system-management.vala:90
-msgid "Put your computer into suspend mode"
-msgstr "Přepnout počítač do režimu spánku"
-
-#: ../src/plugins/system-management.vala:189
-msgid "Hibernate"
-msgstr "Uspat na disk"
-
-#: ../src/plugins/system-management.vala:190
-msgid "Put your computer into hibernation mode"
-msgstr "Přepnout počítač do režimu hibernace"
-
-#: ../src/plugins/system-management.vala:288
-msgid "Shut Down"
-msgstr "Vypnout"
-
-#: ../src/plugins/system-management.vala:289
-msgid "Turn your computer off"
-msgstr "Vypnout počítač"
-
-#: ../src/plugins/system-management.vala:372
-msgid "Restart"
-msgstr "Restartovat"
-
-#: ../src/plugins/system-management.vala:373
-msgid "Restart your computer"
-msgstr "Restartovat počítač"
-
-#: ../src/plugins/system-management.vala:457
-msgid "Suspend, hibernate, restart or shutdown your computer."
-msgstr ""
-"Umožňuje uspat počítač do paměti nebo na disk, restartovat ho nebo ho "
-"vypnout."
-
-#: ../src/plugins/system-management.vala:462
-msgid "ConsoleKit wasn't found"
-msgstr "„ConsoleKit“ nebyl nalezen"
-
 #: ../src/plugins/zeitgeist-plugin.vala:162
 msgid "few moments ago"
 msgstr "před chvilkou"

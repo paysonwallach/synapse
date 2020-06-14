@@ -1,0 +1,60 @@
+# Spanish translation for synapse-systemmanagement-plugin
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# This file is distributed under the same license as the synapse-systemmanagement-plugin package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: synapse-systemmanagement-plugin\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2015-11-30 14:48+0000\n"
+"PO-Revision-Date: 2016-02-10 03:50+0000\n"
+"Last-Translator: Adolfo Jayme <fitoschido@gmail.com>\n"
+"Language-Team: Spanish <es@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Launchpad-Export-Date: 2016-02-11 05:42+0000\n"
+"X-Generator: Launchpad (build 17923)\n"
+
+#: ../src/Main.vala:89
+msgid "Suspend"
+msgstr "Suspender"
+
+#: ../src/Main.vala:90
+msgid "Put your computer into suspend mode"
+msgstr "Poner el equipo en modo de suspensión"
+
+#: ../src/Main.vala:189
+msgid "Hibernate"
+msgstr "Hibernar"
+
+#: ../src/Main.vala:190
+msgid "Put your computer into hibernation mode"
+msgstr "Poner el equipo en modo de hibernación"
+
+#: ../src/Main.vala:288
+msgid "Shut Down"
+msgstr "Apagar"
+
+#: ../src/Main.vala:289
+msgid "Turn your computer off"
+msgstr "Apagar su equipo"
+
+#: ../src/Main.vala:372
+msgid "Restart"
+msgstr "Reiniciar"
+
+#: ../src/Main.vala:373
+msgid "Restart your computer"
+msgstr "Reiniciar su equipo"
+
+#: ../src/Main.vala:457
+msgid "Suspend, hibernate, restart or shutdown your computer."
+msgstr "Suspender, hibernar, reiniciar o apagar el ordenador."
+
+#: ../src/Main.vala:462
+msgid "ConsoleKit wasn't found"
+msgstr "No se encontró ConsoleKit"
+

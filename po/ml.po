@@ -330,62 +330,6 @@ msgstr "ക്ലിപ്പ് ബോർഡിലേയ്ക്ക് പക�
 msgid "Copy selection to clipboard"
 msgstr "തിരഞ്ഞെടുത്തത് ക്ലിപ്പ് ബോര്‍ഡിലേക്ക് പകര്‍ത്തുക"
 
-#: ../src/plugins/dictionary.vala:61
-msgid "Define"
-msgstr "നിര്‍വ്വചിക്കുക"
-
-#: ../src/plugins/dictionary.vala:62
-msgid "Look up definition in dictionary"
-msgstr "നിഘണ്ടുവില്‍ നിര്‍വ്വചനം  നോക്കുക"
-
-#: ../src/plugins/dictionary.vala:73
-msgid "Look up definitions of words."
-msgstr "വാക്കുകളുടെ അര്‍ഥം നോക്കുക"
-
-#: ../src/plugins/dictionary.vala:78
-msgid "No compatible Dictionary installed"
-msgstr ""
-
-#: ../src/plugins/system-management.vala:89
-msgid "Suspend"
-msgstr "താത്ക്കാലിക വിരാമം"
-
-#: ../src/plugins/system-management.vala:90
-msgid "Put your computer into suspend mode"
-msgstr ""
-
-#: ../src/plugins/system-management.vala:189
-msgid "Hibernate"
-msgstr "ശിശിരനിദ്ര"
-
-#: ../src/plugins/system-management.vala:190
-msgid "Put your computer into hibernation mode"
-msgstr ""
-
-#: ../src/plugins/system-management.vala:288
-msgid "Shut Down"
-msgstr "ഷട്ട് ഡൌണ്‍"
-
-#: ../src/plugins/system-management.vala:289
-msgid "Turn your computer off"
-msgstr "കമ്പ്യൂട്ടര്‍ ഓഫ്‌ ചെയ്യുക"
-
-#: ../src/plugins/system-management.vala:372
-msgid "Restart"
-msgstr "റീസ്റ്റാര്‍ട്ട് ചെയ്യുക"
-
-#: ../src/plugins/system-management.vala:373
-msgid "Restart your computer"
-msgstr "നിങ്ങളുടെ കംപ്യൂട്ടര്‍ റീസ്റ്റാര്‍ട്ട് ചെയ്യുക"
-
-#: ../src/plugins/system-management.vala:457
-msgid "Suspend, hibernate, restart or shutdown your computer."
-msgstr ""
-
-#: ../src/plugins/system-management.vala:462
-msgid "ConsoleKit wasn't found"
-msgstr ""
-
 #: ../src/plugins/zeitgeist-plugin.vala:162
 msgid "few moments ago"
 msgstr "കുറച്ചു നിമിഷം മുന്‍പ്"

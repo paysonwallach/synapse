@@ -328,62 +328,6 @@ msgstr "Copiar en el portapapeles"
 msgid "Copy selection to clipboard"
 msgstr "Copiar selección en el portapapeles"
 
-#: ../src/plugins/dictionary.vala:61
-msgid "Define"
-msgstr "Definir"
-
-#: ../src/plugins/dictionary.vala:62
-msgid "Look up definition in dictionary"
-msgstr "Buscar definición en el diccionario"
-
-#: ../src/plugins/dictionary.vala:73
-msgid "Look up definitions of words."
-msgstr "Buscar definiciones de palabras."
-
-#: ../src/plugins/dictionary.vala:78
-msgid "No compatible Dictionary installed"
-msgstr "No hay ningún diccionario compatible instalado"
-
-#: ../src/plugins/system-management.vala:89
-msgid "Suspend"
-msgstr "Suspender"
-
-#: ../src/plugins/system-management.vala:90
-msgid "Put your computer into suspend mode"
-msgstr "Poner el equipo en modo de suspensión"
-
-#: ../src/plugins/system-management.vala:189
-msgid "Hibernate"
-msgstr "Hibernar"
-
-#: ../src/plugins/system-management.vala:190
-msgid "Put your computer into hibernation mode"
-msgstr "Poner el equipo en modo de hibernación"
-
-#: ../src/plugins/system-management.vala:288
-msgid "Shut Down"
-msgstr "Apagar"
-
-#: ../src/plugins/system-management.vala:289
-msgid "Turn your computer off"
-msgstr "Apagar su equipo"
-
-#: ../src/plugins/system-management.vala:372
-msgid "Restart"
-msgstr "Reiniciar"
-
-#: ../src/plugins/system-management.vala:373
-msgid "Restart your computer"
-msgstr "Reiniciar su equipo"
-
-#: ../src/plugins/system-management.vala:457
-msgid "Suspend, hibernate, restart or shutdown your computer."
-msgstr "Suspender, hibernar, reiniciar o apagar el ordenador."
-
-#: ../src/plugins/system-management.vala:462
-msgid "ConsoleKit wasn't found"
-msgstr "No se encontró ConsoleKit"
-
 #: ../src/plugins/zeitgeist-plugin.vala:162
 msgid "few moments ago"
 msgstr "hace unos momentos"

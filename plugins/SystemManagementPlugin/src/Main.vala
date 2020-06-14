@@ -16,6 +16,7 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA.
  *
  * Authored by Michal Hruby <michal.mhr@gmail.com>
+ *
  */
 
 namespace Synapse {
@@ -24,12 +25,12 @@ namespace Synapse {
         public const string UNIQUE_NAME = "org.freedesktop.UPower";
         public const string OBJECT_PATH = "/org/freedesktop/UPower";
 
-        public abstract async void hibernate () throws IOError;
-        public abstract async void suspend () throws IOError;
-        public abstract async bool hibernate_allowed () throws IOError;
-        public abstract async bool suspend_allowed () throws IOError;
+        public abstract async void hibernate () throws Error;
+        public abstract async void suspend () throws Error;
+        public abstract async bool hibernate_allowed () throws Error;
+        public abstract async bool suspend_allowed () throws Error;
 
-        public abstract async void about_to_sleep () throws IOError;
+        public abstract async void about_to_sleep () throws Error;
 
     }
 
@@ -38,10 +39,10 @@ namespace Synapse {
         public const string UNIQUE_NAME = "org.freedesktop.ConsoleKit";
         public const string OBJECT_PATH = "/org/freedesktop/ConsoleKit/Manager";
 
-        public abstract void restart () throws IOError;
-        public abstract void stop () throws IOError;
-        public abstract async bool can_restart () throws IOError;
-        public abstract async bool can_stop () throws IOError;
+        public abstract void restart () throws Error;
+        public abstract void stop () throws Error;
+        public abstract async bool can_restart () throws Error;
+        public abstract async bool can_stop () throws Error;
 
     }
 
@@ -50,14 +51,14 @@ namespace Synapse {
         public const string UNIQUE_NAME = "org.freedesktop.login1";
         public const string OBJECT_PATH = "/org/freedesktop/login1";
 
-        public abstract void reboot (bool interactive) throws IOError;
-        public abstract void suspend (bool interactive) throws IOError;
-        public abstract void hibernate (bool interactive) throws IOError;
-        public abstract void power_off (bool interactive) throws IOError;
-        public abstract string can_suspend () throws IOError;
-        public abstract string can_hibernate () throws IOError;
-        public abstract string can_reboot () throws IOError;
-        public abstract string can_power_off () throws IOError;
+        public abstract void reboot (bool interactive) throws Error;
+        public abstract void suspend (bool interactive) throws Error;
+        public abstract void hibernate (bool interactive) throws Error;
+        public abstract void power_off (bool interactive) throws Error;
+        public abstract string can_suspend () throws Error;
+        public abstract string can_hibernate () throws Error;
+        public abstract string can_reboot () throws Error;
+        public abstract string can_power_off () throws Error;
 
     }
 
@@ -92,7 +93,7 @@ namespace Synapse {
 
                     allowed = (dbus_interface.can_suspend () == "yes");
                     return;
-                } catch (IOError err) {
+                } catch (Error err) {
                     warning ("%s", err.message);
                     allowed = false;
                 }
@@ -104,7 +105,7 @@ namespace Synapse {
 
                     allowed = yield dbus_interface.suspend_allowed ();
 
-                } catch (IOError err) {
+                } catch (Error err) {
                     warning ("%s", err.message);
                     allowed = false;
                 }
@@ -124,7 +125,7 @@ namespace Synapse {
 
                     dbus_interface.suspend (true);
                     return;
-                } catch (IOError err) {
+                } catch (Error err) {
                     warning ("%s", err.message);
                 }
 
@@ -137,14 +138,16 @@ namespace Synapse {
                         yield dbus_interface.about_to_sleep ();
 
                     } catch (Error not_there_error) {}
-
+#if HAVE_SCREENSAVER
+                    // yea kinda nasty
+                    ScreenSaverPlugin.lock_screen ();
                     // wait 2 seconds
                     Timeout.add (2000, do_suspend.callback);
                     yield;
-
+#endif
                     yield dbus_interface.suspend ();
 
-                } catch (IOError err) {
+                } catch (Error err) {
                     warning ("%s", err.message);
                 }
             }
@@ -174,7 +177,7 @@ namespace Synapse {
 
                     allowed = (dbus_interface.can_hibernate () == "yes");
                     return;
-                } catch (IOError err) {
+                } catch (Error err) {
                     warning ("%s", err.message);
                     allowed = false;
                 }
@@ -186,7 +189,7 @@ namespace Synapse {
 
                     allowed = yield dbus_interface.hibernate_allowed ();
 
-                } catch (IOError err) {
+                } catch (Error err) {
                     warning ("%s", err.message);
                     allowed = false;
                 }
@@ -206,7 +209,7 @@ namespace Synapse {
 
                     dbus_interface.hibernate (true);
                     return;
-                } catch (IOError err) {
+                } catch (Error err) {
                     warning ("%s", err.message);
                 }
 
@@ -219,12 +222,15 @@ namespace Synapse {
                         yield dbus_interface.about_to_sleep ();
 
                     } catch (Error not_there_error) {}
-
+#if HAVE_SCREENSAVER
+                    // yea kinda nasty
+                    ScreenSaverPlugin.lock_screen ();
                     // wait 2 seconds
                     Timeout.add (2000, do_hibernate.callback);
                     yield;
+#endif
                     dbus_interface.hibernate.begin ();
-                } catch (IOError err) {
+                } catch (Error err) {
                     warning ("%s", err.message);
                 }
             }
@@ -254,7 +260,7 @@ namespace Synapse {
 
                     allowed = (dbus_interface.can_power_off () == "yes");
                     return;
-                } catch (IOError err) {
+                } catch (Error err) {
                     warning ("%s", err.message);
                     allowed = false;
                 }
@@ -266,7 +272,7 @@ namespace Synapse {
 
                     allowed = yield dbus_interface.can_stop ();
 
-                } catch (IOError err) {
+                } catch (Error err) {
                     warning ("%s", err.message);
                     allowed = false;
                 }
@@ -286,7 +292,7 @@ namespace Synapse {
 
                     dbus_interface.power_off (true);
                     return;
-                } catch (IOError err) {
+                } catch (Error err) {
                     warning ("%s", err.message);
                 }
 
@@ -296,7 +302,7 @@ namespace Synapse {
                                                                           ConsoleKitObject.OBJECT_PATH);
 
                     dbus_interface.stop ();
-                } catch (IOError err) {
+                } catch (Error err) {
                     warning ("%s", err.message);
                 }
             }
@@ -322,7 +328,7 @@ namespace Synapse {
 
                     allowed = (dbus_interface.can_reboot () == "yes");
                     return;
-                } catch (IOError err) {
+                } catch (Error err) {
                     warning ("%s", err.message);
                     allowed = false;
                 }
@@ -334,7 +340,7 @@ namespace Synapse {
 
                     allowed = yield dbus_interface.can_restart ();
 
-                } catch (IOError err) {
+                } catch (Error err) {
                     warning ("%s", err.message);
                     allowed = false;
                 }
@@ -354,7 +360,7 @@ namespace Synapse {
 
                     dbus_interface.reboot (true);
                     return;
-                } catch (IOError err) {
+                } catch (Error err) {
                     warning ("%s", err.message);
                 }
 
@@ -364,28 +370,11 @@ namespace Synapse {
                                                                           ConsoleKitObject.OBJECT_PATH);
 
                     dbus_interface.restart ();
-                } catch (IOError err) {
+                } catch (Error err) {
                     warning ("%s", err.message);
                 }
             }
 
-        }
-
-        static void register_plugin () {
-            PluginRegistry.get_default ().register_plugin (
-                typeof (SystemManagementPlugin),
-                "System Management",
-                _("Suspend, hibernate, restart or shutdown your computer."),
-                "system-restart",
-                register_plugin,
-                DBusService.get_default ().service_is_available (SystemdObject.UNIQUE_NAME) ||
-                DBusService.get_default ().service_is_available (ConsoleKitObject.UNIQUE_NAME),
-                _("ConsoleKit wasn't found")
-                );
-        }
-
-        static construct {
-            register_plugin ();
         }
 
         private Gee.List<SystemAction> actions;
@@ -422,4 +411,39 @@ namespace Synapse {
             return result;
         }
     }
+}
+
+private async bool activatable_check () {
+    var systemd_service_is_available = yield Synapse.DBusService.get_default ()
+                                        .service_is_available_async (Synapse.SystemdObject.UNIQUE_NAME);
+
+    var console_kit_service_is_available = yield Synapse.DBusService.get_default ()
+                                            .service_is_available_async (Synapse.ConsoleKitObject.UNIQUE_NAME);
+
+    return (systemd_service_is_available || console_kit_service_is_available);
+}
+
+public Synapse.PluginInfo register_plugin () {
+    Synapse.PluginInfo info = null;
+    var loop = new MainLoop ();
+
+    activatable_check.begin ((obj, res) => {
+        var activatable = activatable_check.end (res);
+
+        info = new Synapse.PluginInfo (
+            typeof (Synapse.SystemManagementPlugin),
+            "System Management",
+            _("Suspend, hibernate, restart or shutdown your computer."),
+            "system-restart",
+            "com.paysonwallach.synapse.systemmanagement",
+            activatable,
+            _("ConsoleKit wasn't found")
+            );
+
+        loop.quit ();
+    });
+
+    loop.run ();
+
+    return info;
 }

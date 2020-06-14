@@ -1,0 +1,61 @@
+# Ukrainian translation for synapse-systemmanagement-plugin
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# This file is distributed under the same license as the synapse-systemmanagement-plugin package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: synapse-systemmanagement-plugin\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2015-11-30 14:48+0000\n"
+"PO-Revision-Date: 2012-08-02 22:16+0000\n"
+"Last-Translator: Max_ym <b.maxym.naumtchyk@gmail.com>\n"
+"Language-Team: Ukrainian <uk@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Launchpad-Export-Date: 2015-12-01 05:19+0000\n"
+"X-Generator: Launchpad (build 17850)\n"
+
+#: ../src/Main.vala:89
+msgid "Suspend"
+msgstr "Режим очікування"
+
+#: ../src/Main.vala:90
+msgid "Put your computer into suspend mode"
+msgstr "Перевести комп’ютер в режим очікування"
+
+#: ../src/Main.vala:189
+msgid "Hibernate"
+msgstr "Режим сну"
+
+#: ../src/Main.vala:190
+msgid "Put your computer into hibernation mode"
+msgstr "Перевести комп’ютер в режим сну"
+
+#: ../src/Main.vala:288
+msgid "Shut Down"
+msgstr "Вимкнути"
+
+#: ../src/Main.vala:289
+msgid "Turn your computer off"
+msgstr "Вимкнути Ваш комп’ютер"
+
+#: ../src/Main.vala:372
+msgid "Restart"
+msgstr "Перезавантажити"
+
+#: ../src/Main.vala:373
+msgid "Restart your computer"
+msgstr "Перезавантажити Ваш комп’ютер"
+
+#: ../src/Main.vala:457
+msgid "Suspend, hibernate, restart or shutdown your computer."
+msgstr ""
+
+#: ../src/Main.vala:462
+msgid "ConsoleKit wasn't found"
+msgstr ""
+

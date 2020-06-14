@@ -330,63 +330,6 @@ msgstr ""
 msgid "Copy selection to clipboard"
 msgstr ""
 
-#: ../src/plugins/dictionary.vala:61
-msgid "Define"
-msgstr ""
-
-#: ../src/plugins/dictionary.vala:62
-msgid "Look up definition in dictionary"
-msgstr ""
-
-#: ../src/plugins/dictionary.vala:73
-msgid "Look up definitions of words."
-msgstr ""
-
-#: ../src/plugins/dictionary.vala:78
-msgid "No compatible Dictionary installed"
-msgstr ""
-
-#: ../src/plugins/system-management.vala:89
-msgid "Suspend"
-msgstr "Felfüggesztés"
-
-#: ../src/plugins/system-management.vala:90
-msgid "Put your computer into suspend mode"
-msgstr "Számítógép felfüggesztése"
-
-#: ../src/plugins/system-management.vala:189
-msgid "Hibernate"
-msgstr "Hibernálás"
-
-#: ../src/plugins/system-management.vala:190
-msgid "Put your computer into hibernation mode"
-msgstr "Számítógép hibernálása"
-
-#: ../src/plugins/system-management.vala:288
-msgid "Shut Down"
-msgstr "Leállítás"
-
-#: ../src/plugins/system-management.vala:289
-msgid "Turn your computer off"
-msgstr "A számítógép leállítása"
-
-#: ../src/plugins/system-management.vala:372
-msgid "Restart"
-msgstr "Újraindítás"
-
-#: ../src/plugins/system-management.vala:373
-msgid "Restart your computer"
-msgstr "A számítógép újraindítása"
-
-#: ../src/plugins/system-management.vala:457
-msgid "Suspend, hibernate, restart or shutdown your computer."
-msgstr ""
-"A számítógép felfüggesztése, hibernálása, újraindítása vagy leállítása."
-
-#: ../src/plugins/system-management.vala:462
-msgid "ConsoleKit wasn't found"
-msgstr "A ConsoleKit nem található"
-
 #: ../src/plugins/zeitgeist-plugin.vala:162
 msgid "few moments ago"
 msgstr "nemrég"

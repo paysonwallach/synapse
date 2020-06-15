@@ -1,26 +1,45 @@
 {
-  "name": "synapse",
+  "name": "com.paysonwallach.synapse",
   "version": "0.4.7",
-  "description": "A semantic launcher written in Vala",
+  "description": "A semantic application launcher and desktop search application for GNOME.",
   "scripts": {
-    "format": "find src -name '*.vala' -exec uncrustify -c uncrustify.cfg --replace {} \\;"
+    "format": "find . -name '*.vala' -exec uncrustify -c uncrustify.cfg --replace {} \\;",
+    "prerelease": "node scripts/build.js",
+    "release": "standard-version"
   },
   "repository": {
     "type": "git",
-    "url": "https://git.launchpad.net/synapse-project"
+    "url": "https://github.com/paysonwallach/synapse"
   },
-  "author": "",
   "license": "LGPL-2.1",
-  "dependencies": {
-    "@commitlint/cli": "^13.0.0",
-    "@commitlint/config-conventional": "^13.0.0",
-    "husky": "^6.0.0",
-    "nunjucks": "^3.2.3",
-    "standard-version": "^9.3.0"
+  "devDependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "husky": "^4.2.5",
+    "nunjucks": "^3.2.2",
+    "standard-version": "^8.0.0"
   },
   "husky": {
     "hooks": {
       "pre-commit": "npm run format"
+    }
+  },
+  "meta": {
+    "title": "Synapse",
+    "license": {
+      "name": "GNU Lesser General Public License v2.1",
+      "url": "https://github.com/paysonwallach/synapse/blob/master/COPYING.md"
+    },
+    "codeOfConduct": {
+      "url": "https://github.com/paysonwallach/synapse/blob/master/CODE_OF_CONDUCT.md"
+    },
+    "releases": {
+      "url": "https://github.com/paysonwallach/synapse/releases"
+    }
+  },
+  "standard-version": {
+    "scripts": {
+      "precommit": "npm run prerelease"
     }
   }
 }

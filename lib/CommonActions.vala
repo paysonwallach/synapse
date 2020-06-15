@@ -126,14 +126,8 @@ namespace Synapse {
                     AppInfo original = app_match.app_info ??
                                        new DesktopAppInfo.from_filename (app_match.filename);
 
-                    try {
-                        AppInfo app = AppInfo.create_from_commandline (
-                            original.get_commandline (), original.get_name (),
-                            AppInfoCreateFlags.NEEDS_TERMINAL);
-                        app.launch (null, Gdk.Display.get_default ().get_app_launch_context ());
-                    } catch (Error err) {
-                        warning ("%s", err.message);
-                    }
+                    Utils.open_command_line (
+                        original.get_commandline (), original.get_name (), true);
                 } else if (match is UriMatch) {
                     try {
                         unowned string uri = ((UriMatch) match).uri;

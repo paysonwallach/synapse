@@ -98,6 +98,53 @@ namespace Synapse {
             }
         }
 
+        public static void open_command_line (string command, string? app_name = null, bool needs_terminal = false) {
+            AppInfoCreateFlags using_terminal = AppInfoCreateFlags.NONE;
+            string commandline = command;
+            string? application_name = app_name;
+
+            if (needs_terminal) {
+                GLib.SettingsSchema? schema = null;
+
+                if (DesktopFileInfo.EnvironmentType.GNOME in DesktopFileService.get_default ().get_environment ())
+                    schema = GLib.SettingsSchemaSource.get_default ().lookup ("org.gnome.desktop.default-applications.terminal", true);
+
+                if (schema != null) {
+                    var settings = new GLib.Settings.full (schema, null, null);
+                    application_name = settings.get_string ("exec");
+                }
+
+                if (application_name == null && Environment.find_program_in_path ("x-terminal-emulator") != null)
+                    application_name = "x-terminal-emulator";
+
+                if (application_name == null)
+                    using_terminal = AppInfoCreateFlags.NEEDS_TERMINAL;
+            }
+
+            if (application_name != null)
+                switch (application_name) {
+                case "terminator":
+                    commandline = "%s -x \"%s\"".printf (application_name, commandline);
+                    break;
+                case "aterm":
+                    commandline = "%s -e %s".printf (application_name, commandline);
+                    break;
+                // case "gnome-terminal":
+                // case "x-terminal-emulator":
+                default:
+                    commandline = "%s -e '%s'".printf (application_name, commandline);
+                    break;
+                }
+
+            try {
+                debug (commandline);
+                AppInfo app = AppInfo.create_from_commandline (commandline, application_name, using_terminal);
+                app.launch (null, Gdk.Display.get_default ().get_app_launch_context ());
+            } catch (Error err) {
+                warning ("%s", err.message);
+            }
+        }
+
         public static string extract_type_name (Type obj_type) {
             string obj_class = obj_type.name ();
 
@@ -164,7 +211,7 @@ namespace Synapse {
 
                 try {
                     re = new Regex ("""[(]?.*?([^/]*?)(\.2)?\.vala(:\d+)[)]?:\s*(.*)""");
-                } catch (Erroer err) {
+                } catch (Error err) {
                     warning (@"error: $(err.message)");
                 }
 

@@ -16,7 +16,7 @@
     "@commitlint/config-conventional": "^9.1.2",
     "husky": "^4.2.5",
     "nunjucks": "^3.2.1",
-    "standard-version": "^8.0.1"
+    "standard-version": "^8.0.2"
   },
   "husky": {
     "hooks": {

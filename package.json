@@ -14,7 +14,7 @@
   "dependencies": {
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
-    "husky": "^4.3.7",
+    "husky": "^4.3.8",
     "nunjucks": "^3.2.2",
     "standard-version": "^9.1.0"
   },

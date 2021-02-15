@@ -15,7 +15,7 @@
     "@commitlint/cli": "^12.0.0",
     "@commitlint/config-conventional": "^12.0.0",
     "husky": "^5.0.9",
-    "nunjucks": "^3.2.2",
+    "nunjucks": "^3.2.3",
     "standard-version": "^9.1.0"
   },
   "husky": {

@@ -12,8 +12,8 @@
   "author": "",
   "license": "LGPL-2.1",
   "dependencies": {
-    "@commitlint/cli": "^12.0.0",
-    "@commitlint/config-conventional": "^12.0.0",
+    "@commitlint/cli": "^12.0.1",
+    "@commitlint/config-conventional": "^12.0.1",
     "husky": "^5.1.1",
     "nunjucks": "^3.2.3",
     "standard-version": "^9.1.1"

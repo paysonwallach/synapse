@@ -16,7 +16,7 @@
   "devDependencies": {
     "@commitlint/cli": "^12.1.4",
     "@commitlint/config-conventional": "^12.1.4",
-    "husky": "^7.0.0",
+    "husky": "^7.0.1",
     "scrivano": "^0.1.0",
     "standard-version": "^9.3.0"
   },
